@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>re:mark inspect — Ispezione difetti AI per il manifatturiero</title>
+
+<title>re:mark inspector — Ispezione difetti AI per il manifatturiero</title>
 <meta name="description" content="Sistema di ispezione visiva automatica per componenti manifatturieri. Installazione in 2 ore sul nastro esistente. Nessuna modifica alla linea.">
 
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
@@ -167,6 +168,36 @@ header {
   margin-left: auto;
   margin-right: auto;
   line-height: 1.6;
+}
+
+/* ── Inline CTA (between hero and video) ─────────────────── */
+.hero-cta {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.hero-cta .btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--amber);
+  color: #080b10;
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 14px 28px;
+  border-radius: 2px;
+  transition: opacity 0.15s;
+}
+
+.hero-cta .btn-primary:hover { opacity: 0.9; }
+
+.hero-cta .btn-note {
+  display: block;
+  font-size: 12px;
+  color: var(--label);
+  margin-top: 10px;
 }
 
 /* ── Video embed ──────────────────────────────────────────── */
@@ -468,10 +499,7 @@ footer {
         <circle cx="11" cy="11" r="1.5" fill="#22c55e"/>
       </svg>
       <span class="logo-name">re<span>:</span>mark</span>
-      <span class="logo-product">inspect</span>
-    </a>
-    <a href="https://calendly.com/giuliopiana" class="header-cta" target="_blank">
-      Prenota una valutazione →
+      <span class="logo-product">inspector</span>
     </a>
   </div>
 </header>
@@ -480,13 +508,23 @@ footer {
 <section class="hero">
   <div class="container">
     <div class="hero-label">Machine Vision per il Manifatturiero</div>
-    <h1>Ispezione automatica dei difetti <br> sulla tua linea </h1>
+    <h1>Ispezione automatica difetti <br> sulla tua linea</h1>
     <p class="hero-sub">
       Installazione in 2 ore. Nessuna modifica alla linea.<br>
-      Il modello si addestra sui pezzi conformi — nessuna etichettatura dei difetti richiesta.
+      Il modello si addestra sui tuoi pezzi buoni — nessuna etichettatura dei difetti richiesta.
     </p>
   </div>
 </section>
+
+<!-- ── Inline CTA ────────────────────────────────────────── -->
+<div class="container">
+  <div class="hero-cta">
+    <a href="https://calendly.com/giuliopiana" class="btn-primary" target="_blank">
+      Prenota una valutazione gratuita →
+    </a>
+    <span class="btn-note">30 minuti · Nessun impegno · Risposta entro 24h</span>
+  </div>
+</div>
 
 <!-- ── Video ──────────────────────────────────────────────── -->
 <div class="container">
@@ -494,14 +532,13 @@ footer {
     <!-- Sostituisci VIDEO_ID con l'ID del tuo video YouTube unlisted -->
     <!-- Es. se il link è https://youtu.be/dQw4w9WgXcQ l'ID è dQw4w9WgXcQ -->
     <iframe
-      src="https://www.youtube.com/embed/R-HGmeIwM8I?rel=0&modestbranding=1"
+      src="https://www.youtube.com/embed/VIDEO_ID?rel=0&modestbranding=1"
       title="re:mark inspect — demo"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
       allowfullscreen>
     </iframe>
   </div>
 </div>
-
 
 <!-- ── Three numbers ──────────────────────────────────────── -->
 <div class="container">
@@ -533,12 +570,12 @@ footer {
     <div class="step">
       <span class="step-num">02 · MODELLO</span>
       <h3>Si addestra sui tuoi pezzi</h3>
-      <p>Il modello impara da 200 immagini di pezzi conformi. Nessuna etichettatura dei difetti. Nessun dataset da costruire. Operativo in pochi giorni dall'ordine.</p>
+      <p>Il modello impara da 200 immagini di pezzi conformi. Nessuna etichettatura dei difetti. Nessun dataset da costruire. Operational in pochi giorni dall'installazione.</p>
     </div>
     <div class="step">
       <span class="step-num">03 · DASHBOARD</span>
       <h3>Analytics in tempo reale</h3>
-      <p>Ogni pezzo ispezionato genera un record. Il dashboard cloud mostra defect rate per turno, mappa delle anomalie, trend SPC e tracciabilità completa per audit.</p>
+      <p>Ogni pezzo ispezionato genera un record. Il dashboard cloud mostra difect rate per turno, mappa delle anomalie, trend SPC e tracciabilità completa per audit.</p>
     </div>
   </div>
 </section>
@@ -551,14 +588,14 @@ footer {
     <div class="faq-item">
       <div class="faq-q">La nostra ispezione VT richiede un operatore NDT di 2° livello. Come si integra il sistema?</div>
       <div class="faq-a">
-        La normativa NDT Level 2 vincola la responsabilità della decisione finale all'operatore certificato, non prescrive il mezzo di rilevamento. re:mark inspector funziona in modalità supporto: scansiona il 100% dei pezzi e segnala le zone anomale con una mappa visiva, mentre l'operatore certificato esamina e decide solo sui pezzi flaggati. Su una linea con 3–4% di anomalie, l'operatore concentra la propria attenzione su 15–20 pezzi invece di 500.
+        La normativa NDT Level 2 vincola la responsabilità della decisione finale all'operatore certificato, non il mezzo di rilevamento. re:mark inspect funziona in modalità supporto: scansiona il 100% dei pezzi e segnala le zone anomale con una mappa visiva, mentre l'operatore certificato esamina e decide solo sui flaggati. Su una linea con 3–4% di anomalie, l'operatore concentra la propria attenzione su 15–20 pezzi invece di 500.
       </div>
     </div>
 
     <div class="faq-item">
       <div class="faq-q">Il nostro nastro ha già una configurazione specifica. Dobbiamo modificarlo?</div>
       <div class="faq-a">
-        No. Il modulo si installa a fianco del nastro esistente con un frame in profilato di alluminio — nessuna modifica meccanica, nessuna interruzione del flusso. L'unica precondizione è che i pezzi arrivino già singolarizzati con orientamento predicibile, condizione tipicamente già soddisfatta all'uscita CNC, dal lavaggio o nella fase di pre-imballaggio.
+        No. Il frame in profilato di alluminio si affianca al nastro esistente — nessuna modifica meccanica, nessuna interruzione del flusso. L'unica precondizione è che i pezzi arrivino già singolarizzati con orientamento predicibile, condizione tipicamente già soddisfatta all'uscita CNC, dalla lavatrice industriale o nella fase di pre-imballaggio.
       </div>
     </div>
 
@@ -577,9 +614,10 @@ footer {
   <div class="cta-section">
     <h2>Valutazione gratuita della fattibilità</h2>
     <p>
-      30 minuti presso la vostra sede. Nessun impegno. Verifichiamo sui vostri componenti se il processo è compatibile.
+      30 minuti. Nessun impegno. Portiamo la demo dal vivo sui vostri componenti
+      per verificare insieme se il processo è compatibile.
     </p>
-    <a href="https://calendly.com/giuliopiana" class="btn-primary" target="_blank">
+    <a href="https://calendly.com/tuonome" class="btn-primary" target="_blank">
       Prenota 30 minuti →
     </a>
     <span class="btn-note">Oppure scrivici direttamente</span>
@@ -596,7 +634,7 @@ footer {
 <footer>
   <div class="footer-inner">
     <div class="footer-copy">
-      RE:MARK INSPECTOR è un prodotto
+      re:mark inspect è un prodotto
       <a href="https://brandcraft.it" target="_blank">Brandcraft srl</a>
       &nbsp;·&nbsp; P.IVA IT13291650961
       &nbsp;·&nbsp; Milano, Italia
