@@ -475,6 +475,70 @@ footer {
 
 .footer-copy a:hover { color: var(--muted); }
 
+/* ── Numbers brand signature ──────────────────────────────── */
+.numbers-brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.numbers-brand-name {
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--ink);
+}
+
+.numbers-colon {
+  color: var(--amber);
+}
+
+.numbers-brand-product {
+  font-size: 12px;
+  color: var(--label);
+  letter-spacing: 0.08em;
+  font-family: var(--mono);
+}
+
+/* ── Footer logo ──────────────────────────────────────────── */
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.footer-logo-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.footer-logo-name {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink);
+  letter-spacing: 0.01em;
+}
+
+.footer-colon {
+  color: var(--amber);
+}
+
+.footer-logo-sub {
+  font-size: 11px;
+  color: var(--label);
+  line-height: 1.5;
+}
+
+.footer-logo-sub a {
+  color: var(--label);
+  text-decoration: none;
+}
+
+.footer-logo-sub a:hover { color: var(--muted); }
+
 /* ── Responsive ───────────────────────────────────────────── */
 @media (max-width: 640px) {
   .numbers  { grid-template-columns: 1fr; }
@@ -542,6 +606,17 @@ footer {
 
 <!-- ── Three numbers ──────────────────────────────────────── -->
 <div class="container">
+  <!-- Brand signature above the metrics — gives the data section identity -->
+  <div class="numbers-brand">
+    <svg viewBox="0 0 22 22" fill="none" style="width:18px;height:18px;flex-shrink:0;">
+      <rect x="1" y="1" width="20" height="20" rx="3"
+        stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+      <circle cx="11" cy="11" r="4.5" stroke="#22c55e" stroke-width="1.5"/>
+      <circle cx="11" cy="11" r="1.5" fill="#22c55e"/>
+    </svg>
+    <span class="numbers-brand-name">re<span class="numbers-colon">:</span>mark</span>
+    <span class="numbers-brand-product">inspector</span>
+  </div>
   <div class="numbers">
     <div class="number-item">
       <div class="number-value green">99.8%</div>
@@ -633,11 +708,21 @@ footer {
 <!-- ── Footer ─────────────────────────────────────────────── -->
 <footer>
   <div class="footer-inner">
-    <div class="footer-copy">
-      re:mark inspector è un prodotto
-      <a href="https://brandcraft.it" target="_blank">Brandcraft srl</a>
-      &nbsp;·&nbsp; P.IVA IT13291650961
-      &nbsp;·&nbsp; Milano, Italia
+    <!-- Logo in footer — slightly larger than header for signature weight -->
+    <div class="footer-logo">
+      <svg viewBox="0 0 22 22" fill="none" style="width:20px;height:20px;flex-shrink:0;">
+        <rect x="1" y="1" width="20" height="20" rx="3"
+          stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
+        <circle cx="11" cy="11" r="4.5" stroke="#22c55e" stroke-width="1.5"/>
+        <circle cx="11" cy="11" r="1.5" fill="#22c55e"/>
+      </svg>
+      <div class="footer-logo-text">
+        <span class="footer-logo-name">re<span class="footer-colon">:</span>mark <span style="color:var(--label);font-weight:400;">inspector</span></span>
+        <span class="footer-logo-sub">
+          un prodotto <a href="https://brandcraft.it" target="_blank">Brandcraft srl</a>
+          &nbsp;·&nbsp; P.IVA IT13291650961 &nbsp;·&nbsp; Milano, Italia
+        </span>
+      </div>
     </div>
     <div class="footer-copy">
       <a href="mailto:giulio.piana@brandcraft.it">giulio.piana@brandcraft.it</a>
