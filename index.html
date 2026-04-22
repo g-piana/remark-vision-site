@@ -369,6 +369,11 @@ header {
   align-items: baseline;
   gap: 12px;
 }
+.faq-bold {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+}
 
 .faq-q::before {
   content: 'Q';
@@ -562,7 +567,7 @@ footer {
         <circle cx="11" cy="11" r="4.5" stroke="#22c55e" stroke-width="1.5"/>
         <circle cx="11" cy="11" r="1.5" fill="#22c55e"/>
       </svg>
-      <span class="logo-name">re<span>:</span>mark</span>
+      <span class="logo-name">RE<span>:</span>MARK</span>
       <span class="logo-product">inspector</span>
     </a>
   </div>
@@ -614,7 +619,7 @@ footer {
       <circle cx="11" cy="11" r="4.5" stroke="#22c55e" stroke-width="1.5"/>
       <circle cx="11" cy="11" r="1.5" fill="#22c55e"/>
     </svg>
-    <span class="numbers-brand-name">re<span class="numbers-colon">:</span>mark</span>
+    <span class="numbers-brand-name">RE<span class="numbers-colon">:</span>MARK</span>
     <span class="numbers-brand-product">inspector</span>
   </div>
   <div class="numbers">
@@ -663,7 +668,18 @@ footer {
     <div class="faq-item">
       <div class="faq-q">La nostra ispezione VT richiede un operatore NDT di 2° livello. Come si integra il sistema?</div>
       <div class="faq-a">
-        La normativa NDT Level 2 vincola la responsabilità della decisione finale all'operatore certificato, non prescrive il mezzo di rilevamento. re:mark inspector funziona in modalità di supporto: scansiona il 100% dei pezzi e segnala le zone anomale con una mappa visiva, mentre l'operatore certificato esamina e decide solo sui flaggati. Su una linea con 3–4% di anomalie, l'operatore concentra la propria attenzione su 15–20 pezzi invece di 500.
+        In contesti con normativa NDT Level 2, re:mark inspector opera come strumento di supporto strumentale all'operatore certificato — non come sostituto.<br>
+L'operatore esamina il 100% dei pezzi, come previsto dalla normativa. Quello che cambia è che arriva a ogni pezzo con una mappa di anomalia già pronta, prodotta in meno di 30ms, che evidenzia le zone da esaminare con priorità. <br><br><span class="faq-bold">La decisione finale rimane, su tutti i pezzi, all'operatore certificato, ma si riduce significativamente l'errore umano</span>. <br><br>
+Il risultato è misurabile: un operatore qualificato rileva tipicamente l'80% dei difetti in condizioni reali di linea. Aggiungendo il sistema, la probabilità che un difetto sfugga a entrambi scende a circa 1.2%. In un settore dove un singolo escape può avere conseguenze catastrofiche, questo delta ha un valore economico e di sicurezza concreto.<br>
+In aggiunta, ogni ispezione — inclusi i pezzi conformi — viene archiviata con immagine originale e mappa di anomalia. In caso di contestazione o incidente, è possibile dimostrare lo stato qualitativo del singolo pezzo al momento dell'uscita dalla linea.
+      </div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Non abbiamo una normativa NDT, ma il volume di produzione rende il controllo visivo manuale insostenibile. Siamo un caso d'uso?</div>
+      <div class="faq-a">
+Sì — è il secondo scenario in cui il sistema è progettato per operare.<br>
+Su linee ad alto volume con normativa ISO 9001 o IATF 16949, il requisito è la <span class="faq-bold">copertura documentata del 100% della produzione</span>. Il controllo manuale su ogni pezzo diventa fisicamente impossibile oltre una certa cadenza, e la qualità dell'ispezione degrada rapidamente con la fatica dell'operatore.<br>
+re:mark inspector ispeziona ogni pezzo automaticamente. L'operatore interviene sui flaggati — tipicamente il 3–5% della produzione — con piena attenzione e contesto visivo. <br><span class="faq-bold">Il risultato è copertura 100% documentata con un carico operativo sostenibile, e un audit trail completo per ogni lotto.</span>
       </div>
     </div>
 
