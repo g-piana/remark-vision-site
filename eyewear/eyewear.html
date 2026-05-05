@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>re:mark inspector — Ispezione AI per il distretto dell'occhialeria</title>
+<meta name="description" content="Ispezione visiva automatica per montature e componenti occhialeria. Post-galvanica e post-lucidatura. Rileva il difetto quando costa ancora poco correggerlo.">
+
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:     #080b10;
+  --s1:     #0d1117;
+  --s2:     #131920;
+  --b0:     rgba(255,255,255,0.05);
+  --b1:     rgba(255,255,255,0.09);
+  --amber:  #f59e0b;
+  --pass:   #22c55e;
+  --fail:   #ef4444;
+  --ink:    #e8edf5;
+  --muted:  #a8b3c4;
+  --label:  #7a8799;
+  --mono:   'JetBrains Mono', monospace;
+  --sans:   'DM Sans', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ── Header ── */
+header {
+  border-bottom: 1px solid var(--b0);
+  background: rgba(8,11,16,0.92);
+  backdrop-filter: blur(8px);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.header-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.logo-icon { width: 22px; height: 22px; flex-shrink: 0; }
+
+.logo-name {
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--ink);
+}
+
+.logo-name span { color: var(--amber); }
+
+.logo-product {
+  font-size: 12px;
+  color: var(--label);
+  letter-spacing: 0.06em;
+  font-family: var(--mono);
+}
+
+.header-cta {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--amber);
+  text-decoration: none;
+  border: 1px solid rgba(245,158,11,0.3);
+  padding: 6px 14px;
+  border-radius: 2px;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.header-cta:hover {
+  background: rgba(245,158,11,0.08);
+  border-color: rgba(245,158,11,0.5);
+}
+
+/* ── Hero ── */
+.hero {
+  padding: 80px 0 64px;
+  text-align: center;
+}
+
+.hero-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.hero-label::before,
+.hero-label::after {
+  content: '';
+  display: block;
+  width: 32px;
+  height: 1px;
+  background: rgba(245,158,11,0.4);
+}
+
+.hero h1 {
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 20px;
+  max-width: 680px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-sub {
+  font-size: 18px;
+  color: var(--muted);
+  margin-bottom: 40px;
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+/* ── Inline CTA ── */
+.hero-cta {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.hero-cta .btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--amber);
+  color: #080b10;
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 14px 28px;
+  border-radius: 2px;
+  transition: opacity 0.15s;
+}
+
+.hero-cta .btn-primary:hover { opacity: 0.9; }
+
+.hero-cta .btn-note {
+  display: block;
+  font-size: 12px;
+  color: var(--label);
+  margin-top: 10px;
+}
+
+/* ── Heatmap image ── */
+.heatmap-wrapper {
+  max-width: 860px;
+  margin: 0 auto 64px;
+  border: 1px solid var(--b1);
+  border-radius: 3px;
+  overflow: hidden;
+  background: var(--s1);
+}
+
+.heatmap-wrapper img {
+  width: 100%;
+  display: block;
+}
+
+.heatmap-caption {
+  padding: 14px 20px;
+  background: var(--s2);
+  border-top: 1px solid var(--b0);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.heatmap-caption-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--fail);
+  flex-shrink: 0;
+}
+
+.heatmap-caption-text {
+  font-size: 13px;
+  color: var(--muted);
+  font-family: var(--mono);
+}
+
+/* ── Defect table ── */
+.defect-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--b0);
+  border: 1px solid var(--b1);
+  border-radius: 3px;
+  overflow: hidden;
+  margin: 0 0 64px;
+}
+
+.defect-item {
+  background: var(--s1);
+  padding: 22px 20px;
+}
+
+.defect-phase {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--amber);
+  margin-bottom: 8px;
+  display: block;
+}
+
+.defect-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+
+.defect-desc {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+/* ── ROI highlight ── */
+.roi-band {
+  background: var(--s1);
+  border: 1px solid var(--b1);
+  border-radius: 3px;
+  padding: 32px 40px;
+  margin: 0 0 64px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 32px;
+  position: relative;
+  overflow: hidden;
+}
+
+.roi-band::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(to right, transparent, var(--amber), transparent);
+  opacity: 0.5;
+}
+
+.roi-side { text-align: center; }
+
+.roi-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--label);
+  margin-bottom: 8px;
+  font-family: var(--mono);
+}
+
+.roi-value {
+  font-size: 28px;
+  font-weight: 500;
+  font-family: var(--mono);
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.roi-value.red   { color: var(--fail); }
+.roi-value.green { color: var(--pass); }
+
+.roi-sub {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+.roi-arrow {
+  font-size: 28px;
+  color: var(--amber);
+  font-family: var(--mono);
+  text-align: center;
+}
+
+/* ── Numbers ── */
+.numbers {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--b0);
+  border: 1px solid var(--b1);
+  border-radius: 3px;
+  overflow: hidden;
+  margin: 0 0 64px;
+}
+
+.number-item {
+  background: var(--s1);
+  padding: 28px 24px;
+  text-align: center;
+}
+
+.number-value {
+  font-family: var(--mono);
+  font-size: 32px;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.number-value.green  { color: var(--pass); }
+.number-value.amber  { color: var(--amber); }
+.number-value.white  { color: var(--ink); }
+
+.number-label {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+.numbers-brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.numbers-brand-name {
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--ink);
+}
+
+.numbers-colon { color: var(--amber); }
+
+.numbers-brand-product {
+  font-size: 12px;
+  color: var(--label);
+  letter-spacing: 0.08em;
+  font-family: var(--mono);
+}
+
+/* ── How it works ── */
+.section { margin-bottom: 64px; }
+
+.section-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--label);
+  margin-bottom: 32px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--b0);
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.step {
+  background: var(--s1);
+  border: 1px solid var(--b1);
+  border-radius: 3px;
+  padding: 24px;
+}
+
+.step-num {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--amber);
+  letter-spacing: 0.08em;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.step h3 {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+
+.step p {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* ── FAQ ── */
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: var(--b0);
+  border: 1px solid var(--b1);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.faq-item {
+  background: var(--s1);
+  padding: 24px 28px;
+}
+
+.faq-item + .faq-item { border-top: 1px solid var(--b0); }
+
+.faq-q {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.faq-q::before {
+  content: 'Q';
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--amber);
+  flex-shrink: 0;
+}
+
+.faq-a {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.7;
+  padding-left: 23px;
+}
+
+.faq-bold {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+/* ── CTA section ── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--amber);
+  color: #080b10;
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 14px 28px;
+  border-radius: 2px;
+  transition: opacity 0.15s;
+  margin-bottom: 12px;
+}
+
+.btn-primary:hover { opacity: 0.9; }
+
+.btn-note {
+  font-size: 12px;
+  color: var(--label);
+  display: block;
+}
+
+.cta-section {
+  margin-bottom: 64px;
+  background: var(--s1);
+  border: 1px solid var(--b1);
+  border-radius: 3px;
+  padding: 48px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-section::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(to right, transparent, var(--amber), transparent);
+  opacity: 0.6;
+}
+
+.cta-section h2 {
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 12px;
+}
+
+.cta-section p {
+  font-size: 15px;
+  color: var(--muted);
+  margin-bottom: 32px;
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.contact-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin-top: 24px;
+}
+
+.contact-name {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.contact-email {
+  font-family: var(--mono);
+  font-size: 14px;
+  color: var(--amber);
+  text-decoration: none;
+}
+
+.contact-email:hover { text-decoration: underline; }
+
+/* ── Footer ── */
+footer {
+  border-top: 1px solid var(--b0);
+  padding: 24px 0;
+}
+
+.footer-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.footer-copy {
+  font-size: 12px;
+  color: var(--label);
+  line-height: 1.6;
+}
+
+.footer-copy a { color: var(--label); text-decoration: none; }
+.footer-copy a:hover { color: var(--muted); }
+
+.footer-logo { display: flex; align-items: center; gap: 10px; }
+
+.footer-logo-text { display: flex; flex-direction: column; gap: 2px; }
+
+.footer-logo-name {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink);
+  letter-spacing: 0.01em;
+}
+
+.footer-colon { color: var(--amber); }
+
+.footer-logo-sub { font-size: 11px; color: var(--label); line-height: 1.5; }
+.footer-logo-sub a { color: var(--label); text-decoration: none; }
+.footer-logo-sub a:hover { color: var(--muted); }
+
+/* ── Sector badge ── */
+.sector-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--label);
+  border: 1px solid var(--b1);
+  border-radius: 2px;
+  padding: 4px 10px;
+  margin-bottom: 20px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .numbers      { grid-template-columns: 1fr; }
+  .steps        { grid-template-columns: 1fr; }
+  .defect-grid  { grid-template-columns: 1fr 1fr; }
+  .roi-band     { grid-template-columns: 1fr; gap: 16px; }
+  .roi-arrow    { transform: rotate(90deg); }
+  .hero h1      { font-size: 26px; }
+  .hero-sub     { font-size: 16px; }
+  .cta-section  { padding: 32px 24px; }
+  .footer-inner { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── Header ── -->
+<header>
+  <div class="header-inner">
+    <a href="https://remark-vision.com" class="logo">
+      <svg class="logo-icon" viewBox="0 0 22 22" fill="none">
+        <rect x="1" y="1" width="20" height="20" rx="3"
+          stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+        <circle cx="11" cy="11" r="4.5" stroke="#22c55e" stroke-width="1.5"/>
+        <circle cx="11" cy="11" r="1.5" fill="#22c55e"/>
+      </svg>
+      <span class="logo-name">RE<span>:</span>MARK</span>
+      <span class="logo-product">inspector</span>
+    </a>
+    <a href="https://calendly.com/giuliopiana" class="header-cta" target="_blank">
+      Prenota una demo →
+    </a>
+  </div>
+</header>
+
+<!-- ── Hero ── -->
+<section class="hero">
+  <div class="container">
+    <div class="sector-badge">
+      <svg viewBox="0 0 10 10" fill="none" width="8" height="8">
+        <circle cx="5" cy="5" r="4" stroke="#f59e0b" stroke-width="1.2"/>
+        <circle cx="5" cy="5" r="1.5" fill="#f59e0b"/>
+      </svg>
+      Distretto dell'Occhialeria · Belluno · Veneto
+    </div>
+    <div class="hero-label">Ispezione AI per l'occhialeria</div>
+    <h1>Rileva il difetto<br>quando costa ancora poco correggerlo</h1>
+    <p class="hero-sub">
+      Ispezione automatica post-galvanica e post-lucidatura.<br>
+      Il modello si addestra sui tuoi pezzi conformi <br> Non richiede labeling dei difetti.
+    </p>
+  </div>
+</section>
+
+<!-- ── Inline CTA ── -->
+<div class="container">
+  <div class="hero-cta">
+    <a href="https://calendly.com/giuliopiana" class="btn-primary" target="_blank">
+      Prenota una valutazione gratuita →
+    </a>
+    <span class="btn-note">30 minuti · Nessun impegno · Valutiamo la fattibilità sui vostri componenti</span>
+  </div>
+</div>
+
+<!-- ── Heatmap image ── -->
+<div class="container">
+  <div class="heatmap-wrapper">
+    <img
+      src="montatura_fronte_anomaly_04.jpg"
+      alt="re:mark inspector — rilevamento anomalia su montatura occhiali. Sinistra: immagine originale. Destra: mappa di anomalia con localizzazione del difetto."
+    >
+    <div class="heatmap-caption">
+      <div class="heatmap-caption-dot"></div>
+      <span class="heatmap-caption-text">
+        FAIL · difetto localizzato sull'asta — non facilmente rilevabile a ispezione visiva manuale
+      </span>
+    </div>
+  </div>
+</div>
+
+<!-- ── ROI band ── -->
+<div class="container">
+  <div class="roi-band">
+    <div class="roi-side">
+      <div class="roi-label">Scoperto a fine linea</div>
+      <div class="roi-value red">Scarto</div>
+      <div class="roi-sub">Montatura finita · 48 fasi di lavorazione già completate · valore perso</div>
+    </div>
+    <div class="roi-arrow">→</div>
+    <div class="roi-side">
+      <div class="roi-label">Scoperto post-galvanica</div>
+      <div class="roi-value green">Rilavorazione</div>
+      <div class="roi-sub">Semi-lavorato · una fase da ripetere · valore recuperato</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── Defect grid ── -->
+<div class="container">
+  <div class="section-label" style="margin-bottom:24px;">Difetti rilevati nel processo</div>
+  <div class="defect-grid">
+
+    <div class="defect-item">
+      <span class="defect-phase">Post-galvanica · Metallo</span>
+      <div class="defect-name">Difetto di placcatura</div>
+      <div class="defect-desc">Aree non placcate, microvuoti nel coating, distacco localizzato. Causa: contaminazione bagno o contatto insufficiente.</div>
+    </div>
+
+    <div class="defect-item">
+      <span class="defect-phase">Post-galvanica · Metallo</span>
+      <div class="defect-name">Bolle e inclusioni</div>
+      <div class="defect-desc">Bolle superficiali nel deposito galvanico, inclusioni di particolato. Visibili solo con illuminazione radente.</div>
+    </div>
+
+    <div class="defect-item">
+      <span class="defect-phase">Post-lucidatura · Acetato</span>
+      <div class="defect-name">Graffi residui</div>
+      <div class="defect-desc">Micro-graffi non rimossi dal ciclo di lucidatura, localizzati su zone specifiche della superficie.</div>
+    </div>
+
+    <div class="defect-item">
+      <span class="defect-phase">Post-lucidatura · Acetato</span>
+      <div class="defect-name">Opacità localizzata</div>
+      <div class="defect-desc">Zone opache su superficie lucida — indice di lucidatura incompleta o contaminazione del tamburo.</div>
+    </div>
+
+    <div class="defect-item">
+      <span class="defect-phase">Assemblaggio · Frame</span>
+      <div class="defect-name">Difetti di verniciatura</div>
+      <div class="defect-desc">Colature, bolle, mancanza di copertura su bordi e giunzioni. Spesso visibili solo sotto luce specifica.</div>
+    </div>
+
+    <div class="defect-item">
+      <span class="defect-phase">Fine linea · Completo</span>
+      <div class="defect-name">Disallineamento aste</div>
+      <div class="defect-desc">Asimmetria nella posizione delle aste rispetto al front. Rilevabile per confronto geometrico con il modello di riferimento.</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── Three numbers ── -->
+<div class="container">
+  <div class="numbers-brand">
+    <svg viewBox="0 0 22 22" fill="none" style="width:18px;height:18px;flex-shrink:0;">
+      <rect x="1" y="1" width="20" height="20" rx="3"
+        stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+      <circle cx="11" cy="11" r="4.5" stroke="#22c55e" stroke-width="1.5"/>
+      <circle cx="11" cy="11" r="1.5" fill="#22c55e"/>
+    </svg>
+    <span class="numbers-brand-name">RE<span class="numbers-colon">:</span>MARK</span>
+    <span class="numbers-brand-product">inspector</span>
+  </div>
+  <div class="numbers">
+    <div class="number-item">
+      <div class="number-value green">99.8%</div>
+      <div class="number-label">Accuratezza di rilevamento<br>su superfici metalliche e acetato</div>
+    </div>
+    <div class="number-item">
+      <div class="number-value amber">200</div>
+      <div class="number-label">Immagini di pezzi conformi<br>sufficienti per addestrare il modello</div>
+    </div>
+    <div class="number-item">
+      <div class="number-value white">0</div>
+      <div class="number-label">Difetti da etichettare<br>per avviare l'ispezione</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── How it works ── -->
+<section class="section container">
+  <div class="section-label">Come funziona</div>
+  <div class="steps">
+    <div class="step">
+      <span class="step-num">01 · ACQUISIZIONE</span>
+      <h3>Telecamera sulla stazione</h3>
+      <p>Il frame si affianca alla stazione post-galvanica o post-lucidatura esistente. Illuminazione LED radente o coassiale ottimizzata per superfici metalliche lucidate e acetato.</p>
+    </div>
+    <div class="step">
+      <span class="step-num">02 · MODELLO</span>
+      <h3>Impara dai tuoi pezzi conformi</h3>
+      <p>Il modello viene addestrato su 200 immagini di montature conformi fornite da voi. Nessuna etichettatura dei difetti. Operativo in pochi giorni. Si aggiorna automaticamente con nuovi riferimenti.</p>
+    </div>
+    <div class="step">
+      <span class="step-num">03 · DASHBOARD</span>
+      <h3>Tracciabilità per lotto e turno</h3>
+      <p>Ogni pezzo ispezionato genera un record con immagine originale e mappa di anomalia. Defect rate per turno, alert su deriva di processo, audit trail completo per cliente e certificazione.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── FAQ ── -->
+<section class="section container">
+  <div class="section-label">Domande frequenti</div>
+  <div class="faq-list">
+
+    <div class="faq-item">
+      <div class="faq-q">Produciamo sia montature in acetato che in metallo. Il sistema funziona su entrambi?</div>
+      <div class="faq-a">
+        Sì — sono materiali con caratteristiche ottiche diverse che richiedono illuminazioni differenti, ma lo stesso modello di rilevamento anomalie si applica a entrambi.<br><br>
+        Per l'acetato si usa luce diffusa che rivela graffi e opacità in superficie. Per il metallo lucidato si usa luce radente o coassiale che evidenzia difetti di placcatura, bolle e inclusioni. In una stazione con entrambi i materiali, le configurazioni di illuminazione vengono selezionate automaticamente in base al tipo di pezzo identificato.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Lavoriamo su commessa con referenze diverse ogni settimana. Come gestisce il sistema i cambi di modello?</div>
+      <div class="faq-a">
+        Il sistema mantiene un modello separato per ciascuna referenza. Il cambio produzione viene notificato all'operatore — tipicamente con un codice a barre o un segnale manuale — e il sistema carica il modello corrispondente in pochi secondi.<br><br>
+        <span class="faq-bold">Per referenze nuove</span> il percorso è: raccogliere 200 immagini conformi durante la prima produzione, addestrare il modello overnight, attivare l'ispezione dalla produzione successiva. Il lead time di attivazione per una nuova referenza è tipicamente 1–2 giorni.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">L'ispezione ha senso solo a fine linea o si può inserire nel processo?</div>
+      <div class="faq-a">
+        <span class="faq-bold">Nel processo è dove porta più valore.</span> Un difetto di placcatura scoperto dopo l'assemblaggio finale significa scartare una montatura finita — 48 fasi di lavorazione perse. Lo stesso difetto scoperto immediatamente post-galvanica significa ri-placcare una singola fase.<br><br>
+        Le stazioni di maggior impatto sono due: <span class="faq-bold">post-galvanica</span> per difetti di coating su metallo, e <span class="faq-bold">post-lucidatura</span> per graffi residui su acetato. In entrambi i casi il difetto è ancora correggibile — il costo di non averlo rilevato aumenta ad ogni fase successiva.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Il sistema può supportare la documentazione per clienti che richiedono certificazione di qualità?</div>
+      <div class="faq-a">
+        Sì. Ogni ispezione viene archiviata con immagine originale, mappa di anomalia, score, timestamp e identificativo del lotto. Il dashboard genera report per lotto esportabili in PDF — pronti per l'allegato al documento di spedizione o per la risposta a una contestazione del cliente.<br><br>
+        Per produttori che riforniscono grandi buyer (GDO occhialeria, brand internazionali) che richiedono documentazione di processo, il report di ispezione automatizzata diventa un elemento del fascicolo qualità di lotto, senza lavoro manuale aggiuntivo.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Quanto costa e in quanto tempo si installa?</div>
+      <div class="faq-a">
+        Il costo dipende dalla configurazione — numero di stazioni, tipo di illuminazione, abbonamento dashboard. In una valutazione gratuita di 30 minuti stimiamo insieme il ritorno atteso basato sul vostro volume di produzione e sul costo attuale degli scarti e dei resi.<br><br>
+        L'installazione fisica richiede 2–3 ore sulla stazione esistente. Il modello viene addestrato offline sui vostri campioni e attivato entro i giorni successivi. <span class="faq-bold">Tipicamente il break-even si raggiunge in 3–9 mesi.</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── CTA section ── -->
+<section class="section container">
+  <div class="cta-section">
+    <h2>Valutazione gratuita della fattibilità</h2>
+    <p>
+      Video call di 30 minuti. Nessun impegno.<br>
+      Valutiamo le vostre stazioni e i componenti per verificare la compatibilità del processo.
+    </p>
+    <a href="https://calendly.com/giuliopiana" class="btn-primary" target="_blank">
+      Prenota 30 minuti →
+    </a>
+    <span class="btn-note">Oppure scrivici direttamente</span>
+    <div class="contact-details">
+      <span class="contact-name">Giulio Piana</span>
+      <a href="mailto:giulio.piana@brandcraft.it" class="contact-email">
+        giulio.piana@brandcraft.it
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <svg viewBox="0 0 22 22" fill="none" style="width:20px;height:20px;flex-shrink:0;">
+        <rect x="1" y="1" width="20" height="20" rx="3"
+          stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
+        <circle cx="11" cy="11" r="4.5" stroke="#22c55e" stroke-width="1.5"/>
+        <circle cx="11" cy="11" r="1.5" fill="#22c55e"/>
+      </svg>
+      <div class="footer-logo-text">
+        <span class="footer-logo-name">RE<span class="footer-colon">:</span>MARK <span style="color:var(--label);font-weight:400;">inspector</span></span>
+        <span class="footer-logo-sub">
+          un prodotto <a href="https://brandcraft.it" target="_blank">Brandcraft srl</a>
+          &nbsp;·&nbsp; P.IVA IT13291650961 &nbsp;·&nbsp; Milano, Italia
+        </span>
+      </div>
+    </div>
+    <div class="footer-copy">
+      <a href="mailto:giulio.piana@brandcraft.it">giulio.piana@brandcraft.it</a>
+      &nbsp;·&nbsp; <a href="https://remark-vision.com">remark-vision.com</a>
+    </div>
+  </div>
+</footer>
+
+<!-- HubSpot -->
+<script type="text/javascript" id="hs-script-loader" async defer src="//js-eu1.hs-scripts.com/148276793.js"></script>
+</body>
+</html>
