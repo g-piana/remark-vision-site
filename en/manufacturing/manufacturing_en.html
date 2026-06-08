@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>RE:MARK Inspector — AI Defect Inspection for Manufacturing</title>
+<meta name="description" content="Automated visual inspection system for manufactured components. Operational in 6 hours on your existing line. No line modifications required.">
+
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:     #080b10;
+  --s1:     #0d1117;
+  --s2:     #131920;
+  --b0:     rgba(255,255,255,0.05);
+  --b1:     rgba(255,255,255,0.09);
+  --amber:  #f59e0b;
+  --pass:   #22c55e;
+  --fail:   #ef4444;
+  --ink:    #e8edf5;
+  --muted:  #a8b3c4;
+  --label:  #7a8799;
+  --mono:   'JetBrains Mono', monospace;
+  --sans:   'DM Sans', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Scrollbar ────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+
+/* ── Layout ───────────────────────────────────────────────── */
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ── Header ───────────────────────────────────────────────── */
+header {
+  border-bottom: 1px solid var(--b0);
+  background: rgba(8,11,16,0.92);
+  backdrop-filter: blur(8px);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.header-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.logo-icon {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+}
+
+.logo-name {
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--ink);
+}
+
+.logo-name span {
+  color: var(--amber);
+}
+
+.logo-product {
+  font-size: 12px;
+  color: var(--label);
+  letter-spacing: 0.06em;
+  font-family: var(--mono);
+}
+
+.header-cta {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--amber);
+  text-decoration: none;
+  border: 1px solid rgba(245,158,11,0.3);
+  padding: 6px 14px;
+  border-radius: 2px;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.header-cta:hover {
+  background: rgba(245,158,11,0.08);
+  border-color: rgba(245,158,11,0.5);
+}
+
+/* ── Hero ─────────────────────────────────────────────────── */
+.hero {
+  padding: 80px 0 64px;
+  text-align: center;
+}
+
+.hero-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.hero-label::before,
+.hero-label::after {
+  content: '';
+  display: block;
+  width: 32px;
+  height: 1px;
+  background: rgba(245,158,11,0.4);
+}
+
+.hero h1 {
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 20px;
+  max-width: 680px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-sub {
+  font-size: 18px;
+  color: var(--muted);
+  margin-bottom: 40px;
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+/* ── Inline CTA (between hero and video) ─────────────────── */
+.hero-cta {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.hero-cta .btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--amber);
+  color: #080b10;
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 14px 28px;
+  border-radius: 2px;
+  transition: opacity 0.15s;
+}
+
+.hero-cta .btn-primary:hover { opacity: 0.9; }
+
+.hero-cta .btn-note {
+  display: block;
+  font-size: 12px;
+  color: var(--label);
+  margin-top: 10px;
+}
+
+/* ── Video embed ──────────────────────────────────────────── */
+.video-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto 64px;
+  border-radius: 3px;
+  overflow: hidden;
+  border: 1px solid var(--b1);
+  background: var(--s1);
+}
+
+.video-wrapper::before {
+  content: '';
+  display: block;
+  padding-top: 56.25%; /* 16:9 */
+}
+
+.video-wrapper iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* ── CTA button ───────────────────────────────────────────── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--amber);
+  color: #080b10;
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 14px 28px;
+  border-radius: 2px;
+  transition: opacity 0.15s;
+  margin-bottom: 12px;
+}
+
+.btn-primary:hover { opacity: 0.9; }
+
+.btn-note {
+  font-size: 12px;
+  color: var(--label);
+  display: block;
+}
+
+/* ── Three numbers ────────────────────────────────────────── */
+.numbers {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--b0);
+  border: 1px solid var(--b1);
+  border-radius: 3px;
+  overflow: hidden;
+  margin: 0 0 64px;
+}
+
+.number-item {
+  background: var(--s1);
+  padding: 28px 24px;
+  text-align: center;
+}
+
+.number-value {
+  font-family: var(--mono);
+  font-size: 32px;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.number-value.green  { color: var(--pass); }
+.number-value.amber  { color: var(--amber); }
+.number-value.white  { color: var(--ink); }
+
+.number-label {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+/* ── How it works ─────────────────────────────────────────── */
+.section {
+  margin-bottom: 64px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--label);
+  margin-bottom: 32px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--b0);
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.step {
+  background: var(--s1);
+  border: 1px solid var(--b1);
+  border-radius: 3px;
+  padding: 24px;
+  position: relative;
+}
+
+.step-num {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--amber);
+  letter-spacing: 0.08em;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.step h3 {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+
+.step p {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* ── FAQ ──────────────────────────────────────────────────── */
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: var(--b0);
+  border: 1px solid var(--b1);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.faq-item {
+  background: var(--s1);
+  padding: 24px 28px;
+}
+
+.faq-item + .faq-item {
+  border-top: 1px solid var(--b0);
+}
+
+.faq-q {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+.faq-bold {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.faq-q::before {
+  content: 'Q';
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--amber);
+  flex-shrink: 0;
+}
+
+.faq-a {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.7;
+  padding-left: 23px;
+}
+
+/* ── CTA section ──────────────────────────────────────────── */
+.cta-section {
+  margin-bottom: 64px;
+  background: var(--s1);
+  border: 1px solid var(--b1);
+  border-radius: 3px;
+  padding: 48px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-section::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(to right, transparent, var(--amber), transparent);
+  opacity: 0.6;
+}
+
+.cta-section h2 {
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 12px;
+}
+
+.cta-section p {
+  font-size: 15px;
+  color: var(--muted);
+  margin-bottom: 32px;
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.contact-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin-top: 24px;
+}
+
+.contact-name {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.contact-email {
+  font-family: var(--mono);
+  font-size: 14px;
+  color: var(--amber);
+  text-decoration: none;
+}
+
+.contact-email:hover { text-decoration: underline; }
+
+/* ── Footer ───────────────────────────────────────────────── */
+footer {
+  border-top: 1px solid var(--b0);
+  padding: 24px 0;
+}
+
+.footer-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.footer-copy {
+  font-size: 12px;
+  color: var(--label);
+  line-height: 1.6;
+}
+
+.footer-copy a {
+  color: var(--label);
+  text-decoration: none;
+}
+
+.footer-copy a:hover { color: var(--muted); }
+
+/* ── Numbers brand signature ──────────────────────────────── */
+.numbers-brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.numbers-brand-name {
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--ink);
+}
+
+.numbers-colon {
+  color: var(--amber);
+}
+
+.numbers-brand-product {
+  font-size: 12px;
+  color: var(--label);
+  letter-spacing: 0.08em;
+  font-family: var(--mono);
+}
+
+/* ── Footer logo ──────────────────────────────────────────── */
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.footer-logo-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.footer-logo-name {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink);
+  letter-spacing: 0.01em;
+}
+
+.footer-colon {
+  color: var(--amber);
+}
+
+.footer-logo-sub {
+  font-size: 11px;
+  color: var(--label);
+  line-height: 1.5;
+}
+
+.footer-logo-sub a {
+  color: var(--label);
+  text-decoration: none;
+}
+
+.footer-logo-sub a:hover { color: var(--muted); }
+
+/* ── Responsive ───────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .numbers  { grid-template-columns: 1fr; }
+  .steps    { grid-template-columns: 1fr; }
+  .hero h1  { font-size: 26px; }
+  .hero-sub { font-size: 16px; }
+  .cta-section { padding: 32px 24px; }
+  .footer-inner { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── Header ─────────────────────────────────────────────── -->
+<header>
+  <div class="header-inner">
+    <a href="/en/" class="logo">
+      <svg class="logo-icon" viewBox="0 0 22 22" fill="none">
+        <rect x="1" y="1" width="20" height="20" rx="3"
+          stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+        <circle cx="11" cy="11" r="4.5" stroke="#22c55e" stroke-width="1.5"/>
+        <circle cx="11" cy="11" r="1.5" fill="#22c55e"/>
+      </svg>
+      <span class="logo-name">RE<span>:</span>MARK</span>
+      <span class="logo-product">inspector</span>
+    </a>
+    <a href="https://calendly.com/giuliopiana" class="header-cta" target="_blank">
+      Book a call →
+    </a>
+  </div>
+</header>
+
+<!-- ── Hero ───────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-label">Machine Vision for Manufacturing</div>
+    <h1>Automated defect inspection <br> on your existing line</h1>
+    <p class="hero-sub">
+      Operational in 6 hours. No line modifications.<br>
+      The model trains on your conforming parts — no defect labelling required.
+    </p>
+  </div>
+</section>
+
+<!-- ── Inline CTA ────────────────────────────────────────── -->
+<div class="container">
+  <div class="hero-cta">
+    <a href="https://calendly.com/giuliopiana" class="btn-primary" target="_blank">
+      Book a free feasibility assessment →
+    </a>
+    <span class="btn-note">30 minutes · No commitment<br>We evaluate your line and components
+      to verify process compatibility.</span>
+  </div>
+</div>
+
+<!-- ── Video ──────────────────────────────────────────────── -->
+
+
+<!-- ── Three numbers ──────────────────────────────────────── -->
+<div class="container">
+  <!-- Brand signature above the metrics — gives the data section identity -->
+  <div class="numbers-brand">
+    <svg viewBox="0 0 22 22" fill="none" style="width:18px;height:18px;flex-shrink:0;">
+      <rect x="1" y="1" width="20" height="20" rx="3"
+        stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+      <circle cx="11" cy="11" r="4.5" stroke="#22c55e" stroke-width="1.5"/>
+      <circle cx="11" cy="11" r="1.5" fill="#22c55e"/>
+    </svg>
+    <span class="numbers-brand-name">RE<span class="numbers-colon">:</span>MARK</span>
+    <span class="numbers-brand-product">inspector</span>
+  </div>
+  <div class="numbers">
+    <div class="number-item">
+      <div class="number-value green">99.8%</div>
+      <div class="number-label">Anomaly detection accuracy<br>on discrete manufactured components</div>
+    </div>
+    <div class="number-item">
+      <div class="number-value amber">6 hrs</div>
+      <div class="number-label">Operational installation<br>on existing conveyor</div>
+    </div>
+    <div class="number-item">
+      <div class="number-value white">0</div>
+      <div class="number-label">Line or process modifications<br>required</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── How it works ───────────────────────────────────────── -->
+<section class="section container">
+  <div class="section-label">How it works</div>
+  <div class="steps">
+    <div class="step">
+      <span class="step-num">01 · EDGE</span>
+      <h3>Camera and AI module</h3>
+      <p>A compact frame — industrial camera, LED lighting, edge device — mounts alongside the existing conveyor. No production downtime during installation.</p>
+    </div>
+    <div class="step">
+      <span class="step-num">02 · MODEL</span>
+      <h3>Trains on your own parts</h3>
+      <p>The model learns from 200 images of conforming parts. No defect labelling. No dataset to build. Operational within days of installation.</p>
+    </div>
+    <div class="step">
+      <span class="step-num">03 · DASHBOARD</span>
+      <h3>Real-time analytics</h3>
+      <p>Every inspected part generates a record. The cloud dashboard shows defect rate by shift, anomaly map, SPC trends and full traceability for audits.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── FAQ ────────────────────────────────────────────────── -->
+<section class="section container">
+  <div class="section-label">Frequently asked questions</div>
+  <div class="faq-list">
+
+    <div class="faq-item">
+      <div class="faq-q">Our visual inspection requires an NDT Level 2 certified operator. How does the system integrate?</div>
+      <div class="faq-a">
+        In contexts with NDT Level 2 regulation, RE:MARK Inspector operates as an instrumental support tool for the certified operator — not as a replacement.<br>
+The operator examines 100% of parts, as required by the regulation. <br><br><span class="faq-bold">The final decision on every part remains with the certified operator, but human error is significantly reduced</span>.<br><br>
+RE:MARK Inspector detects over 95% of visual anomalies, regardless of fatigue or operating conditions. Combined with certified operator review, it reduces the probability of a defect escaping the overall inspection process by approximately 20x — whatever the operator's baseline detection rate. In a sector where a single escape can have catastrophic consequences, this delta has concrete economic and safety value.<br>
+Additionally, every inspection — including conforming parts — is archived with the original image and anomaly map. In the event of a dispute or incident, it is possible to demonstrate the quality status of each individual part at the moment it left the line.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">We have no NDT regulation, but production volume makes manual visual inspection unsustainable. Are we a use case?</div>
+      <div class="faq-a">
+Yes — this is the second scenario the system is designed for.<br>
+On high-volume lines under ISO 9001 or IATF 16949, the requirement is <span class="faq-bold">documented 100% production coverage</span>. Manual inspection of every part becomes physically impossible beyond a certain pace, and inspection quality degrades rapidly with operator fatigue.<br>
+RE:MARK Inspector inspects every part automatically. The operator intervenes on flagged parts — typically 3–5% of production — with full attention and visual context.<br><span class="faq-bold">The result is documented 100% coverage with a sustainable operational load, and a complete audit trail for every batch.</span>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Our process uses AQL sampling inspection. Does the system replace it? Do we need to recertify?</div>
+      <div class="faq-a">
+        No — and this is an important distinction to clarify before any conversation with your certification body.<br><br>
+        ISO 9001 and IATF 16949 <span class="faq-bold">do not prescribe AQL as a mandatory method</span>: they require that control methods are defined and documented in the Control Plan. The Control Plan is a living document, updatable within normal QMS management — it does not require an extraordinary audit or recertification.<br><br>
+        The typical path with RE:MARK Inspector has three phases:<br><br>
+        <span class="faq-bold">Phase 1 — Pre-inspection addition.</span> RE:MARK is inserted before your existing sampling. The AQL process remains unchanged. Nothing needs updating in the Control Plan: it is an additional step, not a replacement. Sample results improve immediately because they are drawn from an already pre-filtered batch.<br><br>
+        <span class="faq-bold">Phase 2 — Historical documentation.</span> After 3–6 months you have objective data on system performance: detection rate, temporal distribution of anomalies, correlation with process parameters. This is the documentary basis for any subsequent decision.<br><br>
+        <span class="faq-bold">Phase 3 — Control Plan update (optional).</span> With data in hand, the quality manager can choose to update the Control Plan to reduce manual sampling frequency, documenting automated inspection as the primary method with periodic sample validation. This is a normal continuous improvement process provided for by the standard — reviewed in the annual surveillance cycle, not with a separate audit.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Our line already has a specific configuration. Do we need to modify it?</div>
+      <div class="faq-a">
+        No. The aluminium profile frame mounts alongside the existing conveyor — no mechanical modifications, no disruption to the flow. The only precondition is that parts arrive already singulated with predictable orientation, a condition typically already met at CNC exit, after washing, or at the pre-packaging stage.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">What does it cost and how quickly does the investment pay back?</div>
+      <div class="faq-a">
+        The cost depends on the specific configuration — hardware, cloud dashboard subscription, and support. In a free 30-minute assessment we calculate together the expected return based on your production volume, current defect rate, and cost of parts that currently escape inspection. Typically break-even is reached in 3–9 months.
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── CTA section ─────────────────────────────────────────── -->
+<section class="section container">
+  <div class="cta-section">
+    <h2>Free feasibility assessment</h2>
+    <p>
+      30-minute video call. No commitment.<br>We evaluate your line and components
+      to verify process compatibility.
+    </p>
+    <a href="https://calendly.com/giuliopiana" class="btn-primary" target="_blank">
+      Book 30 minutes →
+    </a>
+    <span class="btn-note">Or write to us directly</span>
+    <div class="contact-details">
+      <span class="contact-name">Giulio Piana</span>
+      <a href="mailto:giulio.piana@brandcraft.it" class="contact-email">
+        giulio.piana@brandcraft.it
+      </a>
+    </div>
+  </div>
+  <div style="margin-top: 32px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.05); text-align: center;">
+    <p style="font-size: 13px; color: #7a8799; margin-bottom: 10px;">
+      Have a different problem from anomaly detection<br>or an idea worth validating?
+    </p>
+    <a href="/en/" style="font-size: 13px; color: #f59e0b; text-decoration: none; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.04em;">
+      RE:MARK Industrial AI Validation →
+    </a>
+  </div>
+</section>
+
+<!-- ── Footer ─────────────────────────────────────────────── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <svg viewBox="0 0 22 22" fill="none" style="width:20px;height:20px;flex-shrink:0;">
+        <rect x="1" y="1" width="20" height="20" rx="3"
+          stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
+        <circle cx="11" cy="11" r="4.5" stroke="#22c55e" stroke-width="1.5"/>
+        <circle cx="11" cy="11" r="1.5" fill="#22c55e"/>
+      </svg>
+      <div class="footer-logo-text">
+        <span class="footer-logo-name">RE<span class="footer-colon">:</span>MARK <span style="color:var(--label);font-weight:400;">inspector</span></span>
+        <span class="footer-logo-sub">
+          a product by <a href="https://brandcraft.it" target="_blank">Brandcraft srl</a>
+          &nbsp;·&nbsp; VAT IT13291650961 &nbsp;·&nbsp; Milan, Italy
+        </span>
+      </div>
+    </div>
+    <div class="footer-copy">
+      <a href="mailto:giulio.piana@brandcraft.it">giulio.piana@brandcraft.it</a>
+      &nbsp;·&nbsp; remark-vision.com
+    </div>
+  </div>
+</footer>
+<!-- Start of HubSpot Embed Code -->
+<script type="text/javascript" id="hs-script-loader" async defer src="//js-eu1.hs-scripts.com/148276793.js"></script>
+<!-- End of HubSpot Embed Code -->
+</body>
+</html>

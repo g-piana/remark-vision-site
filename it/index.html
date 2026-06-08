@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>RE:MARK — Industrial AI Validation per il Manifatturiero</title>
+<meta name="description" content="Identifichiamo dove il vostro processo manifatturiero sta perdendo margine — qualità, efficienza, scarti — e consegniamo una risposta misurabile che giustifica una decisione. Dati reali, metodo sperimentale.">
+
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:     #080b10;
+  --s1:     #0d1117;
+  --s2:     #131920;
+  --b0:     rgba(255,255,255,0.05);
+  --b1:     rgba(255,255,255,0.09);
+  --amber:  #f59e0b;
+  --pass:   #22c55e;
+  --fail:   #ef4444;
+  --ink:    #e8edf5;
+  --muted:  #a8b3c4;
+  --label:  #7a8799;
+  --mono:   'JetBrains Mono', monospace;
+  --sans:   'DM Sans', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ── Header ───────────────────────────────────────────────── */
+header {
+  border-bottom: 1px solid var(--b0);
+  background: rgba(8,11,16,0.92);
+  backdrop-filter: blur(8px);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.header-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.logo-icon {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+}
+
+.logo-name {
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--ink);
+}
+
+.logo-name span { color: var(--amber); }
+
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.header-nav a {
+  font-size: 13px;
+  color: var(--label);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.header-nav a:hover { color: var(--muted); }
+
+.header-cta {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--amber);
+  text-decoration: none;
+  border: 1px solid rgba(245,158,11,0.3);
+  padding: 6px 14px;
+  border-radius: 2px;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.header-cta:hover {
+  background: rgba(245,158,11,0.08);
+  border-color: rgba(245,158,11,0.5);
+}
+
+/* ── Hero ─────────────────────────────────────────────────── */
+.hero {
+  padding: 88px 0 72px;
+  text-align: center;
+}
+
+.hero-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.hero-label::before,
+.hero-label::after {
+  content: '';
+  display: block;
+  width: 32px;
+  height: 1px;
+  background: rgba(245,158,11,0.4);
+}
+
+.hero h1 {
+  font-size: clamp(30px, 4vw, 48px);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+  margin-bottom: 24px;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero h1 em {
+  font-style: normal;
+  color: var(--amber);
+}
+
+.hero-sub {
+  font-size: 18px;
+  color: var(--muted);
+  margin-bottom: 48px;
+  max-width: 560px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+.hero-cta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--amber);
+  color: #080b10;
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 14px 28px;
+  border-radius: 2px;
+  transition: opacity 0.15s;
+}
+
+.btn-primary:hover { opacity: 0.9; }
+
+.btn-note {
+  font-size: 12px;
+  color: var(--label);
+}
+
+/* ── Section shared ───────────────────────────────────────── */
+.section {
+  margin-bottom: 72px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--label);
+  margin-bottom: 32px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--b0);
+}
+
+/* ── Steps — tre fasi ─────────────────────────────────────── */
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.step {
+  background: var(--s1);
+  border: 1px solid var(--b1);
+  border-radius: 3px;
+  padding: 24px;
+}
+
+.step-num {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--amber);
+  letter-spacing: 0.08em;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.step h3 {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+
+.step p {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* ── Scenarios — quando chiamarci ────────────────────────── */
+.scenarios {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: var(--b0);
+  border: 1px solid var(--b1);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.scenario {
+  background: var(--s1);
+  padding: 24px 28px;
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.scenario + .scenario { border-top: 1px solid var(--b0); }
+
+.scenario-icon {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--amber);
+  letter-spacing: 0.08em;
+  flex-shrink: 0;
+  padding-top: 2px;
+  min-width: 32px;
+}
+
+.scenario-body h3 {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+
+.scenario-body p {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* ── Inspector product card ───────────────────────────────── */
+.product-card {
+  background: var(--s1);
+  border: 1px solid var(--b1);
+  border-radius: 3px;
+  padding: 36px 40px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 32px;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.product-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(to right, transparent, var(--pass), transparent);
+  opacity: 0.5;
+}
+
+.product-card-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--pass);
+  letter-spacing: 0.1em;
+  margin-bottom: 10px;
+}
+
+.product-card h3 {
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 10px;
+  letter-spacing: -0.01em;
+}
+
+.product-card h3 span { color: var(--amber); }
+
+.product-card p {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.7;
+  max-width: 520px;
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--amber);
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  border: 1px solid rgba(245,158,11,0.3);
+  padding: 10px 18px;
+  border-radius: 2px;
+  white-space: nowrap;
+  transition: background 0.15s, border-color 0.15s;
+  flex-shrink: 0;
+}
+
+.btn-secondary:hover {
+  background: rgba(245,158,11,0.08);
+  border-color: rgba(245,158,11,0.5);
+}
+
+/* ── Credentials strip ────────────────────────────────────── */
+.credentials-strip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  flex-wrap: wrap;
+  padding: 24px 0;
+  border-top: 1px solid var(--b0);
+  border-bottom: 1px solid var(--b0);
+  margin-bottom: 72px;
+}
+
+.cred-item {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--label);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0 20px;
+}
+
+.cred-sep {
+  color: var(--b1);
+  font-size: 14px;
+}
+
+/* ── CTA section ──────────────────────────────────────────── */
+.cta-section {
+  margin-bottom: 72px;
+  background: var(--s1);
+  border: 1px solid var(--b1);
+  border-radius: 3px;
+  padding: 48px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-section::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(to right, transparent, var(--amber), transparent);
+  opacity: 0.6;
+}
+
+.cta-section h2 {
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 12px;
+}
+
+.cta-section p {
+  font-size: 15px;
+  color: var(--muted);
+  margin-bottom: 32px;
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+.cta-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.contact-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  margin-top: 16px;
+}
+
+.contact-name {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.contact-role {
+  font-size: 13px;
+  color: var(--label);
+}
+
+.contact-email {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--amber);
+  text-decoration: none;
+}
+
+.contact-email:hover { text-decoration: underline; }
+
+/* ── Footer ───────────────────────────────────────────────── */
+footer {
+  border-top: 1px solid var(--b0);
+  padding: 24px 0;
+}
+
+.footer-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.footer-logo-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.footer-logo-name {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink);
+  letter-spacing: 0.01em;
+}
+
+.footer-colon { color: var(--amber); }
+
+.footer-logo-sub {
+  font-size: 11px;
+  color: var(--label);
+  line-height: 1.5;
+}
+
+.footer-logo-sub a { color: var(--label); text-decoration: none; }
+.footer-logo-sub a:hover { color: var(--muted); }
+
+.footer-copy {
+  font-size: 12px;
+  color: var(--label);
+}
+
+.footer-copy a { color: var(--label); text-decoration: none; }
+.footer-copy a:hover { color: var(--muted); }
+
+/* ── Responsive ───────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .steps              { grid-template-columns: 1fr; }
+  .product-card       { grid-template-columns: 1fr; }
+  .hero h1            { font-size: 28px; }
+  .hero-sub           { font-size: 16px; }
+  .cta-section        { padding: 32px 24px; }
+  .footer-inner       { flex-direction: column; }
+  .credentials-strip  { gap: 8px; }
+  .cred-sep           { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── Header ─────────────────────────────────────────────── -->
+<header>
+  <div class="header-inner">
+    <a href="/" class="logo">
+      <svg class="logo-icon" viewBox="0 0 22 22" fill="none">
+        <rect x="1" y="1" width="20" height="20" rx="3"
+          stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+        <circle cx="11" cy="11" r="4.5" stroke="#f59e0b" stroke-width="1.5"/>
+        <circle cx="11" cy="11" r="1.5" fill="#f59e0b"/>
+      </svg>
+      <span class="logo-name">RE<span>:</span>MARK</span>
+    </a>
+    <nav class="header-nav">
+      <a href="/manufacturing/">Inspector →</a>
+    </nav>
+    <a href="https://calendly.com/giuliopiana" class="header-cta" target="_blank">
+      Prenota una call →
+    </a>
+  </div>
+</header>
+
+<!-- ── Hero ───────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-label">Industrial AI Validation · Manifatturiero</div>
+    <h1>Ogni processo manifatturiero <br>ha un margine nascosto.<br><em><br>Di solito è nei dati <br>che nessuno ha ancora analizzato.</em></h1>
+    <br>
+    <p class="hero-sub">
+      Identifichiamo dove il vostro processo sta perdendo valore — qualità, efficienza, scarti —
+      e consegniamo una risposta misurabile che giustifica una decisione di investimento o di cambiamento operativo.
+      Dati reali dal vostro processo. Nessuna demo generica. Nessun impegno prima di aver definito insieme il problema.
+    </p>
+    <div class="hero-cta">
+      <a href="https://calendly.com/giuliopiana" class="btn-primary" target="_blank">
+        Prenota una call esplorativa →
+      </a>
+      <span class="btn-note">30 minuti · Nessun impegno</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── Credentials strip ──────────────────────────────────── -->
+<div class="container">
+  <div class="credentials-strip">
+    <span class="cred-item">PhD Physics</span>
+    <span class="cred-sep">·</span>
+    <span class="cred-item">CERN Researcher</span>
+    <span class="cred-sep">·</span>
+    <span class="cred-item">Six Sigma</span>
+    <span class="cred-sep">·</span>
+    <span class="cred-item">15y Boston Scientific Executive</span>
+    <span class="cred-sep">·</span>
+    <span class="cred-item">Machine Vision</span>
+    <span class="cred-sep">·</span>
+    <span class="cred-item">Edge AI</span>
+  </div>
+</div>
+
+<!-- ── Come funziona ──────────────────────────────────────── -->
+<section class="section container">
+  <div class="section-label">Come funziona</div>
+  <div class="steps">
+    <div class="step">
+      <span class="step-num">01 · ASSESSMENT</span>
+      <h3>Definiamo il problema e il valore potenziale</h3>
+      <p>Prima di qualsiasi analisi, capiamo se il problema è reale e misurabile. Una visita on-site, i dati disponibili, i criteri di successo condivisi. Se non c'è un caso economico chiaro, lo diciamo subito. Nessun impegno economico in questa fase.</p>
+    </div>
+    <div class="step">
+      <span class="step-num">02 · VALIDATION STUDY</span>
+      <h3>Misuriamo sul vostro processo reale</h3>
+      <p>Nessun dataset generico. Raccogliamo dati dalla vostra produzione, addestriamo il modello sui vostri componenti, misuriamo con metodo controllato. Tipicamente 4–6 settimane dalla raccolta dati al deliverable.</p>
+    </div>
+    <div class="step">
+      <span class="step-num">03 · GO / NO-GO</span>
+      <h3>Una risposta che regge davanti a un board</h3>
+      <p>Accuratezza misurata, impatto economico stimato, limiti identificati, raccomandazione chiara. Il deliverable è progettato per supportare una decisione di investimento — non per aprire nuove domande.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── Quando chiamarci ───────────────────────────────────── -->
+<section class="section container">
+  <div class="section-label">Tre situazioni che riconosciamo spesso</div>
+  <div class="scenarios">
+
+    <div class="scenario">
+      <span class="scenario-icon">01</span>
+      <div class="scenario-body">
+        <h3>Il tasso di scarto oscilla e non sapete perché</h3>
+        <p>I dati ci sono — log macchina, parametri di processo, report turno. Ma nessuno ha mai analizzato la correlazione tra quelle variabili e l'output qualitativo. Spesso la risposta è già nei dati che avete.</p>
+      </div>
+    </div>
+
+    <div class="scenario">
+      <span class="scenario-icon">02</span>
+      <div class="scenario-body">
+        <h3>Il controllo visivo manuale non scala</h3>
+        <p>L'ispezione a campione funziona finché il volume è gestibile e gli operatori sono riposati. Quando il ritmo aumenta o la geometria è complessa, la variabilità umana diventa il collo di bottiglia. Volete sapere se un sistema AI può fare meglio — sui vostri pezzi reali, non su una demo.</p>
+      </div>
+    </div>
+
+    <div class="scenario">
+      <span class="scenario-icon">03</span>
+      <div class="scenario-body">
+        <h3>State valutando un investimento in AI industriale</h3>
+        <p>Prima di allocare budget su un sistema, su un'acquisizione, o su un partner tecnologico, vale la pena sapere se la tecnologia regge sui vostri dati reali. Un assessment indipendente riduce il rischio di investire su una promessa che non sopravvive al contatto con la produzione.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── Inspector product card ─────────────────────────────── -->
+<section class="section container">
+  <div class="section-label">Un esempio concreto</div>
+  <div class="product-card">
+    <div>
+      <div class="product-card-label">Prodotto · In validazione con Tier 1 Automotive</div>
+      <h3>RE<span>:</span>MARK inspector</h3>
+      <p>
+        Sistema di anomaly detection per ispezione visiva automatica su componenti discreti — pezzi metallici, stampati, lavorati a CNC. Addestrato su immagini di parti conformi: non richiede dataset di difetti etichettati. Attualmente in validazione con un produttore automotive Tier 1 su geometrie cilindriche con superfici riflettenti.
+      </p>
+    </div>
+    <a href="/manufacturing/" class="btn-secondary">
+      Scopri Inspector →
+    </a>
+  </div>
+</section>
+
+<!-- ── CTA ────────────────────────────────────────────────── -->
+<section class="section container">
+  <div class="cta-section">
+    <h2>State valutando dove l'AI può creare valore reale nel vostro processo?</h2>
+    <p>
+      Una call di 30 minuti per capire se c'è un caso economico misurabile.
+      Nessun impegno. Una risposta onesta — anche se la risposta è no.
+    </p>
+    <div class="cta-inner">
+      <a href="https://calendly.com/giuliopiana" class="btn-primary" target="_blank">
+        Prenota 30 minuti →
+      </a>
+      <span class="btn-note">Oppure scrivici direttamente</span>
+      <div class="contact-details">
+        <span class="contact-name">Giulio Piana</span>
+        <span class="contact-role">Industrial AI Validation · RE:MARK</span>
+        <a href="mailto:giulio.piana@brandcraft.it" class="contact-email">
+          giulio.piana@brandcraft.it
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ─────────────────────────────────────────────── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <svg viewBox="0 0 22 22" fill="none" style="width:20px;height:20px;flex-shrink:0;">
+        <rect x="1" y="1" width="20" height="20" rx="3"
+          stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
+        <circle cx="11" cy="11" r="4.5" stroke="#f59e0b" stroke-width="1.5"/>
+        <circle cx="11" cy="11" r="1.5" fill="#f59e0b"/>
+      </svg>
+      <div class="footer-logo-text">
+        <span class="footer-logo-name">RE<span class="footer-colon">:</span>MARK</span>
+        <span class="footer-logo-sub">
+          un servizio <a href="https://brandcraft.it" target="_blank">Brandcraft srl</a>
+          &nbsp;·&nbsp; P.IVA IT13291650961 &nbsp;·&nbsp; Milano, Italia
+        </span>
+      </div>
+    </div>
+    <div class="footer-copy">
+      <a href="mailto:giulio.piana@brandcraft.it">giulio.piana@brandcraft.it</a>
+      &nbsp;·&nbsp; remark-vision.com
+    </div>
+  </div>
+</footer>
+
+<!-- HubSpot -->
+<script type="text/javascript" id="hs-script-loader" async defer src="//js-eu1.hs-scripts.com/148276793.js"></script>
+</body>
+</html>
