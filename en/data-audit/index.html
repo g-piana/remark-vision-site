@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>RE:MARK — Technical Due Diligence & Integration Advisory for VC/PE</title>
-<meta name="description" content="Technical due diligence and integration advisory for VC and PE deal teams. Industrial AI, robotics, computer vision, manufacturing systems. Validation before commitment, a plan before day one.">
+<title>RE:MARK — Industrial AI Validation for Manufacturing</title>
+<meta name="description" content="We identify where your manufacturing process is losing margin — quality, efficiency, scrap — and deliver a measurable answer that justifies an investment or operational decision. Real process data, rigorous experimental method.">
 
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
@@ -224,6 +224,42 @@ header {
   border-bottom: 1px solid var(--b0);
 }
 
+/* ── Steps — tre fasi ─────────────────────────────────────── */
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.step {
+  background: var(--s1);
+  border: 1px solid var(--b1);
+  border-radius: 3px;
+  padding: 24px;
+}
+
+.step-num {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--amber);
+  letter-spacing: 0.08em;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.step h3 {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+
+.step p {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
 /* ── Scenarios — quando chiamarci ────────────────────────── */
 .scenarios {
   display: flex;
@@ -268,7 +304,54 @@ header {
   line-height: 1.6;
 }
 
-/* ── Buttons ──────────────────────────────────────────────── */
+/* ── Inspector product card ───────────────────────────────── */
+.product-card {
+  background: var(--s1);
+  border: 1px solid var(--b1);
+  border-radius: 3px;
+  padding: 36px 40px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 32px;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.product-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(to right, transparent, var(--pass), transparent);
+  opacity: 0.5;
+}
+
+.product-card-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--pass);
+  letter-spacing: 0.1em;
+  margin-bottom: 10px;
+}
+
+.product-card h3 {
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 10px;
+  letter-spacing: -0.01em;
+}
+
+.product-card h3 span { color: var(--amber); }
+
+.product-card p {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.7;
+  max-width: 520px;
+}
+
 .btn-secondary {
   display: inline-flex;
   align-items: center;
@@ -445,157 +528,10 @@ footer {
 .footer-copy a { color: var(--label); text-decoration: none; }
 .footer-copy a:hover { color: var(--muted); }
 
-/* ── Domains strip ────────────────────────────────────────── */
-.domains-strip {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-top: 28px;
-}
-
-.domain-tag {
-  font-family: var(--mono);
-  font-size: 11px;
-  color: var(--muted);
-  letter-spacing: 0.04em;
-  border: 1px solid var(--b1);
-  border-radius: 2px;
-  padding: 5px 12px;
-  background: rgba(255,255,255,0.02);
-}
-
-/* ── Service blocks — two-column ─────────────────────────── */
-.service-blocks {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1px;
-  background: var(--b0);
-  border: 1px solid var(--b1);
-  border-radius: 3px;
-  overflow: hidden;
-}
-
-.service-block {
-  background: var(--s1);
-  padding: 32px 28px;
-}
-
-.service-block-phase {
-  font-family: var(--mono);
-  font-size: 11px;
-  color: var(--amber);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  margin-bottom: 14px;
-}
-
-.service-block h3 {
-  font-size: 17px;
-  font-weight: 500;
-  color: var(--ink);
-  margin-bottom: 10px;
-  letter-spacing: -0.01em;
-}
-
-.service-block p {
-  font-size: 14px;
-  color: var(--muted);
-  line-height: 1.7;
-  margin-bottom: 16px;
-}
-
-.service-block ul {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.service-block li {
-  font-size: 13px;
-  color: var(--muted);
-  line-height: 1.5;
-  padding-left: 16px;
-  position: relative;
-}
-
-.service-block li::before {
-  content: '–';
-  position: absolute;
-  left: 0;
-  color: var(--label);
-}
-
-/* ── Implementation cards ─────────────────────────────────── */
-.impl-intro {
-  font-size: 14px;
-  color: var(--muted);
-  line-height: 1.7;
-  max-width: 640px;
-  margin-bottom: 28px;
-}
-
-.impl-cards {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-}
-
-.impl-card {
-  background: var(--s1);
-  border: 1px solid var(--b1);
-  border-radius: 3px;
-  padding: 28px;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  overflow: hidden;
-}
-
-.impl-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 2px;
-  background: linear-gradient(to right, transparent, var(--pass), transparent);
-  opacity: 0.5;
-}
-
-.impl-card-label {
-  font-family: var(--mono);
-  font-size: 10px;
-  color: var(--pass);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  margin-bottom: 10px;
-}
-
-.impl-card h3 {
-  font-size: 16px;
-  font-weight: 500;
-  color: var(--ink);
-  margin-bottom: 8px;
-}
-
-.impl-card p {
-  font-size: 13px;
-  color: var(--muted);
-  line-height: 1.6;
-  margin-bottom: 18px;
-  flex-grow: 1;
-}
-
-.impl-card .btn-secondary {
-  align-self: flex-start;
-}
-
 /* ── Responsive ───────────────────────────────────────────── */
 @media (max-width: 640px) {
-  .service-blocks     { grid-template-columns: 1fr; }
-  .impl-cards         { grid-template-columns: 1fr; }
   .steps              { grid-template-columns: 1fr; }
+  .product-card       { grid-template-columns: 1fr; }
   .hero h1            { font-size: 28px; }
   .hero-sub           { font-size: 16px; }
   .cta-section        { padding: 32px 24px; }
@@ -620,11 +556,10 @@ footer {
       <span class="logo-name">RE<span>:</span>MARK</span>
     </a>
     <nav class="header-nav">
-      <a href="/data-audit/">Data Audit →</a>
-      <a href="/manufacturing/">Inspector →</a>
+      <a href="/en/manufacturing/">Inspector →</a>
     </nav>
     <a href="https://calendly.com/giuliopiana" class="header-cta" target="_blank">
-      Let's talk
+      Book a call →
     </a>
   </div>
 </header>
@@ -632,24 +567,18 @@ footer {
 <!-- ── Hero ───────────────────────────────────────────────── -->
 <section class="hero">
   <div class="container">
-    <div class="hero-label">Technical Due Diligence & Integration Advisory</div>
-    <h1>Technical Due Diligence &<br><em>Integration Advisory</em> for VC/PE</h1>
-    <p class="hero-sub">
-      I validate the technology in a target before you commit — and the integration plan before day one.
-      Between target identification and system integration, deal teams need a clear technical read.
-      That's where I work.
+    <div class="hero-label">Industrial AI Validation · Manufacturing</div>
+    <h1>Every manufacturing process <br>has a hidden margin.<br><em><br>It's usually in the data <br>nobody has analysed yet.</em></h1>
+    <br><p class="hero-sub">
+      We identify where your process is losing value — quality, efficiency, scrap —
+      and deliver a measurable answer that justifies an investment or operational decision.
+      Real data from your process. No generic demos. No commitment before we've defined the problem together.
     </p>
-    <div class="domains-strip">
-      <span class="domain-tag">Industrial AI</span>
-      <span class="domain-tag">Robotics</span>
-      <span class="domain-tag">Computer Vision</span>
-      <span class="domain-tag">Manufacturing Systems</span>
-    </div>
-    <div class="hero-cta" style="margin-top: 40px;">
+    <div class="hero-cta">
       <a href="https://calendly.com/giuliopiana" class="btn-primary" target="_blank">
-        Book a 30-minute call →
+        Book an exploratory call →
       </a>
-      <span class="btn-note">No commitment</span>
+      <span class="btn-note">30 minutes · No commitment</span>
     </div>
   </div>
 </section>
@@ -663,7 +592,7 @@ footer {
     <span class="cred-sep">·</span>
     <span class="cred-item">Six Sigma</span>
     <span class="cred-sep">·</span>
-    <span class="cred-item">15y Executive</span>
+    <span class="cred-item">15y Boston Scientific Executive</span>
     <span class="cred-sep">·</span>
     <span class="cred-item">Machine Vision</span>
     <span class="cred-sep">·</span>
@@ -671,117 +600,93 @@ footer {
   </div>
 </div>
 
-<!-- ── Service blocks ──────────────────────────────────────── -->
+<!-- ── How it works ───────────────────────────────────────── -->
 <section class="section container">
-  <div class="section-label">Where I work in the deal</div>
-  <div class="service-blocks">
-    <div class="service-block">
-      <div class="service-block-phase">Pre-Deal · Technical Due Diligence</div>
-      <h3>Is the technology what it claims to be?</h3>
-      <p>Independent technical validation on a target or add-on, structured for deal teams who need a defensible answer, not a longer report.</p>
-      <ul>
-        <li>Architecture and performance claims verified against real evidence</li>
-        <li>Licensing, IP, and certification risk reviewed</li>
-        <li>Technical team and founder calls structured around the open questions</li>
-        <li>Fixed-price engagement, typically contingent on deal close</li>
-      </ul>
+  <div class="section-label">How it works</div>
+  <div class="steps">
+    <div class="step">
+      <span class="step-num">01 · ASSESSMENT</span>
+      <h3>Define the problem and the potential value</h3>
+      <p>Before any analysis, we establish whether the problem is real and measurable. An on-site visit, available data, shared success criteria. If there is no clear economic case, we say so immediately. No financial commitment at this stage.</p>
     </div>
-    <div class="service-block">
-      <div class="service-block-phase">Post-Deal · Integration Readiness</div>
-      <h3>What does day one actually require?</h3>
-      <p>A technical integration roadmap delivered before closing, so the platform and the add-on know what to expect from each other on day one.</p>
-      <ul>
-        <li>High-level technical integration plan, sequenced and scoped</li>
-        <li>Dependencies and risk points flagged before they become surprises</li>
-        <li>Input for negotiation and the 100-day plan</li>
-        <li>A roadmap, not an open-ended implementation engagement</li>
-      </ul>
+    <div class="step">
+      <span class="step-num">02 · VALIDATION STUDY</span>
+      <h3>We measure on your real process</h3>
+      <p>No generic datasets. We collect data from your production line, train the model on your components, and measure with a controlled experimental method. Typically 4–6 weeks from data collection to deliverable.</p>
+    </div>
+    <div class="step">
+      <span class="step-num">03 · GO / NO-GO</span>
+      <h3>An answer that holds up in a board room</h3>
+      <p>Measured accuracy, estimated economic impact, identified limitations, clear recommendation. The deliverable is designed to support an investment decision — not to open new questions.</p>
     </div>
   </div>
 </section>
 
-<!-- ── Quando ha senso ────────────────────────────────────── -->
+<!-- ── When to call us ────────────────────────────────────── -->
 <section class="section container">
-  <div class="section-label">When this is useful</div>
+  <div class="section-label">Three situations we recognise often</div>
   <div class="scenarios">
 
     <div class="scenario">
       <span class="scenario-icon">01</span>
       <div class="scenario-body">
-        <h3>A deeptech or industrial target with technical claims to verify</h3>
-        <p>Performance numbers, architecture decisions, or certification claims that the deal team can't independently assess — and that materially affect valuation or risk.</p>
+        <h3>Your scrap rate fluctuates and you don't know why</h3>
+        <p>The data exists — machine logs, process parameters, shift reports. But nobody has ever analysed the correlation between those variables and quality output. The answer is usually already in the data you have.</p>
       </div>
     </div>
 
     <div class="scenario">
       <span class="scenario-icon">02</span>
       <div class="scenario-body">
-        <h3>An add-on acquisition with an integration question</h3>
-        <p>The target makes sense strategically, but no one has mapped what connecting it to the existing platform actually requires — until it becomes a day-one problem.</p>
+        <h3>Manual visual inspection doesn't scale</h3>
+        <p>Sampling inspection works as long as volume is manageable and operators are rested. When pace increases or geometry becomes complex, human variability becomes the bottleneck. You want to know whether an AI system can do better — on your actual parts, not on a demo.</p>
       </div>
     </div>
 
     <div class="scenario">
       <span class="scenario-icon">03</span>
       <div class="scenario-body">
-        <h3>A technical read the partner doesn't have time to build alone</h3>
-        <p>You need a defensible technical opinion fast, from someone who has built and deployed the systems in question — not just evaluated them on paper.</p>
+        <h3>You are evaluating an investment in industrial AI</h3>
+        <p>Before allocating budget on a system, an acquisition, or a technology partner, it's worth knowing whether the technology holds up on your real data. An independent assessment reduces the risk of investing in a promise that doesn't survive contact with production.</p>
       </div>
     </div>
 
   </div>
 </section>
 
-<!-- ── Concrete implementation experience ─────────────────── -->
+<!-- ── Inspector product card ─────────────────────────────── -->
 <section class="section container">
-  <div class="section-label">Concrete implementation experience</div>
-  <p class="impl-intro">
-    The diligence is informed by building, not just reviewing. Two examples of work
-    delivered end-to-end — not slides, working systems.
-  </p>
-  <div class="impl-cards">
-
-    <div class="impl-card">
-      <div class="impl-card-label">Data Audit</div>
-      <h3>5-day Process Intelligence Assessment</h3>
+  <div class="section-label">A concrete example</div>
+  <div class="product-card">
+    <div>
+      <div class="product-card-label">Product · In validation with Tier 1 Automotive</div>
+      <h3>RE<span>:</span>MARK inspector</h3>
       <p>
-        A structured, fixed-price data audit for manufacturing operations — applying the same
-        experimental-physics and Six Sigma method used in technical diligence, on a real
-        production process.
+        Anomaly detection system for automated visual inspection of discrete components — machined metal parts, castings, CNC-finished parts. Trained on conforming part images: no labelled defect dataset required. The architecture integrates with existing plant infrastructure — PLC, MES, motion control — rather than operating as a standalone layer. Currently in validation with a Tier 1 automotive manufacturer on cylindrical geometries with reflective surfaces.
       </p>
-      <a href="/data-audit/" class="btn-secondary">View the audit →</a>
     </div>
-
-    <div class="impl-card">
-      <div class="impl-card-label">In validation · Tier 1 Automotive</div>
-      <h3>RE<span style="color:var(--amber)">:</span>MARK Inspector</h3>
-      <p>
-        An anomaly detection system for automated visual inspection, built from edge hardware
-        to cloud dashboard — proof that the validation method holds up on real production data,
-        not benchmark datasets.
-      </p>
-      <a href="/manufacturing/" class="btn-secondary">See Inspector →</a>
-    </div>
-
+    <a href="/en/manufacturing/" class="btn-secondary">
+      Discover Inspector →
+    </a>
   </div>
 </section>
 
 <!-- ── CTA ────────────────────────────────────────────────── -->
 <section class="section container">
   <div class="cta-section">
-    <h2>A target or add-on you need to validate?</h2>
+    <h2>Evaluating where AI can create real value in your process?</h2>
     <p>
-      A 30-minute call to see if there's a fit. No commitment, no proposal
-      before we've understood the deal.
+      A 30-minute call to establish whether there is a measurable economic case.
+      No commitment. An honest answer — even if the answer is no.
     </p>
     <div class="cta-inner">
       <a href="https://calendly.com/giuliopiana" class="btn-primary" target="_blank">
         Book 30 minutes →
       </a>
-      <span class="btn-note">Or write directly</span>
+      <span class="btn-note">Or write to us directly</span>
       <div class="contact-details">
         <span class="contact-name">Giulio Piana</span>
-        <span class="contact-role">Technical Due Diligence & Integration Advisory · RE:MARK</span>
+        <span class="contact-role">Industrial AI Validation · RE:MARK</span>
         <a href="mailto:giulio.piana@brandcraft.it" class="contact-email">
           giulio.piana@brandcraft.it
         </a>
@@ -803,10 +708,14 @@ footer {
       <div class="footer-logo-text">
         <span class="footer-logo-name">RE<span class="footer-colon">:</span>MARK</span>
         <span class="footer-logo-sub">
-          a <a href="https://brandcraft.it" target="_blank">Brandcraft srl</a> service
-          &nbsp;·&nbsp; P.IVA IT13291650961 &nbsp;·&nbsp; Milan, Italy
+          a service by <a href="https://brandcraft.it" target="_blank">Brandcraft srl</a>
+          &nbsp;·&nbsp; VAT IT13291650961 &nbsp;·&nbsp; Milan, Italy
         </span>
       </div>
+    </div>
+        <div class="footer-copy">
+      <a href="/it/">Versione italiana</a>
+
     </div>
     <div class="footer-copy">
       <a href="mailto:giulio.piana@brandcraft.it">giulio.piana@brandcraft.it</a>
