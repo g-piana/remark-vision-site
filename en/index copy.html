@@ -591,85 +591,6 @@ footer {
   align-self: flex-start;
 }
 
-/* ── AI Readiness featured block ─────────────────────────── */
-.ai-readiness-block {
-  background: var(--s1);
-  border: 1px solid var(--b1);
-  border-radius: 3px;
-  padding: 40px 44px;
-  position: relative;
-  overflow: hidden;
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 40px;
-  align-items: center;
-}
-
-.ai-readiness-block::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 2px;
-  background: linear-gradient(to right, transparent, var(--amber), transparent);
-  opacity: 0.7;
-}
-
-.ai-readiness-tag {
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--amber);
-  margin-bottom: 12px;
-}
-
-.ai-readiness-block h3 {
-  font-size: 20px;
-  font-weight: 500;
-  color: var(--ink);
-  letter-spacing: -0.015em;
-  margin-bottom: 12px;
-}
-
-.ai-readiness-block p {
-  font-size: 14px;
-  color: var(--muted);
-  line-height: 1.7;
-  max-width: 520px;
-}
-
-.ai-readiness-stats {
-  display: flex;
-  gap: 28px;
-  margin-top: 24px;
-  padding-top: 20px;
-  border-top: 1px solid var(--b0);
-}
-
-.ai-readiness-stat-val {
-  font-family: var(--mono);
-  font-size: 20px;
-  font-weight: 500;
-  color: var(--amber);
-  letter-spacing: -0.02em;
-  line-height: 1;
-  display: block;
-  margin-bottom: 4px;
-}
-
-.ai-readiness-stat-lbl {
-  font-size: 11px;
-  color: var(--label);
-  line-height: 1.4;
-  max-width: 120px;
-  display: block;
-}
-
-@media (max-width: 640px) {
-  .ai-readiness-block { grid-template-columns: 1fr; padding: 28px 24px; }
-  .ai-readiness-stats { gap: 20px; flex-wrap: wrap; }
-}
-
 /* ── Responsive ───────────────────────────────────────────── */
 @media (max-width: 640px) {
   .service-blocks     { grid-template-columns: 1fr; }
@@ -699,7 +620,6 @@ footer {
       <span class="logo-name">RE<span>:</span>MARK</span>
     </a>
     <nav class="header-nav">
-      <a href="/en/ai-readiness/">AI Readiness →</a>
       <a href="/en/data-audit/">Data Audit →</a>
       <a href="/en/manufacturing/">Inspector →</a>
     </nav>
@@ -748,39 +668,6 @@ footer {
     <span class="cred-item">Edge AI</span>
   </div>
 </div>
-
-<!-- ── AI Readiness Assessment ────────────────────────────── -->
-<section class="section container">
-  <div class="section-label">New offering · Industrial AI</div>
-  <div class="ai-readiness-block">
-    <div>
-      <div class="ai-readiness-tag">AI Readiness Assessment</div>
-      <h3>Before committing to AI, know whether your data supports the thesis.</h3>
-      <p>
-        Manufacturing companies have invested in sensors, PLCs, MES, and quality systems for years.
-        The data exists — but it sits in incompatible silos with unknown quality.
-        Any AI initiative built on top underperforms or fails silently.
-        A 4-week structured assessment that tells you where value is actually reachable,
-        with the evidence to support a capital allocation decision.
-      </p>
-      <div class="ai-readiness-stats">
-        <div>
-          <span class="ai-readiness-stat-val">41%</span>
-          <span class="ai-readiness-stat-lbl">cite data access as primary AI barrier</span>
-        </div>
-        <div>
-          <span class="ai-readiness-stat-val">4 wk</span>
-          <span class="ai-readiness-stat-lbl">to a board-ready assessment with prioritised use cases</span>
-        </div>
-        <div>
-          <span class="ai-readiness-stat-val">Go / No-go</span>
-          <span class="ai-readiness-stat-lbl">with the data to justify it — not a transformation roadmap</span>
-        </div>
-      </div>
-    </div>
-    <a href="/en/ai-readiness/" class="btn-secondary">See the assessment →</a>
-  </div>
-</section>
 
 <!-- ── Service blocks ──────────────────────────────────────── -->
 <section class="section container">

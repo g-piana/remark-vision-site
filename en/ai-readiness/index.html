@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RE:MARK — Industrial AI Readiness Assessment</title>
+<meta name="description" content="Before investing in industrial AI, know whether your process data can support it. A 4-week structured assessment that tells you where AI creates real value — and where it doesn't.">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:     #080b10;
+  --s1:     #0d1117;
+  --s2:     #131920;
+  --b0:     rgba(255,255,255,0.05);
+  --b1:     rgba(255,255,255,0.09);
+  --amber:  #f59e0b;
+  --pass:   #22c55e;
+  --fail:   #ef4444;
+  --blue:   #3b82f6;
+  --ink:    #e8edf5;
+  --muted:  #a8b3c4;
+  --label:  #7a8799;
+  --mono:   'JetBrains Mono', monospace;
+  --sans:   'DM Sans', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ── Header ── */
+header {
+  border-bottom: 1px solid var(--b0);
+  background: rgba(8,11,16,0.92);
+  backdrop-filter: blur(8px);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+.header-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+.logo-icon { width: 22px; height: 22px; flex-shrink: 0; }
+.logo-name { font-size: 15px; font-weight: 500; letter-spacing: 0.01em; color: var(--ink); }
+.logo-name span { color: var(--amber); }
+.header-nav { display: flex; align-items: center; gap: 24px; }
+.header-nav a { font-size: 13px; color: var(--label); text-decoration: none; transition: color 0.15s; }
+.header-nav a:hover { color: var(--muted); }
+.header-cta {
+  font-size: 12px; font-weight: 500; color: var(--amber);
+  text-decoration: none; border: 1px solid rgba(245,158,11,0.3);
+  padding: 6px 14px; border-radius: 2px; transition: background 0.15s, border-color 0.15s;
+}
+.header-cta:hover { background: rgba(245,158,11,0.08); border-color: rgba(245,158,11,0.5); }
+
+/* ── Hero ── */
+.hero {
+  padding: 80px 0 64px;
+}
+.hero-eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.hero-eyebrow::before {
+  content: '';
+  display: block;
+  width: 28px; height: 1px;
+  background: rgba(245,158,11,0.4);
+}
+.hero h1 {
+  font-size: clamp(28px, 3.8vw, 46px);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+  max-width: 680px;
+  margin-bottom: 10px;
+}
+.hero h1 em { font-style: normal; color: var(--amber); }
+
+.hero-thesis {
+  font-size: clamp(14px, 1.6vw, 17px);
+  color: var(--muted);
+  max-width: 600px;
+  margin-bottom: 40px;
+  line-height: 1.7;
+}
+
+.hero-stat-row {
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+  margin-bottom: 44px;
+  padding: 24px 28px;
+  background: var(--s1);
+  border: 1px solid var(--b1);
+  border-radius: 3px;
+  border-left: 3px solid var(--amber);
+  max-width: 680px;
+}
+.hero-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.hero-stat-value {
+  font-family: var(--mono);
+  font-size: 28px;
+  font-weight: 500;
+  color: var(--amber);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+.hero-stat-label {
+  font-size: 12px;
+  color: var(--label);
+  max-width: 160px;
+  line-height: 1.4;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--amber);
+  color: #080b10;
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 14px 28px;
+  border-radius: 2px;
+  transition: opacity 0.15s;
+}
+.btn-primary:hover { opacity: 0.9; }
+.btn-note { font-size: 12px; color: var(--label); margin-top: 10px; display: block; }
+
+/* ── Section shared ── */
+.section { margin-bottom: 72px; }
+.section-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--label);
+  margin-bottom: 32px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--b0);
+}
+
+/* ── Diagnostic visual ── */
+.diagnostic-wrapper {
+  background: var(--s1);
+  border: 1px solid var(--b1);
+  border-radius: 3px;
+  padding: 36px 40px;
+  margin-bottom: 16px;
+  overflow: hidden;
+}
+.diagnostic-caption {
+  font-size: 13px;
+  color: var(--label);
+  text-align: center;
+  margin-top: 20px;
+  font-family: var(--mono);
+  letter-spacing: 0.04em;
+}
+
+/* ── SVG diagnostic internal styles are inline ── */
+
+/* ── The problem block ── */
+.problem-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  background: var(--b0);
+  border: 1px solid var(--b1);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.problem-cell {
+  background: var(--s1);
+  padding: 28px 32px;
+}
+.problem-cell-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--label);
+  margin-bottom: 12px;
+}
+.problem-cell h3 {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+}
+.problem-cell p {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.65;
+}
+.problem-cell.highlight {
+  background: var(--s2);
+  border-left: 2px solid var(--amber);
+}
+
+/* ── Deliverables ── */
+.deliverables {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  background: var(--b0);
+  border: 1px solid var(--b1);
+  border-radius: 3px;
+  overflow: hidden;
+  counter-reset: deliverable;
+}
+.deliverable {
+  background: var(--s1);
+  padding: 28px 32px 28px 28px;
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: 20px;
+  align-items: start;
+}
+.deliverable + .deliverable { border-top: 1px solid var(--b0); }
+.deliverable-num {
+  font-family: var(--mono);
+  font-size: 22px;
+  font-weight: 500;
+  color: rgba(245,158,11,0.25);
+  letter-spacing: -0.02em;
+  padding-top: 2px;
+  line-height: 1;
+}
+.deliverable-body h3 {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+.deliverable-body p {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.65;
+  margin-bottom: 10px;
+}
+.deliverable-signal {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--amber);
+  letter-spacing: 0.06em;
+  padding: 4px 10px;
+  border: 1px solid rgba(245,158,11,0.2);
+  border-radius: 2px;
+  display: inline-block;
+}
+
+/* ── Method strip ── */
+.method-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  background: var(--b0);
+  border: 1px solid var(--b1);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.method-step {
+  background: var(--s1);
+  padding: 24px 24px;
+}
+.method-step-num {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--amber);
+  letter-spacing: 0.1em;
+  margin-bottom: 10px;
+  display: block;
+}
+.method-step h3 { font-size: 14px; font-weight: 500; color: var(--ink); margin-bottom: 6px; }
+.method-step p { font-size: 12px; color: var(--muted); line-height: 1.6; }
+
+/* ── Who it's for ── */
+.audience-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.audience-card {
+  background: var(--s1);
+  border: 1px solid var(--b1);
+  border-radius: 3px;
+  padding: 24px 28px;
+}
+.audience-role {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--pass);
+  margin-bottom: 10px;
+}
+.audience-card h3 { font-size: 14px; font-weight: 500; color: var(--ink); margin-bottom: 8px; }
+.audience-card p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+/* ── Differentiator ── */
+.diff-block {
+  background: var(--s1);
+  border: 1px solid var(--b1);
+  border-radius: 3px;
+  padding: 36px 40px;
+  position: relative;
+  overflow: hidden;
+}
+.diff-block::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(to right, transparent, var(--amber), transparent);
+  opacity: 0.5;
+}
+.diff-block p {
+  font-size: 17px;
+  color: var(--muted);
+  line-height: 1.75;
+  max-width: 700px;
+}
+.diff-block p strong { color: var(--ink); font-weight: 500; }
+.diff-block p em {
+  font-style: normal;
+  color: var(--amber);
+  font-family: var(--mono);
+  font-size: 14px;
+  display: block;
+  margin-top: 20px;
+  letter-spacing: 0.04em;
+}
+
+/* ── CTA ── */
+.cta-section {
+  background: var(--s1);
+  border: 1px solid var(--b1);
+  border-radius: 3px;
+  padding: 48px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 72px;
+}
+.cta-section::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(to right, transparent, var(--amber), transparent);
+  opacity: 0.6;
+}
+.cta-section h2 { font-size: 22px; font-weight: 500; color: var(--ink); margin-bottom: 12px; letter-spacing: -0.01em; }
+.cta-section p { font-size: 15px; color: var(--muted); margin-bottom: 32px; max-width: 480px; margin-left: auto; margin-right: auto; line-height: 1.65; }
+.cta-inner { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.contact-details { display: flex; flex-direction: column; align-items: center; gap: 4px; margin-top: 16px; }
+.contact-name { font-size: 15px; font-weight: 500; color: var(--ink); }
+.contact-role { font-size: 13px; color: var(--label); }
+.contact-email { font-family: var(--mono); font-size: 13px; color: var(--amber); text-decoration: none; }
+.contact-email:hover { text-decoration: underline; }
+
+/* ── Credentials strip ── */
+.credentials-strip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  flex-wrap: wrap;
+  padding: 20px 0;
+  border-top: 1px solid var(--b0);
+  border-bottom: 1px solid var(--b0);
+  margin-bottom: 72px;
+}
+.cred-item { font-family: var(--mono); font-size: 11px; color: var(--label); letter-spacing: 0.08em; text-transform: uppercase; padding: 0 18px; }
+.cred-sep { color: var(--b1); font-size: 14px; }
+
+/* ── Footer ── */
+footer { border-top: 1px solid var(--b0); padding: 24px 0; }
+.footer-inner {
+  max-width: 960px; margin: 0 auto; padding: 0 24px;
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+}
+.footer-logo { display: flex; align-items: center; gap: 10px; }
+.footer-logo-text { display: flex; flex-direction: column; gap: 2px; }
+.footer-logo-name { font-size: 15px; font-weight: 500; color: var(--ink); letter-spacing: 0.01em; }
+.footer-colon { color: var(--amber); }
+.footer-logo-sub { font-size: 11px; color: var(--label); line-height: 1.5; }
+.footer-logo-sub a { color: var(--label); text-decoration: none; }
+.footer-logo-sub a:hover { color: var(--muted); }
+.footer-copy { font-size: 12px; color: var(--label); }
+.footer-copy a { color: var(--label); text-decoration: none; }
+.footer-copy a:hover { color: var(--muted); }
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .problem-grid    { grid-template-columns: 1fr; }
+  .method-strip    { grid-template-columns: 1fr; }
+  .audience-grid   { grid-template-columns: 1fr; }
+  .deliverable     { grid-template-columns: 40px 1fr; }
+  .hero h1         { font-size: 26px; }
+  .cta-section     { padding: 32px 24px; }
+  .diff-block      { padding: 28px 24px; }
+  .hero-stat-row   { gap: 20px; }
+  .diagnostic-wrapper { padding: 20px; }
+  .footer-inner    { flex-direction: column; }
+  .credentials-strip { gap: 8px; }
+  .cred-sep        { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── Header ── -->
+<header>
+  <div class="header-inner">
+    <a href="/" class="logo">
+      <svg class="logo-icon" viewBox="0 0 22 22" fill="none">
+        <rect x="1" y="1" width="20" height="20" rx="3" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+        <circle cx="11" cy="11" r="4.5" stroke="#f59e0b" stroke-width="1.5"/>
+        <circle cx="11" cy="11" r="1.5" fill="#f59e0b"/>
+      </svg>
+      <span class="logo-name">RE<span>:</span>MARK</span>
+    </a>
+    <nav class="header-nav">
+      <a href="/en/">Validation →</a>
+      <a href="/en/manufacturing/">Inspector →</a>
+    </nav>
+    <a href="https://calendly.com/giuliopiana" class="header-cta" target="_blank">Book a call</a>
+  </div>
+</header>
+
+<!-- ── Hero ── -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-eyebrow">Industrial AI Readiness Assessment</div>
+    <h1>Most industrial AI projects<br>fail before they start.<br><em>The reason is always the data.</em></h1>
+    <p class="hero-thesis">
+      Manufacturing companies have invested in sensors, PLCs, MES, and quality systems for years.
+      The data exists. The problem is that it sits in incompatible silos — different semantics,
+      different granularities, unknown quality. Any AI model built on top underperforms or fails silently.
+      Before committing budget, it is worth knowing what you actually have.
+    </p>
+
+    <div class="hero-stat-row">
+      <div class="hero-stat">
+        <span class="hero-stat-value">41%</span>
+        <span class="hero-stat-label">of companies cite data access as their primary AI barrier — above budget, skills, and talent</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-value">60–70%</span>
+        <span class="hero-stat-label">of variables in a typical multi-system industrial environment carry redundant or non-predictive signal</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-value">4 wk</span>
+        <span class="hero-stat-label">from first data access to a board-ready assessment with prioritised use cases and ROI estimates</span>
+      </div>
+    </div>
+
+    <a href="https://calendly.com/giuliopiana" class="btn-primary" target="_blank">
+      Book an exploratory call →
+    </a>
+    <span class="btn-note">30 minutes · No commitment · Honest answer even if the answer is no</span>
+  </div>
+</section>
+
+<!-- ── Credentials ── -->
+<div class="container">
+  <div class="credentials-strip">
+    <span class="cred-item">PhD Physics</span>
+    <span class="cred-sep">·</span>
+    <span class="cred-item">CERN Researcher</span>
+    <span class="cred-sep">·</span>
+    <span class="cred-item">Six Sigma</span>
+    <span class="cred-sep">·</span>
+    <span class="cred-item">15y Boston Scientific</span>
+    <span class="cred-sep">·</span>
+    <span class="cred-item">EMEA Analytics</span>
+    <span class="cred-sep">·</span>
+    <span class="cred-item">Industrial AI</span>
+  </div>
+</div>
+
+<!-- ── Diagnostic Visual ── -->
+<section class="section container">
+  <div class="section-label">What industrial data actually looks like</div>
+
+  <div class="diagnostic-wrapper">
+    <!-- SVG: The data chaos → semantic model diagram -->
+    <svg viewBox="0 0 880 420" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;">
+      <defs>
+        <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+          <path d="M0,0 L0,6 L8,3 z" fill="rgba(245,158,11,0.6)"/>
+        </marker>
+        <marker id="arrow-dim" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+          <path d="M0,0 L0,6 L8,3 z" fill="rgba(168,179,196,0.3)"/>
+        </marker>
+      </defs>
+
+      <!-- LEFT SIDE: Chaos -->
+      <text x="28" y="28" font-family="'JetBrains Mono',monospace" font-size="10" fill="rgba(122,135,153,0.9)" letter-spacing="0.1em" text-anchor="start">BEFORE · TYPICAL PLANT DATA LANDSCAPE</text>
+
+      <!-- PLC box -->
+      <rect x="28" y="48" width="160" height="88" rx="2" fill="#0d1117" stroke="rgba(59,130,246,0.4)" stroke-width="1"/>
+      <text x="38" y="67" font-family="'JetBrains Mono',monospace" font-size="9" fill="#3b82f6" letter-spacing="0.08em">PLC · SIEMENS S7</text>
+      <text x="38" y="85" font-family="'JetBrains Mono',monospace" font-size="9" fill="rgba(168,179,196,0.6)">Temp_Forno_1</text>
+      <text x="38" y="99" font-family="'JetBrains Mono',monospace" font-size="9" fill="rgba(168,179,196,0.6)">P_Inject_Bar</text>
+      <text x="38" y="113" font-family="'JetBrains Mono',monospace" font-size="9" fill="rgba(168,179,196,0.45)">∆t = 100ms</text>
+      <text x="38" y="127" font-family="'JetBrains Mono',monospace" font-size="9" fill="rgba(239,68,68,0.7)">No timestamp TZ</text>
+
+      <!-- MES box -->
+      <rect x="28" y="154" width="160" height="88" rx="2" fill="#0d1117" stroke="rgba(34,197,94,0.35)" stroke-width="1"/>
+      <text x="38" y="173" font-family="'JetBrains Mono',monospace" font-size="9" fill="#22c55e" letter-spacing="0.08em">MES · SAP ME</text>
+      <text x="38" y="191" font-family="'JetBrains Mono',monospace" font-size="9" fill="rgba(168,179,196,0.6)">BATCH_ID</text>
+      <text x="38" y="205" font-family="'JetBrains Mono',monospace" font-size="9" fill="rgba(168,179,196,0.6)">SHIFT_RESULT</text>
+      <text x="38" y="219" font-family="'JetBrains Mono',monospace" font-size="9" fill="rgba(168,179,196,0.45)">∆t = per shift</text>
+      <text x="38" y="233" font-family="'JetBrains Mono',monospace" font-size="9" fill="rgba(239,68,68,0.7)">No part-level link</text>
+
+      <!-- Quality system box -->
+      <rect x="28" y="260" width="160" height="88" rx="2" fill="#0d1117" stroke="rgba(245,158,11,0.3)" stroke-width="1"/>
+      <text x="38" y="279" font-family="'JetBrains Mono',monospace" font-size="9" fill="rgba(245,158,11,0.8)" letter-spacing="0.08em">QUALITY · CSV EXPORT</text>
+      <text x="38" y="297" font-family="'JetBrains Mono',monospace" font-size="9" fill="rgba(168,179,196,0.6)">scarto_%</text>
+      <text x="38" y="311" font-family="'JetBrains Mono',monospace" font-size="9" fill="rgba(168,179,196,0.6)">operatore_id</text>
+      <text x="38" y="325" font-family="'JetBrains Mono',monospace" font-size="9" fill="rgba(168,179,196,0.45)">∆t = daily</text>
+      <text x="38" y="339" font-family="'JetBrains Mono',monospace" font-size="9" fill="rgba(239,68,68,0.7)">Manual, inconsistent</text>
+
+      <!-- Maintenance log box -->
+      <rect x="28" y="366" width="160" height="44" rx="2" fill="#0d1117" stroke="rgba(168,179,196,0.15)" stroke-width="1"/>
+      <text x="38" y="384" font-family="'JetBrains Mono',monospace" font-size="9" fill="rgba(122,135,153,0.7)" letter-spacing="0.08em">MAINTENANCE · WORD DOCS</text>
+      <text x="38" y="400" font-family="'JetBrains Mono',monospace" font-size="9" fill="rgba(122,135,153,0.5)">Unstructured · Not linked</text>
+
+      <!-- Problem labels -->
+      <text x="200" y="94" font-family="'JetBrains Mono',monospace" font-size="9" fill="rgba(239,68,68,0.55)">← clock drift</text>
+      <text x="200" y="200" font-family="'JetBrains Mono',monospace" font-size="9" fill="rgba(239,68,68,0.55)">← semantic gap</text>
+      <text x="200" y="307" font-family="'JetBrains Mono',monospace" font-size="9" fill="rgba(239,68,68,0.55)">← granularity mismatch</text>
+      <text x="200" y="388" font-family="'JetBrains Mono',monospace" font-size="9" fill="rgba(239,68,68,0.45)">← no schema</text>
+
+      <!-- CENTRE: Arrow and assessment label -->
+      <line x1="344" y1="210" x2="500" y2="210" stroke="rgba(245,158,11,0.5)" stroke-width="1.5" marker-end="url(#arrow)" stroke-dasharray="4,3"/>
+      <rect x="346" y="186" width="146" height="48" rx="2" fill="#080b10" stroke="rgba(245,158,11,0.2)" stroke-width="1"/>
+      <text x="419" y="206" font-family="'JetBrains Mono',monospace" font-size="9" fill="rgba(245,158,11,0.9)" letter-spacing="0.08em" text-anchor="middle">RE:MARK</text>
+      <text x="419" y="221" font-family="'JetBrains Mono',monospace" font-size="9" fill="rgba(245,158,11,0.7)" letter-spacing="0.06em" text-anchor="middle">READINESS ASSESSMENT</text>
+
+      <!-- RIGHT SIDE: Unified model -->
+      <text x="516" y="28" font-family="'JetBrains Mono',monospace" font-size="10" fill="rgba(122,135,153,0.9)" letter-spacing="0.1em">AFTER · SEMANTIC PROCESS MODEL</text>
+
+      <!-- Unified model outer -->
+      <rect x="516" y="48" width="340" height="362" rx="3" fill="#0d1117" stroke="rgba(34,197,94,0.3)" stroke-width="1"/>
+      <rect x="516" y="48" width="340" height="3" rx="0" fill="rgba(34,197,94,0.4)"/>
+
+      <text x="534" y="74" font-family="'JetBrains Mono',monospace" font-size="9" fill="rgba(34,197,94,0.8)" letter-spacing="0.1em">UNIFIED PROCESS ONTOLOGY</text>
+
+      <!-- Variable rows -->
+      <!-- Row headers -->
+      <text x="534" y="102" font-family="'JetBrains Mono',monospace" font-size="8" fill="rgba(122,135,153,0.6)" letter-spacing="0.06em">VARIABLE</text>
+      <text x="690" y="102" font-family="'JetBrains Mono',monospace" font-size="8" fill="rgba(122,135,153,0.6)" letter-spacing="0.06em">SIGNAL</text>
+      <text x="760" y="102" font-family="'JetBrains Mono',monospace" font-size="8" fill="rgba(122,135,153,0.6)" letter-spacing="0.06em">PREDICTIVE?</text>
+
+      <line x1="530" y1="108" x2="848" y2="108" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+
+      <!-- Data rows -->
+      <text x="534" y="124" font-family="'JetBrains Mono',monospace" font-size="9" fill="rgba(232,237,245,0.75)">mold_temperature_C</text>
+      <rect x="688" y="113" width="60" height="6" rx="2" fill="rgba(34,197,94,0.7)"/>
+      <text x="760" y="124" font-family="'JetBrains Mono',monospace" font-size="9" fill="rgba(34,197,94,0.9)">HIGH</text>
+
+      <text x="534" y="144" font-family="'JetBrains Mono',monospace" font-size="9" fill="rgba(232,237,245,0.75)">injection_pressure_bar</text>
+      <rect x="688" y="133" width="52" height="6" rx="2" fill="rgba(34,197,94,0.6)"/>
+      <text x="760" y="144" font-family="'JetBrains Mono',monospace" font-size="9" fill="rgba(34,197,94,0.9)">HIGH</text>
+
+      <text x="534" y="164" font-family="'JetBrains Mono',monospace" font-size="9" fill="rgba(232,237,245,0.75)">cooling_time_s</text>
+      <rect x="688" y="153" width="36" height="6" rx="2" fill="rgba(245,158,11,0.55)"/>
+      <text x="760" y="164" font-family="'JetBrains Mono',monospace" font-size="9" fill="rgba(245,158,11,0.9)">MED</text>
+
+      <text x="534" y="184" font-family="'JetBrains Mono',monospace" font-size="9" fill="rgba(232,237,245,0.45)">operator_id</text>
+      <rect x="688" y="173" width="10" height="6" rx="2" fill="rgba(168,179,196,0.25)"/>
+      <text x="760" y="184" font-family="'JetBrains Mono',monospace" font-size="9" fill="rgba(122,135,153,0.7)">LOW</text>
+
+      <text x="534" y="204" font-family="'JetBrains Mono',monospace" font-size="9" fill="rgba(232,237,245,0.45)">shift_start_flag</text>
+      <rect x="688" y="193" width="6" height="6" rx="2" fill="rgba(168,179,196,0.2)"/>
+      <text x="760" y="204" font-family="'JetBrains Mono',monospace" font-size="9" fill="rgba(122,135,153,0.7)">NOISE</text>
+
+      <text x="534" y="224" font-family="'JetBrains Mono',monospace" font-size="9" fill="rgba(232,237,245,0.35)">batch_sequence_nr</text>
+      <rect x="688" y="213" width="4" height="6" rx="2" fill="rgba(168,179,196,0.15)"/>
+      <text x="760" y="224" font-family="'JetBrains Mono',monospace" font-size="9" fill="rgba(122,135,153,0.5)">REDUNDANT</text>
+
+      <line x1="530" y1="234" x2="848" y2="234" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+
+      <!-- Correlation block -->
+      <text x="534" y="255" font-family="'JetBrains Mono',monospace" font-size="9" fill="rgba(122,135,153,0.7)" letter-spacing="0.08em">IDENTIFIED CORRELATIONS</text>
+
+      <rect x="530" y="264" width="318" height="30" rx="2" fill="rgba(34,197,94,0.08)" stroke="rgba(34,197,94,0.2)" stroke-width="1"/>
+      <text x="542" y="283" font-family="'JetBrains Mono',monospace" font-size="9" fill="rgba(34,197,94,0.85)">mold_temp × injection_pressure → scrap_rate  r=0.81</text>
+
+      <rect x="530" y="300" width="318" height="30" rx="2" fill="rgba(245,158,11,0.07)" stroke="rgba(245,158,11,0.2)" stroke-width="1"/>
+      <text x="542" y="319" font-family="'JetBrains Mono',monospace" font-size="9" fill="rgba(245,158,11,0.8)">cooling_time → surface_defect_rate  r=0.54</text>
+
+      <rect x="530" y="336" width="318" height="30" rx="2" fill="rgba(168,179,196,0.05)" stroke="rgba(168,179,196,0.1)" stroke-width="1"/>
+      <text x="542" y="355" font-family="'JetBrains Mono',monospace" font-size="9" fill="rgba(122,135,153,0.65)">shift_start_flag → scrap_rate  r=0.12  (not significant)</text>
+
+      <line x1="530" y1="374" x2="848" y2="374" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+
+      <!-- Use case output -->
+      <text x="534" y="393" font-family="'JetBrains Mono',monospace" font-size="9" fill="rgba(122,135,153,0.7)" letter-spacing="0.08em">RECOMMENDED USE CASE · PRIORITY 1</text>
+      <text x="534" y="407" font-family="'JetBrains Mono',monospace" font-size="9" fill="rgba(232,237,245,0.7)">Real-time scrap prediction from 2 process variables</text>
+    </svg>
+
+    <p class="diagnostic-caption">
+      Schematic representation of a typical assessment output — variable signal ranking, correlation identification, and use case prioritisation.
+      All values shown are illustrative.
+    </p>
+  </div>
+</section>
+
+<!-- ── The problem ── -->
+<section class="section container">
+  <div class="section-label">Why standard approaches don't work</div>
+  <div class="problem-grid">
+    <div class="problem-cell">
+      <div class="problem-cell-label">The consulting firm approach</div>
+      <h3>Interviews and frameworks</h3>
+      <p>A generic AI maturity model applied through stakeholder interviews. The output is a slide deck with capability gaps and a transformation roadmap. It tells you what you already know and offers no evidence from your actual data.</p>
+    </div>
+    <div class="problem-cell">
+      <div class="problem-cell-label">The system integrator approach</div>
+      <h3>Sell first, discover later</h3>
+      <p>The vendor assesses your readiness as a precursor to selling their platform. The recommendation is inevitably their product. Data quality issues are minimised or deferred to the implementation phase.</p>
+    </div>
+    <div class="problem-cell highlight">
+      <div class="problem-cell-label">What we do instead</div>
+      <h3>Evidence from your actual data</h3>
+      <p>We access and analyse the operational data your business already generates — with the same experimental rigour applied to physics research. Null hypothesis, signal-to-noise quantification, uncertainty bounds. The assessment is evidence-based, not framework-based. If the data does not support the investment thesis, we say so before budget is committed.</p>
+    </div>
+    <div class="problem-cell">
+      <div class="problem-cell-label">Why it matters</div>
+      <h3>Measuring badly is worse than not measuring</h3>
+      <p>An AI model trained on misaligned, inconsistent, or low-signal data will produce outputs that look plausible and are wrong. The cost of discovering this after deployment is an order of magnitude higher than the cost of this assessment.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── Deliverables ── -->
+<section class="section container">
+  <div class="section-label">Four deliverables in four weeks</div>
+  <div class="deliverables">
+
+    <div class="deliverable">
+      <div class="deliverable-num">01</div>
+      <div class="deliverable-body">
+        <h3>Data Landscape Map</h3>
+        <p>A structured inventory of every data source in the process scope: PLC logs, MES records, quality system exports, maintenance records. For each source: schema, granularity, actual availability, and a first-pass quality assessment. Not what IT believes you have — what you actually have when someone reads the files.</p>
+        <span class="deliverable-signal">Format → structured report + source schema table</span>
+      </div>
+    </div>
+
+    <div class="deliverable">
+      <div class="deliverable-num">02</div>
+      <div class="deliverable-body">
+        <h3>Signal-to-Noise Assessment</h3>
+        <p>Statistical analysis of which variables in your existing data carry predictive information about quality, efficiency, or scrap — and which are redundant or noise. Typically 60–70% of variables in a multi-system environment are eliminated at this stage. What remains is the usable signal surface for any subsequent AI work.</p>
+        <span class="deliverable-signal">Format → variable ranking with correlation evidence + uncertainty bounds</span>
+      </div>
+    </div>
+
+    <div class="deliverable">
+      <div class="deliverable-num">03</div>
+      <div class="deliverable-body">
+        <h3>AI Use Case Prioritisation</h3>
+        <p>The 2–3 use cases with measurable ROI achievable within 12 months, ranked by technical feasibility and economic impact. Each use case includes: data requirements already met vs. missing, estimated model performance range, investment estimate, and expected payback window. Designed to support a capital allocation decision.</p>
+        <span class="deliverable-signal">Format → decision matrix with ROI range per use case</span>
+      </div>
+    </div>
+
+    <div class="deliverable">
+      <div class="deliverable-num">04</div>
+      <div class="deliverable-body">
+        <h3>Build / Buy / Wait Recommendation</h3>
+        <p>For each prioritised use case, an explicit recommendation: build internally, procure a vendor solution, or defer until data quality or technology maturity improves. Includes vendor landscape for the relevant category and the specific technical criteria any solution must satisfy. This is the document you bring to a board conversation.</p>
+        <span class="deliverable-signal">Format → structured recommendation with go/no-go rationale</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── Method ── -->
+<section class="section container">
+  <div class="section-label">How the assessment runs</div>
+  <div class="method-strip">
+    <div class="method-step">
+      <span class="method-step-num">WK 01 · ACCESS + INVENTORY</span>
+      <h3>Get to the raw data</h3>
+      <p>On-site or remote access to operational data sources. No IT project required — we work with whatever is available: exports, read-only database access, existing integrations. We inventory what exists and assess its quality before forming any hypothesis.</p>
+    </div>
+    <div class="method-step">
+      <span class="method-step-num">WK 02–03 · ANALYSIS</span>
+      <h3>Measure signal quality</h3>
+      <p>Statistical analysis of variable distributions, cross-system alignment, temporal consistency, and predictive correlation with quality output. Gaps and inconsistencies are documented, not glossed over. This is where most assessments find the unexpected.</p>
+    </div>
+    <div class="method-step">
+      <span class="method-step-num">WK 04 · SYNTHESIS</span>
+      <h3>Produce the deliverable</h3>
+      <p>Use case prioritisation, build/buy/wait recommendation, and a final readout session with your technical and business leadership. The deliverable is designed to be read by a CFO and scrutinised by a process engineer.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── Who it's for ── -->
+<section class="section container">
+  <div class="section-label">Who commissions this</div>
+  <div class="audience-grid">
+    <div class="audience-card">
+      <div class="audience-role">VC / PE Fund</div>
+      <h3>Pre-investment or post-deal AI diligence</h3>
+      <p>You are evaluating a manufacturing asset and need to know whether an AI-driven value creation thesis is technically supportable. Or you have a portfolio company where AI investment has underdelivered and you want an independent diagnosis before committing further capital.</p>
+    </div>
+    <div class="audience-card">
+      <div class="audience-role">CEO / COO · Manufacturing</div>
+      <h3>Before approving the AI budget</h3>
+      <p>Your team is proposing significant investment in AI or digital transformation. You want an independent, evidence-based view of where value can actually be created — not a vendor pitch dressed as an assessment.</p>
+    </div>
+    <div class="audience-card">
+      <div class="audience-role">Operating Partner</div>
+      <h3>Value creation roadmap for portfolio companies</h3>
+      <p>You manage a portfolio of industrial companies and need a repeatable, credible method to assess AI potential across assets. The deliverable format is designed to be comparable across engagements and presentable to investment committees.</p>
+    </div>
+    <div class="audience-card">
+      <div class="audience-role">Head of Digital · Tier 1 Manufacturer</div>
+      <h3>Grounding an AI initiative in real data</h3>
+      <p>You have an AI mandate but have run into the data problem. You need an external assessment that validates which use cases are feasible with current data infrastructure — and gives you the evidence to prioritise investment in data quality where it actually matters.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── Differentiator ── -->
+<section class="section container">
+  <div class="diff-block">
+    <p>
+      A management consultant maps your AI maturity against a framework and produces a transformation roadmap.
+      A system integrator assesses your readiness as a precursor to selling their platform.
+      <strong>Neither produces an independent, evidence-based answer to the question that actually matters: does the AI investment thesis hold up against your real operational data?</strong>
+      <br><br>
+      The method comes from experimental physics: you do not assume the hypothesis is true before testing it.
+      You design the measurement, run it on real data, and report what you find —
+      including when the finding is that the data does not yet support the investment case.
+      That answer, delivered before budget is committed, is worth more than a confidence-building exercise dressed as a readiness report.
+    </p>
+    <em>PhD in Physics · CERN Researcher · 15 years executive in manufacturing analytics · Six Sigma · Tier 1 Automotive PoC in validation</em>
+  </div>
+</section>
+
+<!-- ── CTA ── -->
+<section class="container">
+  <div class="cta-section">
+    <h2>Evaluating an AI investment in a manufacturing asset?</h2>
+    <p>
+      A 30-minute call to establish whether the data supports the thesis —
+      and whether this assessment is the right next step.
+      No commitment. No proposal before we understand the problem.
+    </p>
+    <div class="cta-inner">
+      <a href="https://calendly.com/giuliopiana" class="btn-primary" target="_blank">
+        Book 30 minutes →
+      </a>
+      <span class="btn-note">Or write directly</span>
+      <div class="contact-details">
+        <span class="contact-name">Giulio Piana</span>
+        <span class="contact-role">Industrial AI · RE:MARK</span>
+        <a href="mailto:giulio.piana@brandcraft.it" class="contact-email">giulio.piana@brandcraft.it</a>
+      </div>
+    </div>
+  <div style="margin-top: 32px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.05); text-align: center;">
+    <p style="font-size: 13px; color: #7a8799; margin-bottom: 10px;">
+      Need tech advisory on a deal<br>or a tech integration roadmap for an add-on?
+    </p>
+    <a href="/en/" style="font-size: 13px; color: #f59e0b; text-decoration: none; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.04em;">
+      RE:MARK Technical Due Diligence & Integration Advisory →
+    </a>
+  </div>
+
+  </div>
+</section>
+
+<!-- ── Footer ── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <svg viewBox="0 0 22 22" fill="none" style="width:20px;height:20px;flex-shrink:0;">
+        <rect x="1" y="1" width="20" height="20" rx="3" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
+        <circle cx="11" cy="11" r="4.5" stroke="#f59e0b" stroke-width="1.5"/>
+        <circle cx="11" cy="11" r="1.5" fill="#f59e0b"/>
+      </svg>
+      <div class="footer-logo-text">
+        <span class="footer-logo-name">RE<span class="footer-colon">:</span>MARK</span>
+        <span class="footer-logo-sub">
+          a service by <a href="https://brandcraft.it" target="_blank">Brandcraft srl</a>
+          &nbsp;·&nbsp; P.IVA IT13291650961 &nbsp;·&nbsp; Milan, Italy
+        </span>
+      </div>
+    </div>
+    <div class="footer-copy">
+      <a href="mailto:giulio.piana@brandcraft.it">giulio.piana@brandcraft.it</a>
+      &nbsp;·&nbsp; remark-vision.com
+    </div>
+  </div>
+</footer>
+
+<script type="text/javascript" id="hs-script-loader" async defer src="//js-eu1.hs-scripts.com/148276793.js"></script>
+</body>
+</html>
