@@ -104,6 +104,21 @@ header {
   font-family: var(--mono);
 }
 
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.header-nav a {
+  font-size: 13px;
+  color: var(--label);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.header-nav a:hover { color: var(--muted); }
+
 .header-cta {
   font-size: 12px;
   font-weight: 500;
