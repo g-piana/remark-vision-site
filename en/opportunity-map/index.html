@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>RE:MARK — Portfolio AI Opportunity Map</title>
+<meta name="description" content="A 6-week structured engagement for PE funds: every manufacturing portfolio company screened on operational data, top candidates assessed on-site, investment-committee memos for the 2–3 viable AI opportunities.">
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:    #080b10;
+  --s1:    #0d1117;
+  --s2:    #131920;
+  --b0:    rgba(255,255,255,0.05);
+  --b1:    rgba(255,255,255,0.09);
+  --amber: #f59e0b;
+  --pass:  #22c55e;
+  --fail:  #ef4444;
+  --ink:   #e8edf5;
+  --muted: #a8b3c4;
+  --label: #7a8799;
+  --mono:  'JetBrains Mono', monospace;
+  --sans:  'DM Sans', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+
+.container { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+
+/* ── Header ── */
+header {
+  border-bottom: 1px solid var(--b0);
+  background: rgba(8,11,16,0.92);
+  backdrop-filter: blur(8px);
+  position: sticky; top: 0; z-index: 50;
+}
+.header-inner {
+  max-width: 960px; margin: 0 auto; padding: 0 24px;
+  height: 52px; display: flex; align-items: center; justify-content: space-between;
+}
+.logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.logo-icon { width: 22px; height: 22px; flex-shrink: 0; }
+.logo-name { font-size: 15px; font-weight: 500; letter-spacing: 0.01em; color: var(--ink); }
+.logo-name span { color: var(--amber); }
+.header-nav { display: flex; align-items: center; gap: 24px; }
+.header-nav a { font-size: 13px; color: var(--label); text-decoration: none; transition: color 0.15s; }
+.header-nav a:hover { color: var(--muted); }
+.header-nav a.active { color: var(--amber); }
+.header-cta {
+  font-size: 12px; font-weight: 500; color: var(--amber); text-decoration: none;
+  border: 1px solid rgba(245,158,11,0.3); padding: 6px 14px; border-radius: 2px;
+  transition: background 0.15s, border-color 0.15s;
+}
+.header-cta:hover { background: rgba(245,158,11,0.08); border-color: rgba(245,158,11,0.5); }
+
+/* ── Hero ── */
+.hero { padding: 80px 0 64px; text-align: center; }
+.hero-eyebrow {
+  font-size: 11px; font-weight: 500; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--amber); margin-bottom: 24px;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+.hero-eyebrow::before, .hero-eyebrow::after {
+  content: ''; display: block; width: 32px; height: 1px;
+  background: rgba(245,158,11,0.4);
+}
+.hero h1 {
+  font-size: clamp(28px, 4vw, 46px); font-weight: 500; line-height: 1.15;
+  letter-spacing: -0.025em; color: var(--ink); margin-bottom: 24px;
+  max-width: 700px; margin-left: auto; margin-right: auto;
+}
+.hero h1 em { font-style: normal; color: var(--amber); }
+.hero-thesis {
+  font-size: 17px; color: var(--muted); line-height: 1.7;
+  max-width: 600px; margin: 0 auto 40px;
+}
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--amber); color: #080b10;
+  font-family: var(--sans); font-size: 15px; font-weight: 500;
+  text-decoration: none; padding: 14px 28px; border-radius: 2px;
+  transition: opacity 0.15s;
+}
+.btn-primary:hover { opacity: 0.9; }
+.btn-note { font-size: 12px; color: var(--label); display: block; margin-top: 10px; }
+.btn-secondary {
+  display: inline-flex; align-items: center; gap: 8px; color: var(--amber);
+  font-size: 13px; font-weight: 500; text-decoration: none;
+  border: 1px solid rgba(245,158,11,0.3); padding: 10px 18px; border-radius: 2px;
+  white-space: nowrap; transition: background 0.15s, border-color 0.15s; flex-shrink: 0;
+}
+.btn-secondary:hover { background: rgba(245,158,11,0.08); border-color: rgba(245,158,11,0.5); }
+
+/* ── Section shared ── */
+.section { margin-bottom: 72px; }
+.section-label {
+  font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--label); margin-bottom: 32px; padding-bottom: 12px;
+  border-bottom: 1px solid var(--b0);
+}
+
+/* ── Credentials strip ── */
+.credentials-strip {
+  display: flex; align-items: center; justify-content: center;
+  gap: 0; flex-wrap: wrap; padding: 20px 0;
+  border-top: 1px solid var(--b0); border-bottom: 1px solid var(--b0);
+  margin-bottom: 72px;
+}
+.cred-item { font-family: var(--mono); font-size: 11px; color: var(--label); letter-spacing: 0.08em; text-transform: uppercase; padding: 0 18px; }
+.cred-sep { color: var(--b1); font-size: 14px; }
+
+/* ── Portfolio Visual (the mock output) ── */
+.omap-visual-wrap {
+  border: 1px solid var(--b1);
+  border-radius: 3px;
+  overflow: hidden;
+  background: var(--b0);
+  margin-bottom: 12px;
+}
+
+.omap-visual {
+  display: grid;
+  grid-template-columns: 1fr 40px 1fr;
+}
+
+/* Screening panel */
+.omap-screen {
+  background: var(--s1);
+}
+
+.omap-panel-header {
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--b0);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.omap-panel-title {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--label);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.omap-phase-tag {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--amber);
+  letter-spacing: 0.06em;
+}
+
+/* Screening rows */
+.omap-row {
+  display: grid;
+  grid-template-columns: 28px 1fr auto;
+  align-items: start;
+  gap: 12px;
+  padding: 13px 20px;
+  border-bottom: 1px solid var(--b0);
+  position: relative;
+  transition: background 0.1s;
+}
+
+.omap-row:last-child { border-bottom: none; }
+
+.omap-row.priority-1::before,
+.omap-row.priority-2::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 2px;
+}
+.omap-row.priority-1 { background: rgba(245,158,11,0.035); }
+.omap-row.priority-1::before { background: var(--amber); }
+.omap-row.priority-2 { background: rgba(245,158,11,0.02); }
+.omap-row.priority-2::before { background: rgba(245,158,11,0.6); }
+
+.omap-row.candidate { background: rgba(255,255,255,0.01); }
+.omap-row.dimmed { opacity: 0.38; }
+
+.omap-rank {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+  padding-top: 2px;
+  line-height: 1;
+}
+.priority-1 .omap-rank, .priority-2 .omap-rank { color: var(--amber); }
+.candidate .omap-rank { color: var(--label); }
+.dimmed .omap-rank { color: var(--label); }
+
+.omap-company { line-height: 1.3; }
+.omap-company-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink);
+  display: block;
+  margin-bottom: 3px;
+}
+.dimmed .omap-company-name { color: var(--muted); }
+
+.omap-finding {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--label);
+  letter-spacing: 0.04em;
+}
+
+.omap-dots {
+  font-family: var(--mono);
+  font-size: 11px;
+  padding-top: 2px;
+  white-space: nowrap;
+  text-align: right;
+}
+.priority-1 .omap-dots { color: var(--amber); }
+.priority-2 .omap-dots { color: rgba(245,158,11,0.7); }
+.candidate .omap-dots { color: var(--label); }
+.dimmed .omap-dots { color: rgba(122,135,153,0.4); }
+
+/* Connector column */
+.omap-connector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+  border-left: 1px solid var(--b0);
+  border-right: 1px solid var(--b0);
+}
+
+/* Memo panel */
+.omap-memo {
+  background: var(--s1);
+  display: flex;
+  flex-direction: column;
+}
+
+.omap-memo-header {
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--b0);
+  background: rgba(34,197,94,0.04);
+  position: relative;
+  overflow: hidden;
+}
+.omap-memo-header::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(to right, var(--pass), transparent);
+  opacity: 0.6;
+}
+
+.omap-memo-eyebrow {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--pass);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.omap-memo-title {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.omap-metric {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: start;
+  padding: 11px 20px;
+  border-bottom: 1px solid var(--b0);
+  gap: 8px;
+}
+
+.omap-metric:last-child { border-bottom: none; margin-top: auto; }
+
+.omap-metric-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--label);
+  padding-top: 2px;
+}
+
+.omap-metric-value {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink);
+  text-align: right;
+}
+
+.omap-metric-value.positive { color: var(--pass); }
+.omap-metric-value.amber { color: var(--amber); }
+
+.omap-recommendation {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 20px;
+  background: rgba(34,197,94,0.06);
+  border-top: 1px solid rgba(34,197,94,0.12);
+  margin-top: auto;
+}
+
+.omap-rec-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--label);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.omap-rec-value {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--pass);
+  letter-spacing: 0.08em;
+}
+
+.omap-caption {
+  font-size: 11px;
+  color: var(--label);
+  font-family: var(--mono);
+  letter-spacing: 0.04em;
+  text-align: right;
+  margin-top: 8px;
+}
+
+/* ── Method strip (phases) ── */
+.method-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  background: var(--b0);
+  border: 1px solid var(--b1);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.method-step { background: var(--s1); padding: 24px; }
+.method-step-num {
+  font-family: var(--mono); font-size: 10px; color: var(--amber);
+  letter-spacing: 0.1em; margin-bottom: 12px; display: block;
+}
+.method-step h3 { font-size: 14px; font-weight: 500; color: var(--ink); margin-bottom: 8px; }
+.method-step p { font-size: 12px; color: var(--muted); line-height: 1.6; }
+.method-step .method-input {
+  margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--b0);
+  font-family: var(--mono); font-size: 10px; color: var(--label); letter-spacing: 0.04em;
+}
+.method-step .method-input strong { color: var(--muted); font-weight: 500; }
+
+/* ── Deliverables ── */
+.deliverables {
+  display: flex; flex-direction: column; gap: 2px;
+  background: var(--b0); border: 1px solid var(--b1);
+  border-radius: 3px; overflow: hidden;
+}
+.deliverable {
+  background: var(--s1); padding: 24px 28px 24px 28px;
+  display: grid; grid-template-columns: 52px 1fr;
+  gap: 20px; align-items: start;
+}
+.deliverable + .deliverable { border-top: 1px solid var(--b0); }
+.deliverable-num {
+  font-family: var(--mono); font-size: 22px; font-weight: 500;
+  color: rgba(245,158,11,0.22); letter-spacing: -0.02em;
+  padding-top: 2px; line-height: 1;
+}
+.deliverable-body h3 { font-size: 15px; font-weight: 500; color: var(--ink); margin-bottom: 6px; }
+.deliverable-body p { font-size: 13px; color: var(--muted); line-height: 1.65; margin-bottom: 10px; }
+.deliverable-tag {
+  font-family: var(--mono); font-size: 10px; color: var(--amber);
+  letter-spacing: 0.06em; padding: 3px 9px;
+  border: 1px solid rgba(245,158,11,0.2); border-radius: 2px; display: inline-block;
+}
+
+/* ── Differentiator block ── */
+.diff-block {
+  background: var(--s1); border: 1px solid var(--b1); border-radius: 3px;
+  padding: 36px 40px; position: relative; overflow: hidden;
+}
+.diff-block::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(to right, transparent, var(--amber), transparent);
+  opacity: 0.5;
+}
+.diff-block p { font-size: 17px; color: var(--muted); line-height: 1.75; max-width: 700px; }
+.diff-block p strong { color: var(--ink); font-weight: 500; }
+.diff-block p em {
+  font-style: normal; color: var(--amber); font-family: var(--mono);
+  font-size: 13px; display: block; margin-top: 20px; letter-spacing: 0.04em;
+}
+
+/* ── CTA ── */
+.cta-section {
+  background: var(--s1); border: 1px solid var(--b1); border-radius: 3px;
+  padding: 48px; text-align: center; position: relative; overflow: hidden;
+  margin-bottom: 72px;
+}
+.cta-section::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(to right, transparent, var(--amber), transparent);
+  opacity: 0.6;
+}
+.cta-section h2 { font-size: 22px; font-weight: 500; color: var(--ink); margin-bottom: 12px; letter-spacing: -0.01em; }
+.cta-section p { font-size: 15px; color: var(--muted); margin-bottom: 32px; max-width: 480px; margin-left: auto; margin-right: auto; line-height: 1.65; }
+.cta-inner { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.contact-details { display: flex; flex-direction: column; align-items: center; gap: 4px; margin-top: 16px; }
+.contact-name { font-size: 15px; font-weight: 500; color: var(--ink); }
+.contact-role { font-size: 13px; color: var(--label); }
+.contact-email { font-family: var(--mono); font-size: 13px; color: var(--amber); text-decoration: none; }
+.contact-email:hover { text-decoration: underline; }
+
+/* ── Footer ── */
+footer { border-top: 1px solid var(--b0); padding: 24px 0; }
+.footer-inner {
+  max-width: 960px; margin: 0 auto; padding: 0 24px;
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+}
+.footer-logo { display: flex; align-items: center; gap: 10px; }
+.footer-logo-text { display: flex; flex-direction: column; gap: 2px; }
+.footer-logo-name { font-size: 15px; font-weight: 500; color: var(--ink); letter-spacing: 0.01em; }
+.footer-colon { color: var(--amber); }
+.footer-logo-sub { font-size: 11px; color: var(--label); line-height: 1.5; }
+.footer-logo-sub a { color: var(--label); text-decoration: none; }
+.footer-logo-sub a:hover { color: var(--muted); }
+.footer-copy { font-size: 12px; color: var(--label); }
+.footer-copy a { color: var(--label); text-decoration: none; }
+.footer-copy a:hover { color: var(--muted); }
+
+/* ── Responsive ── */
+@media (max-width: 720px) {
+  .omap-visual { grid-template-columns: 1fr; }
+  .omap-connector { display: none; }
+  .omap-memo { border-top: 1px solid var(--b1); }
+  .method-strip { grid-template-columns: 1fr; }
+  .deliverable { grid-template-columns: 40px 1fr; }
+  .hero h1 { font-size: 26px; }
+  .cta-section { padding: 32px 24px; }
+  .diff-block { padding: 28px 24px; }
+  .footer-inner { flex-direction: column; }
+  .credentials-strip { gap: 8px; }
+  .cred-sep { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── Header ── -->
+<header>
+  <div class="header-inner">
+    <a href="/" class="logo">
+      <svg class="logo-icon" viewBox="0 0 22 22" fill="none">
+        <rect x="1" y="1" width="20" height="20" rx="3" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+        <circle cx="11" cy="11" r="4.5" stroke="#f59e0b" stroke-width="1.5"/>
+        <circle cx="11" cy="11" r="1.5" fill="#f59e0b"/>
+      </svg>
+      <span class="logo-name">RE<span>:</span>MARK</span>
+    </a>
+    <nav class="header-nav">
+      <a href="/en/opportunity-map/" class="active">Opportunity Map →</a>
+      <a href="/en/data-audit/">Data Audit →</a>
+      <a href="/en/manufacturing/">Inspector →</a>
+    </nav>
+    <a href="https://calendly.com/giuliopiana" class="header-cta" target="_blank">Book a call</a>
+  </div>
+</header>
+
+<!-- ── Hero ── -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-eyebrow">Portfolio Services · PE Funds</div>
+    <h1>Your portfolio has <br>8 manufacturing companies.<br><br><em>Two of them have <br>an AI opportunity worth acting on.</em></h1>
+    <p class="hero-thesis">
+      A 6-week structured engagement: every manufacturing portfolio company
+      screened on operational data, top candidates assessed on-site,
+      investment-committee memos for the 2–3 viable opportunities —
+      with EBITDA impact range, investment required, and a clear recommendation.
+    </p>
+    <a href="https://calendly.com/giuliopiana" class="btn-primary" target="_blank">
+      Book a 30-minute call →
+    </a>
+    <span class="btn-note">No commitment · Honest answer even if the answer is no</span>
+  </div>
+</section>
+
+<!-- ── Credentials ── -->
+<div class="container">
+  <div class="credentials-strip">
+    <span class="cred-item">PhD Physics</span>
+    <span class="cred-sep">·</span>
+    <span class="cred-item">CERN Researcher</span>
+    <span class="cred-sep">·</span>
+    <span class="cred-item">Six Sigma</span>
+    <span class="cred-sep">·</span>
+    <span class="cred-item">15y Boston Scientific</span>
+    <span class="cred-sep">·</span>
+    <span class="cred-item">EMEA Analytics</span>
+    <span class="cred-sep">·</span>
+    <span class="cred-item">Industrial AI</span>
+  </div>
+</div>
+
+<!-- ── The visual ── -->
+<section class="section container">
+  <div class="section-label">What the output looks like</div>
+
+  <div class="omap-visual-wrap">
+    <div class="omap-visual">
+
+      <!-- LEFT: Portfolio Screening Panel -->
+      <div class="omap-screen">
+        <div class="omap-panel-header">
+          <span class="omap-panel-title">Portfolio Screening · 6 Companies</span>
+          <span class="omap-phase-tag">Week 2 deliverable</span>
+        </div>
+
+        <div class="omap-row priority-1">
+          <div class="omap-rank">01</div>
+          <div class="omap-company">
+            <span class="omap-company-name">Mfg Co. C</span>
+            <span class="omap-finding">Visual Inspection · CNC line</span>
+          </div>
+          <div class="omap-dots">●●●</div>
+        </div>
+
+        <div class="omap-row priority-2">
+          <div class="omap-rank">02</div>
+          <div class="omap-company">
+            <span class="omap-company-name">Mfg Co. A</span>
+            <span class="omap-finding">Predictive Maintenance · Press</span>
+          </div>
+          <div class="omap-dots">●●●</div>
+        </div>
+
+        <div class="omap-row candidate">
+          <div class="omap-rank">03</div>
+          <div class="omap-company">
+            <span class="omap-company-name">Mfg Co. F</span>
+            <span class="omap-finding">Yield Optimization · Injection</span>
+          </div>
+          <div class="omap-dots">●●○</div>
+        </div>
+
+        <div class="omap-row dimmed">
+          <div class="omap-rank">—</div>
+          <div class="omap-company">
+            <span class="omap-company-name">Mfg Co. B</span>
+            <span class="omap-finding">No viable use case identified</span>
+          </div>
+          <div class="omap-dots">○○○</div>
+        </div>
+
+        <div class="omap-row dimmed">
+          <div class="omap-rank">—</div>
+          <div class="omap-company">
+            <span class="omap-company-name">Mfg Co. D</span>
+            <span class="omap-finding">Insufficient process data</span>
+          </div>
+          <div class="omap-dots">○○○</div>
+        </div>
+
+        <div class="omap-row dimmed">
+          <div class="omap-rank">—</div>
+          <div class="omap-company">
+            <span class="omap-company-name">Mfg Co. E</span>
+            <span class="omap-finding">Out of scope · Regulated process</span>
+          </div>
+          <div class="omap-dots">○○○</div>
+        </div>
+      </div>
+
+      <!-- CONNECTOR -->
+      <div class="omap-connector">
+        <svg viewBox="0 0 40 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:40px;height:120px;">
+          <line x1="20" y1="20" x2="20" y2="90" stroke="rgba(245,158,11,0.35)" stroke-width="1" stroke-dasharray="3,3"/>
+          <path d="M14,86 L20,96 L26,86" fill="none" stroke="rgba(245,158,11,0.5)" stroke-width="1.5" stroke-linejoin="round"/>
+          <text x="20" y="14" font-family="'JetBrains Mono',monospace" font-size="7" fill="rgba(122,135,153,0.6)" text-anchor="middle" letter-spacing="0.05em">IC</text>
+          <text x="20" y="22" font-family="'JetBrains Mono',monospace" font-size="7" fill="rgba(122,135,153,0.6)" text-anchor="middle">memo</text>
+        </svg>
+      </div>
+
+      <!-- RIGHT: Business Case Memo Panel -->
+      <div class="omap-memo">
+        <div class="omap-memo-header">
+          <div class="omap-memo-eyebrow">Business Case Memo · Priority 01</div>
+          <div class="omap-memo-title">Mfg Co. C — Visual Inspection</div>
+        </div>
+
+        <div class="omap-metric">
+          <span class="omap-metric-label">Use Case</span>
+          <span class="omap-metric-value">Automated defect detection<br><span style="font-size:11px;font-weight:400;color:var(--muted)">CNC stamped components, end-of-line</span></span>
+        </div>
+
+        <div class="omap-metric">
+          <span class="omap-metric-label">Current Quality Cost</span>
+          <span class="omap-metric-value">€210K / yr<br><span style="font-size:11px;font-weight:400;color:var(--muted)">1.4% of revenue · measured from data</span></span>
+        </div>
+
+        <div class="omap-metric">
+          <span class="omap-metric-label">Expected AI Recovery</span>
+          <span class="omap-metric-value positive">€165–230K / yr<br><span style="font-size:11px;font-weight:400;color:var(--muted)">Base case: €195K · 3 scenarios modelled</span></span>
+        </div>
+
+        <div class="omap-metric">
+          <span class="omap-metric-label">Investment Required</span>
+          <span class="omap-metric-value amber">€34K one-time<br><span style="font-size:11px;font-weight:400;color:var(--muted)">Hardware + deployment. No annual licence.</span></span>
+        </div>
+
+        <div class="omap-metric">
+          <span class="omap-metric-label">Payback</span>
+          <span class="omap-metric-value">6–9 months</span>
+        </div>
+
+        <div class="omap-metric">
+          <span class="omap-metric-label">Confidence</span>
+          <span class="omap-metric-value amber">HIGH &nbsp;●●●</span>
+        </div>
+
+        <div class="omap-recommendation">
+          <span class="omap-rec-label">Recommendation</span>
+          <span class="omap-rec-value">▶ PROCEED</span>
+        </div>
+      </div>
+
+    </div><!-- .omap-visual -->
+  </div><!-- .omap-visual-wrap -->
+
+  <p class="omap-caption">Illustrative · Anonymized · All values based on comparable deployments</p>
+</section>
+
+<!-- ── How the engagement runs ── -->
+<section class="section container">
+  <div class="section-label">How the engagement runs</div>
+  <div class="method-strip">
+
+    <div class="method-step">
+      <span class="method-step-num">Phase 01 · Weeks 1–2 · Screening</span>
+      <h3>All companies, data only</h3>
+      <p>Operational data analysis for every manufacturing company in the portfolio — no site visits required. We screen for quality cost exposure, process variance, and AI use case fit.</p>
+      <div class="method-input">
+        <strong>You provide:</strong> Revenue, OEE, quality cost %, product categories — one data pack per company.<br><br>
+        <strong>Output:</strong> Ranked heatmap. Which companies have viable opportunities and why.
+      </div>
+    </div>
+
+    <div class="method-step">
+      <span class="method-step-num">Phase 02 · Weeks 3–4 · Assessment</span>
+      <h3>Top candidates, on-site</h3>
+      <p>One to two days per site on the 2–3 priority companies. Process walkthrough, equipment audit, data infrastructure review. Operator and quality manager interviews.</p>
+      <div class="method-input">
+        <strong>You arrange:</strong> Site access and 4 hours of operator time per visit.<br><br>
+        <strong>Output:</strong> Validated opportunity definition. Risks and data gaps flagged before budget is committed.
+      </div>
+    </div>
+
+    <div class="method-step">
+      <span class="method-step-num">Phase 03 · Weeks 5–6 · Business Cases</span>
+      <h3>Investment committee memos</h3>
+      <p>One structured memo per viable opportunity, formatted for your IC. EBITDA impact range, investment required, payback, build/buy/partner recommendation — with the evidence behind each number.</p>
+      <div class="method-input">
+        <strong>You receive:</strong> A decision, not a recommendation to explore further. If the return does not justify the investment, that is what the memo says.
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── What's in the memo ── -->
+<section class="section container">
+  <div class="section-label">What each business case contains</div>
+  <div class="deliverables">
+
+    <div class="deliverable">
+      <div class="deliverable-num">01</div>
+      <div class="deliverable-body">
+        <h3>Measured baseline</h3>
+        <p>The current cost of the problem — quality escape rate, unplanned downtime hours, yield loss — quantified from actual operational data, not management estimates. This is the number the AI impact is measured against.</p>
+        <span class="deliverable-tag">Source → operational data, not interviews</span>
+      </div>
+    </div>
+
+    <div class="deliverable">
+      <div class="deliverable-num">02</div>
+      <div class="deliverable-body">
+        <h3>Use case definition</h3>
+        <p>The specific AI application scoped to the actual process: which production line, which defect type or failure mode, which data source drives the model. Concrete enough to brief a vendor or an implementation team.</p>
+        <span class="deliverable-tag">Specificity → line-level, not plant-level</span>
+      </div>
+    </div>
+
+    <div class="deliverable">
+      <div class="deliverable-num">03</div>
+      <div class="deliverable-body">
+        <h3>EBITDA impact range</h3>
+        <p>Low, base, and high case estimates with assumptions stated explicitly. Conservative by design — we prefer to be confirmed than to oversell. Each scenario is traceable to the baseline measurement.</p>
+        <span class="deliverable-tag">Format → three scenarios, stated assumptions</span>
+      </div>
+    </div>
+
+    <div class="deliverable">
+      <div class="deliverable-num">04</div>
+      <div class="deliverable-body">
+        <h3>Investment and payback</h3>
+        <p>Hardware, deployment, and Year 1 opex — itemized and based on comparable deployments, not catalogue prices. Payback calculated from the base case EBITDA recovery. No hidden integration costs.</p>
+        <span class="deliverable-tag">Basis → comparable deployments, not vendor quotes</span>
+      </div>
+    </div>
+
+    <div class="deliverable">
+      <div class="deliverable-num">05</div>
+      <div class="deliverable-body">
+        <h3>Go / No-go recommendation</h3>
+        <p>An explicit recommendation with the evidence behind it. Proceed, do not proceed, or a stated prerequisite (typically: a data infrastructure investment that unlocks the opportunity). No ambiguity about what the assessment concluded.</p>
+        <span class="deliverable-tag">Output → a decision, not a framework</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── Differentiator ── -->
+<section class="section container">
+  <div class="diff-block">
+    <p>
+      This is not an AI strategy engagement.
+      <strong>We do not produce transformation roadmaps, maturity scores, or capability gap analyses.</strong>
+      The output is a ranked list of investment decisions, each supported by evidence
+      from your actual portfolio data. Companies without a viable opportunity at acceptable return
+      appear in the output too — with the reasoning.
+      <br><br>
+      The analysis is technically grounded because we have built the systems we are evaluating:
+      anomaly detection on production lines, predictive maintenance on process data, computer vision
+      on discrete components. The assessment is not framework-based. It is evidence-based.
+      <em>Fixed-price engagement · Scope agreed before we start · No open-ended billing</em>
+    </p>
+  </div>
+</section>
+
+<!-- ── CTA ── -->
+<section class="section container">
+  <div class="cta-section">
+    <h2>Manufacturing companies in your portfolio leaving margin on the table?</h2>
+    <p>
+      A 30-minute call to understand your portfolio and whether the engagement makes sense.
+      No commitment. No proposal before we have understood the situation.
+    </p>
+    <div class="cta-inner">
+      <a href="https://calendly.com/giuliopiana" class="btn-primary" target="_blank">
+        Book 30 minutes →
+      </a>
+      <span class="btn-note">Or write directly</span>
+      <div class="contact-details">
+        <span class="contact-name">Giulio Piana</span>
+        <span class="contact-role">Portfolio AI Opportunity Map · RE:MARK</span>
+        <a href="mailto:giulio.piana@brandcraft.it" class="contact-email">
+          giulio.piana@brandcraft.it
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <svg viewBox="0 0 22 22" fill="none" style="width:20px;height:20px;flex-shrink:0;">
+        <rect x="1" y="1" width="20" height="20" rx="3" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
+        <circle cx="11" cy="11" r="4.5" stroke="#f59e0b" stroke-width="1.5"/>
+        <circle cx="11" cy="11" r="1.5" fill="#f59e0b"/>
+      </svg>
+      <div class="footer-logo-text">
+        <span class="footer-logo-name">RE<span class="footer-colon">:</span>MARK</span>
+        <span class="footer-logo-sub">
+          a <a href="https://brandcraft.it" target="_blank">Brandcraft srl</a> service
+          &nbsp;·&nbsp; P.IVA IT13291650961 &nbsp;·&nbsp; Milan, Italy
+        </span>
+      </div>
+    </div>
+    <div class="footer-copy">
+      <a href="mailto:giulio.piana@brandcraft.it">giulio.piana@brandcraft.it</a>
+      &nbsp;·&nbsp; remark-vision.com
+    </div>
+  </div>
+</footer>
+
+<script type="text/javascript" id="hs-script-loader" async defer src="//js-eu1.hs-scripts.com/148276793.js"></script>
+</body>
+</html>
