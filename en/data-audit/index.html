@@ -634,6 +634,14 @@ footer {
       </svg>
       <span class="logo-name">RE<span>:</span>MARK</span>
     </a>
+    <button class="hamburger" aria-expanded="false" aria-label="Menu" onclick="
+      const nav = this.closest('.header-inner').querySelector('.header-nav');
+      const open = nav.classList.toggle('open');
+      this.setAttribute('aria-expanded', open);
+    ">
+      <span></span><span></span><span></span>
+    </button>
+
     <nav class="header-nav">
       <a href="/en/opportunity-map/" >Opportunity Map →</a>
       <a href="/en/data-audit/" class="active">Data Audit →</a>
