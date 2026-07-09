@@ -684,6 +684,83 @@ footer {
   .credentials-strip  { gap: 8px; }
   .cred-sep           { display: none; }
 }
+/* ── Mobile nav fix ──────────────────────────────────────── */
+@media (max-width: 680px) {
+
+  .header-inner {
+    height: auto;
+    min-height: 52px;
+    flex-wrap: wrap;
+    padding: 12px 24px;
+    gap: 0;
+    position: relative;
+  }
+
+  .header-nav {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    padding: 12px 0 4px;
+    border-top: 1px solid var(--b0);
+    margin-top: 8px;
+  }
+
+  .header-nav.open { display: flex; }
+
+  .header-nav a,
+  .header-nav .header-cta {
+    padding: 10px 0;
+    font-size: 14px;
+    width: 100%;
+    border: none;
+    border-radius: 0;
+    background: none;
+  }
+
+  .header-nav .header-cta {
+    color: var(--amber);
+    border-bottom: 1px solid rgba(245,158,11,0.2);
+  }
+
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 28px;
+    height: 28px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+  }
+
+  .hamburger span {
+    display: block;
+    width: 100%;
+    height: 1.5px;
+    background: var(--muted);
+    transition: opacity 0.15s;
+  }
+
+  .hamburger[aria-expanded="true"] span:nth-child(1) {
+    transform: translateY(6.5px) rotate(45deg);
+  }
+  .hamburger[aria-expanded="true"] span:nth-child(2) {
+    opacity: 0;
+  }
+  .hamburger[aria-expanded="true"] span:nth-child(3) {
+    transform: translateY(-6.5px) rotate(-45deg);
+  }
+
+  .hamburger span { transition: transform 0.2s, opacity 0.15s; }
+}
+
+@media (min-width: 681px) {
+  .hamburger { display: none; }
+}
 </style>
 </head>
 <body>
@@ -700,6 +777,13 @@ footer {
       </svg>
       <span class="logo-name">RE<span>:</span>MARK</span>
     </a>
+        <button class="hamburger" aria-expanded="false" aria-label="Menu" onclick="
+      const nav = this.closest('.header-inner').querySelector('.header-nav');
+      const open = nav.classList.toggle('open');
+      this.setAttribute('aria-expanded', open);
+    ">
+      <span></span><span></span><span></span>
+    </button>
     <nav class="header-nav">
       <a href="/en/opportunity-map/">Opportunity Map →</a>
       <a href="/en/data-audit/">Data Audit →</a>
@@ -724,6 +808,7 @@ footer {
       <span class="domain-tag">Robotics</span>
       <span class="domain-tag">Computer Vision</span>
       <span class="domain-tag">Manufacturing Systems</span>
+      <span class="domain-tag">Dual-Use & Defense</span>
     </div>
     <div class="hero-cta" style="margin-top: 40px;">
       <a href="https://calendly.com/giuliopiana" class="btn-primary" target="_blank">
@@ -795,6 +880,7 @@ footer {
       <p>Independent technical validation on a target or add-on, structured for deal teams who need a defensible answer, not a longer report.</p>
       <ul>
         <li>Architecture and performance claims verified against real evidence</li>
+        <li>Sensing, RF, and autonomy claims assessed against physical constraints — not just benchmark numbers</li>
         <li>Licensing, IP, and certification risk reviewed</li>
         <li>Technical team and founder calls structured around the open questions</li>
         <li>Fixed-price engagement, scoped to the deal timeline. <br>Findings in 2–3 weeks, not months</li>
