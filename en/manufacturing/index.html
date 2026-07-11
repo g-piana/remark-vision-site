@@ -177,7 +177,7 @@ header {
   margin-left: auto;
   margin-right: auto;
 }
-
+.hero h1 em { font-style: normal; color: var(--amber); }
 .hero-sub {
   font-size: 18px;
   color: var(--muted);
@@ -687,11 +687,13 @@ footer {
 <!-- ── Hero ───────────────────────────────────────────────── -->
 <section class="hero">
   <div class="container">
-    <div class="hero-label">Machine Vision for Manufacturing</div>
-    <h1>Automated defect inspection <br> on your existing line</h1>
+    <div class="hero-label">RE:MARK · Active Development Platform</div>
+    <h1>An edge AI system for<br>automated visual inspection —<br><em>running on real hardware,<br>on real parts.</em></h1>
     <p class="hero-sub">
-      Operational in 6 hours. No line modifications.<br>
-      The model trains on your conforming parts — no defect labelling required.
+      RE:MARK Inspector is one of the platforms we develop and operate.
+      PatchCore anomaly detection on NVIDIA Jetson, industrial camera,
+      edge-to-cloud telemetry — built and maintained as a working system,
+      not a prototype or a demo.
     </p>
   </div>
 </section>
@@ -699,11 +701,13 @@ footer {
 <!-- ── Inline CTA ────────────────────────────────────────── -->
 <div class="container">
   <div class="hero-cta">
-    <a href="https://calendly.com/giuliopiana" class="btn-primary" target="_blank">
-      Book a free feasibility assessment →
-    </a>
-    <span class="btn-note">30 minutes · No commitment<br>We evaluate your line and components
-      to verify process compatibility.</span>
+<a href="https://calendly.com/giuliopiana" class="btn-primary" target="_blank">
+  Discuss the technology →
+</a>
+<span class="btn-note">
+  Evaluating a similar system for a deal or a portfolio company?<br>
+  Technical questions welcome.
+</span>
   </div>
 </div>
 
@@ -744,6 +748,11 @@ footer {
 <!-- ── How it works ───────────────────────────────────────── -->
 <section class="section container">
   <div class="section-label">How it works</div>
+  <p style="font-size:14px; color:var(--muted); line-height:1.7; max-width:640px; margin-bottom:28px;">
+  The architecture below is what runs in production. Every component — edge device,
+  model pipeline, dashboard — has been selected, integrated, and tested on real parts.
+  What follows is the system as built, not as intended.
+</p>
   <div class="steps">
     <div class="step">
       <span class="step-num">01 · EDGE</span>
@@ -821,17 +830,20 @@ RE:MARK Inspector inspects every part automatically. The operator intervenes on 
 <!-- ── CTA section ─────────────────────────────────────────── -->
 <section class="section container">
   <div class="cta-section">
-    <h2>Free feasibility assessment</h2>
-    <p>
-      30-minute video call. No commitment.<br>We evaluate your line and components
-      to verify process compatibility.
-    </p>
+
+    <h2>Technical questions about <br>machine vision, anomaly detection, or edge AI?</h2>
+<p>
+  Whether you are assessing a target, evaluating a portfolio company's technology,
+  or facing a regulatory evidence question on a vision-based medical device —
+  a 30-minute call to see if there is a useful conversation to be had.
+</p>
+
     <a href="https://calendly.com/giuliopiana" class="btn-primary" target="_blank">
       Book 30 minutes →
     </a>
     <span class="btn-note">Or write to us directly</span>
     <div class="contact-details">
-      <span class="contact-name">Giulio Piana</span>
+      <span class="contact-name">Giulio Piana</span><span class="contact-role">Founder and Principal · RE:MARK</span>
       <a href="mailto:giulio.piana@brandcraft.it" class="contact-email">
         giulio.piana@brandcraft.it
       </a>
