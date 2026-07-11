@@ -10,7 +10,28 @@
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-
+<!-- JSON-LD structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "RE:MARK Inspector",
+  "description": "Edge AI anomaly detection system for automated visual inspection of discrete manufactured components. PatchCore inference on NVIDIA Jetson hardware, industrial camera, edge-to-cloud telemetry. Trains on conforming part images — no defect labelling required.",
+  "brand": {
+    "@type": "Brand",
+    "name": "RE:MARK"
+  },
+  "creator": {
+    "@type": "Person",
+    "name": "Giulio Piana",
+    "jobTitle": "Founder and Principal, RE:MARK",
+    "sameAs": "https://www.linkedin.com/in/giuliopiana/",
+    "url": "https://remark-vision.com"
+  },
+  "category": "Industrial AI · Machine Vision · Edge Computing",
+  "url": "https://remark-vision.com/en/manufacturing/"
+}
+</script>
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -675,7 +696,7 @@ footer {
 
     <nav class="header-nav">
       <a href="/en/opportunity-map/">Opportunity Map →</a>
-      <a href="/en/samd-validation/" class="active">SaMD Validation →</a>
+      <a href="/en/samd-validation/">SaMD Validation →</a>
       <a href="/en/manufacturing/" class="active">Inspector →</a>
     </nav>
     <a href="https://calendly.com/giuliopiana" class="header-cta" target="_blank">
@@ -751,7 +772,7 @@ footer {
   <p style="font-size:14px; color:var(--muted); line-height:1.7; max-width:640px; margin-bottom:28px;">
   The architecture below is what runs in production. Every component — edge device,
   model pipeline, dashboard — has been selected, integrated, and tested on real parts.
-  What follows is the system as built, not as intended.
+  What follows is the system as built and validated.
 </p>
   <div class="steps">
     <div class="step">
