@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Model's Accuracy Doesn't Satisfy Article 10 — RE:MARK</title>
+<meta name="description" content="EU AI Act Article 10 requires representative validation data, documented statistical properties, and bias assessment across subgroups. One accuracy number is not enough — here is what the regulation actually asks for.">
+<link rel="canonical" href="https://remark-vision.com/en/insights/accuracy-does-not-satisfy-article-10/">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Your Model's Accuracy Doesn't Satisfy Article 10",
+  "description": "EU AI Act Article 10 requires representative validation data, documented statistical properties, and bias assessment. Three out of four AI medical devices will be treated as high-risk. One accuracy number is not enough.",
+  "datePublished": "2026-08-01",
+  "dateModified": "2026-08-01",
+  "url": "https://remark-vision.com/en/insights/accuracy-does-not-satisfy-article-10/",
+  "author": {
+    "@type": "Person",
+    "name": "Giulio Piana",
+    "jobTitle": "Founder and Principal, RE:MARK",
+    "description": "PhD Physics (CERN/INFN) · 15 years Boston Scientific (Medical Devices) · EMEA Analytics & Data Science · Six Sigma",
+    "sameAs": "https://www.linkedin.com/in/giuliopiana/",
+    "url": "https://remark-vision.com"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "RE:MARK",
+    "url": "https://remark-vision.com"
+  },
+  "mainEntityOfPage": "https://remark-vision.com/en/insights/accuracy-does-not-satisfy-article-10/",
+  "keywords": ["EU AI Act Article 10", "SaMD validation", "medical device AI compliance", "AI Act high-risk", "MDR technical file", "stratified performance", "AI bias assessment", "SaMD accuracy"]
+}
+</script>
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg:    #080b10;
+  --s1:    #0d1117;
+  --s2:    #131920;
+  --b0:    rgba(255,255,255,0.05);
+  --b1:    rgba(255,255,255,0.09);
+  --amber: #f59e0b;
+  --ink:   #e8edf5;
+  --muted: #a8b3c4;
+  --label: #7a8799;
+  --mono:  'JetBrains Mono', monospace;
+  --sans:  'DM Sans', sans-serif;
+}
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--ink); font-family: var(--sans); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+.container { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+
+/* Header */
+header { border-bottom: 1px solid var(--b0); background: rgba(8,11,16,0.92); backdrop-filter: blur(8px); position: sticky; top: 0; z-index: 50; }
+.header-inner { max-width: 960px; margin: 0 auto; padding: 0 24px; height: 52px; display: flex; align-items: center; justify-content: space-between; }
+.logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.logo-icon { width: 22px; height: 22px; flex-shrink: 0; }
+.logo-name { font-size: 15px; font-weight: 500; letter-spacing: 0.01em; color: var(--ink); }
+.logo-name span { color: var(--amber); }
+.header-nav { display: flex; align-items: center; gap: 24px; }
+.header-nav a { font-size: 13px; color: var(--label); text-decoration: none; transition: color 0.15s; }
+.header-nav a:hover { color: var(--muted); }
+.header-cta { font-size: 12px; font-weight: 500; color: var(--amber); text-decoration: none; border: 1px solid rgba(245,158,11,0.3); padding: 6px 14px; border-radius: 2px; }
+.header-cta:hover { background: rgba(245,158,11,0.08); }
+
+/* Article layout */
+.article-wrap { max-width: 680px; margin: 0 auto; padding: 0 24px; }
+.article-header { padding: 64px 0 48px; }
+.breadcrumb { font-family: var(--mono); font-size: 11px; color: var(--label); letter-spacing: 0.06em; margin-bottom: 24px; }
+.breadcrumb a { color: var(--label); text-decoration: none; }
+.breadcrumb a:hover { color: var(--amber); }
+.breadcrumb span { margin: 0 8px; opacity: 0.4; }
+.article-tag { font-family: var(--mono); font-size: 10px; color: var(--amber); letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 10px; border: 1px solid rgba(245,158,11,0.25); border-radius: 2px; display: inline-block; margin-bottom: 20px; }
+.article-header h1 { font-size: clamp(22px, 3vw, 34px); font-weight: 500; letter-spacing: -0.02em; line-height: 1.2; color: var(--ink); margin-bottom: 20px; }
+.article-meta-row { display: flex; align-items: center; gap: 20px; padding: 16px 0; border-top: 1px solid var(--b0); border-bottom: 1px solid var(--b0); margin-bottom: 48px; }
+.article-meta-row .date { font-family: var(--mono); font-size: 11px; color: var(--label); letter-spacing: 0.06em; }
+.article-meta-row .author { font-size: 13px; color: var(--muted); }
+.article-meta-row .author strong { color: var(--ink); font-weight: 500; }
+
+/* Article body */
+.article-body { font-size: 16px; line-height: 1.75; color: var(--muted); margin-bottom: 64px; }
+.article-body p { margin-bottom: 24px; }
+.article-body p:last-child { margin-bottom: 0; }
+.article-body h2 { font-size: 13px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--label); margin: 48px 0 24px; padding-top: 24px; border-top: 1px solid var(--b0); font-family: var(--mono); }
+.article-body strong { color: var(--ink); font-weight: 500; }
+
+/* Stat callout */
+.stat-callout {
+  background: var(--s1); border: 1px solid var(--b1); border-radius: 3px;
+  padding: 24px 28px; margin: 32px 0; display: flex; gap: 24px; align-items: flex-start;
+}
+.stat-callout-value { font-family: var(--mono); font-size: 36px; font-weight: 500; color: var(--amber); letter-spacing: -0.03em; line-height: 1; flex-shrink: 0; }
+.stat-callout-body { font-size: 14px; color: var(--muted); line-height: 1.65; }
+.stat-callout-body strong { color: var(--ink); }
+
+/* Check blocks */
+.check-block {
+  background: var(--s1); border: 1px solid var(--b1); border-radius: 3px;
+  padding: 28px 32px; margin: 32px 0; position: relative; overflow: hidden;
+}
+.check-block::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: var(--amber); opacity: 0.6; }
+.check-num { font-family: var(--mono); font-size: 10px; color: var(--amber); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 10px; display: block; }
+.check-block p { font-size: 15px; color: var(--ink); font-weight: 500; margin-bottom: 12px; line-height: 1.4; }
+.check-block .detail { font-size: 14px; color: var(--muted); line-height: 1.65; margin-bottom: 0; }
+
+/* Article CTA */
+.article-cta { background: var(--s1); border: 1px solid var(--b1); border-radius: 3px; padding: 36px 40px; margin-bottom: 64px; position: relative; overflow: hidden; text-align: center; }
+.article-cta::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(to right, transparent, var(--amber), transparent); opacity: 0.6; }
+.article-cta h3 { font-size: 18px; font-weight: 500; color: var(--ink); margin-bottom: 10px; letter-spacing: -0.01em; }
+.article-cta p { font-size: 14px; color: var(--muted); line-height: 1.65; margin-bottom: 24px; max-width: 480px; margin-left: auto; margin-right: auto; }
+.btn-primary { display: inline-flex; align-items: center; background: var(--amber); color: #080b10; font-family: var(--sans); font-size: 14px; font-weight: 500; text-decoration: none; padding: 12px 24px; border-radius: 2px; transition: opacity 0.15s; }
+.btn-primary:hover { opacity: 0.9; }
+.btn-secondary { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 500; color: var(--amber); text-decoration: none; border: 1px solid rgba(245,158,11,0.25); padding: 8px 16px; border-radius: 2px; font-family: var(--mono); letter-spacing: 0.04em; margin-top: 12px; }
+.btn-secondary:hover { background: rgba(245,158,11,0.07); }
+
+.back-link { font-family: var(--mono); font-size: 12px; color: var(--label); text-decoration: none; letter-spacing: 0.06em; display: block; padding: 20px 0; border-bottom: 1px solid var(--b0); margin-bottom: 40px; }
+.back-link:hover { color: var(--amber); }
+
+/* Footer */
+footer { border-top: 1px solid var(--b0); padding: 24px 0; }
+.footer-inner { max-width: 960px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+.footer-logo { display: flex; align-items: center; gap: 10px; }
+.footer-logo-text { display: flex; flex-direction: column; gap: 2px; }
+.footer-logo-name { font-size: 15px; font-weight: 500; color: var(--ink); letter-spacing: 0.01em; }
+.footer-colon { color: var(--amber); }
+.footer-logo-sub { font-size: 11px; color: var(--label); line-height: 1.5; }
+.footer-logo-sub a { color: var(--label); text-decoration: none; }
+.footer-copy { font-size: 12px; color: var(--label); }
+.footer-copy a { color: var(--label); text-decoration: none; }
+
+/* Mobile nav */
+@media (max-width: 680px) {
+  .header-inner { height: auto; min-height: 52px; flex-wrap: wrap; padding: 12px 24px; gap: 0; }
+  .header-nav { display: none; width: 100%; flex-direction: column; align-items: flex-start; gap: 0; padding: 12px 0 4px; border-top: 1px solid var(--b0); margin-top: 8px; }
+  .header-nav.open { display: flex; }
+  .header-nav a, .header-nav .header-cta { padding: 10px 0; font-size: 14px; width: 100%; border: none; border-radius: 0; background: none; }
+  .header-nav .header-cta { color: var(--amber); border-bottom: 1px solid rgba(245,158,11,0.2); }
+  .hamburger { display: flex; flex-direction: column; justify-content: center; gap: 5px; width: 28px; height: 28px; cursor: pointer; background: none; border: none; padding: 0; }
+  .hamburger span { display: block; width: 100%; height: 1.5px; background: var(--muted); transition: transform 0.2s, opacity 0.15s; }
+  .hamburger[aria-expanded="true"] span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+  .hamburger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+  .hamburger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+  .stat-callout { flex-direction: column; gap: 12px; }
+  .article-cta { padding: 28px 24px; }
+  .check-block { padding: 20px 20px 20px 28px; }
+  .footer-inner { flex-direction: column; }
+}
+@media (min-width: 681px) { .hamburger { display: none; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="/en/" class="logo">
+      <svg class="logo-icon" viewBox="0 0 22 22" fill="none">
+        <rect x="1" y="1" width="20" height="20" rx="3" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+        <circle cx="11" cy="11" r="4.5" stroke="#f59e0b" stroke-width="1.5"/>
+        <circle cx="11" cy="11" r="1.5" fill="#f59e0b"/>
+      </svg>
+      <span class="logo-name">RE<span>:</span>MARK</span>
+    </a>
+    <button class="hamburger" aria-expanded="false" aria-label="Menu" onclick="
+      const nav = this.closest('.header-inner').querySelector('.header-nav');
+      const open = nav.classList.toggle('open');
+      this.setAttribute('aria-expanded', open);
+    "><span></span><span></span><span></span></button>
+    <nav class="header-nav">
+      <a href="/en/opportunity-map/">Opportunity Map →</a>
+      <a href="/en/samd-validation/">SaMD Validation →</a>
+      <a href="/en/manufacturing/">Inspector →</a>
+    </nav>
+    <a href="https://calendly.com/giuliopiana" class="header-cta" target="_blank">Book a call</a>
+  </div>
+</header>
+
+<div class="article-wrap">
+
+  <div class="article-header">
+    <div class="breadcrumb">
+      <a href="/en/insights/">Insights</a>
+      <span>→</span>
+      SaMD · Article 10
+    </div>
+    <span class="article-tag">SaMD · Article 10</span>
+    <h1>Your Model's Accuracy Doesn't Satisfy Article 10</h1>
+    <div class="article-meta-row">
+      <span class="date">August 2026</span>
+      <span class="author"><strong>Giulio Piana</strong> · Founder and Principal, RE:MARK</span>
+    </div>
+  </div>
+
+  <div class="article-body">
+
+    <div class="stat-callout">
+      <div class="stat-callout-value">75%</div>
+      <div class="stat-callout-body">
+        <strong>of commercially available AI-enabled medical devices are in radiology and classified as Class IIa or higher under the MDR</strong> — according to a peer-reviewed analysis in npj Digital Medicine. That means three out of four AI medical devices on the European market will be treated as high-risk under the EU AI Act. And high-risk means Article 10.
+      </div>
+    </div>
+
+    <p>Article 10 of the AI Act sets requirements for the data used to train, validate, and test your model. It is not long — about two pages — but it asks for something most technical files do not contain: evidence that your validation data is representative, that you assessed it for bias, and that you documented its statistical properties including gaps and shortcomings.</p>
+
+    <p>In plain terms: <strong>"96% accuracy on our test set" is no longer sufficient evidence.</strong> The regulation wants to know 96% on whom, measured where, and under what conditions.</p>
+
+    <h2>Why the standard validation workflow falls short</h2>
+
+    <p>Most AI medical device teams validate their model the way any competent ML team does — hold out a test set, compute sensitivity and specificity, report the result. That workflow produces one number. The regulation asks a different question: does the model work equally well across the conditions it will encounter in clinical use?</p>
+
+    <p>A chest CT algorithm might perform at 97% sensitivity overall. But break the results down by scanner manufacturer, acquisition protocol, and patient demographics, and the picture often changes. Performance on scans from one hospital may look very different from performance on scans from another. The overall number hides that variation. The technical file needs to show it.</p>
+
+    <p>This is not a theoretical concern. The Team-NB questionnaire on AI in medical devices — 189 questions, published November 2024, already used in audits — asks explicitly for stratified performance across clinically relevant subgroups. The AI Act's own Annex IV requires the technical documentation to include "the metrics used to measure accuracy, robustness, and compliance with other relevant requirements" along with "potentially discriminatory impacts." One aggregate metric does not cover either requirement.</p>
+
+    <h2>Three things to check in your current technical file</h2>
+
+    <div class="check-block">
+      <span class="check-num">Check 01</span>
+      <p>Is your validation performance reported per operating condition, or only as one number?</p>
+      <p class="detail">If your device processes data from multiple scanner types, imaging protocols, or clinical settings, does the technical file show performance separately for each? A Notified Body auditor following the Team-NB questionnaire will ask for this breakdown. If it does not exist yet, producing it from your existing validation data is technically straightforward — but it needs to be done before the audit, not during it.</p>
+    </div>
+
+    <div class="check-block">
+      <span class="check-num">Check 02</span>
+      <p>Do you have a documented description of your dataset's statistical properties?</p>
+      <p class="detail">Article 10(2) requires that training, validation, and test datasets "shall be subject to data governance and management practices appropriate for the intended purpose." In practice this means a documented characterisation — what the dataset contains, where it came from, which populations and conditions it covers, and which ones it does not. "We used 10,000 images from three clinical sites" is a start. The regulation wants to know which sites, what the demographic distribution was, what inclusion and exclusion criteria were applied, and what gaps remain after accounting for all of that.</p>
+    </div>
+
+    <div class="check-block">
+      <span class="check-num">Check 03</span>
+      <p>Have you assessed your data for completeness and potential bias?</p>
+      <p class="detail">Article 10(2)(f) requires examination "in view of possible biases that are likely to affect the health and safety of persons." This is not asking whether your model is "fair" in the abstract. It is asking whether you looked at the data with specific failure modes in mind — underrepresented subgroups, known confounders, site-specific acquisition artefacts — and documented what you found. If you found nothing, document that too. The auditor's concern is not that bias exists, but that nobody checked.</p>
+    </div>
+
+    <h2>The gap is not technical — it is documentary</h2>
+
+    <p>None of this requires new technology. The model, the data, and the results already exist inside your validation pipeline. What is missing in most technical files is the structured analysis and the documentation that connects it to the specific regulatory requirements Article 10 imposes.</p>
+
+    <p>That gap is closeable. Stratified performance analysis is a known statistical procedure. Dataset characterisation is a defined deliverable. Bias assessment against a specific intended use population is a documented method. The challenge is not building new capability — it is producing the evidence in a form that a Notified Body reviewer can evaluate independently, with a traceable audit trail, before the December 2027 deadline leaves no time to remediate what the analysis finds.</p>
+
+  </div>
+
+  <div class="article-cta">
+    <h3>Does your technical file answer all three checks?</h3>
+    <p>RE:MARK produces independent statistical evidence packages for SaMD AI models — dataset characterisation, stratified performance, calibration, and drift detection — structured for Notified Body submission under AI Act and MDR requirements.</p>
+    <a href="https://calendly.com/giuliopiana" class="btn-primary" target="_blank">Book 30 minutes →</a>
+    <br>
+    <a href="/en/samd-validation/" class="btn-secondary">See the SaMD validation service →</a>
+  </div>
+
+  <a href="/en/insights/" class="back-link">← Back to Insights</a>
+
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <svg viewBox="0 0 22 22" fill="none" style="width:20px;height:20px;flex-shrink:0;">
+        <rect x="1" y="1" width="20" height="20" rx="3" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
+        <circle cx="11" cy="11" r="4.5" stroke="#f59e0b" stroke-width="1.5"/>
+        <circle cx="11" cy="11" r="1.5" fill="#f59e0b"/>
+      </svg>
+      <div class="footer-logo-text">
+        <span class="footer-logo-name">RE<span class="footer-colon">:</span>MARK</span>
+        <span class="footer-logo-sub">a <a href="https://brandcraft.it" target="_blank">Brandcraft srl</a> service &nbsp;·&nbsp; P.IVA IT13291650961 &nbsp;·&nbsp; Milan, Italy</span>
+      </div>
+    </div>
+    <div class="footer-copy">
+      <a href="mailto:giulio.piana@brandcraft.it">giulio.piana@brandcraft.it</a> &nbsp;·&nbsp; remark-vision.com
+    </div>
+  </div>
+</footer>
+
+<script type="text/javascript" id="hs-script-loader" async defer src="//js-eu1.hs-scripts.com/148276793.js"></script>
+</body>
+</html>

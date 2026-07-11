@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Notified Body AI Questionnaire: Six Questions That Catch Teams Off Guard — RE:MARK</title>
+<meta name="description" content="Team-NB published 189 questions for AI in medical devices. Six require evidence most SaMD technical files don't contain today — training reproducibility, subgroup performance, drift detection, and more.">
+<link rel="canonical" href="https://remark-vision.com/en/insights/notified-body-ai-questionnaire/">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "The Notified Body AI Questionnaire: Six Questions That Catch Teams Off Guard",
+  "description": "Team-NB published a 189-question checklist for AI in medical devices. Most questions are manageable — but six require evidence that most technical files don't contain today.",
+  "datePublished": "2026-08-01",
+  "dateModified": "2026-08-01",
+  "url": "https://remark-vision.com/en/insights/notified-body-ai-questionnaire/",
+  "author": {
+    "@type": "Person",
+    "name": "Giulio Piana",
+    "jobTitle": "Founder and Principal, RE:MARK",
+    "description": "PhD Physics (CERN/INFN) · 15 years Boston Scientific (Medical Devices) · EMEA Analytics & Data Science · Six Sigma",
+    "sameAs": "https://www.linkedin.com/in/giuliopiana/",
+    "url": "https://remark-vision.com"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "RE:MARK",
+    "url": "https://remark-vision.com"
+  },
+  "mainEntityOfPage": "https://remark-vision.com/en/insights/notified-body-ai-questionnaire/",
+  "keywords": ["Notified Body AI questionnaire", "Team-NB", "SaMD validation", "EU AI Act", "MDR technical file", "medical device AI", "AI Act compliance"]
+}
+</script>
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg:    #080b10;
+  --s1:    #0d1117;
+  --s2:    #131920;
+  --b0:    rgba(255,255,255,0.05);
+  --b1:    rgba(255,255,255,0.09);
+  --amber: #f59e0b;
+  --ink:   #e8edf5;
+  --muted: #a8b3c4;
+  --label: #7a8799;
+  --mono:  'JetBrains Mono', monospace;
+  --sans:  'DM Sans', sans-serif;
+}
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--ink); font-family: var(--sans); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+.container { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+
+/* Header */
+header { border-bottom: 1px solid var(--b0); background: rgba(8,11,16,0.92); backdrop-filter: blur(8px); position: sticky; top: 0; z-index: 50; }
+.header-inner { max-width: 960px; margin: 0 auto; padding: 0 24px; height: 52px; display: flex; align-items: center; justify-content: space-between; }
+.logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.logo-icon { width: 22px; height: 22px; flex-shrink: 0; }
+.logo-name { font-size: 15px; font-weight: 500; letter-spacing: 0.01em; color: var(--ink); }
+.logo-name span { color: var(--amber); }
+.header-nav { display: flex; align-items: center; gap: 24px; }
+.header-nav a { font-size: 13px; color: var(--label); text-decoration: none; transition: color 0.15s; }
+.header-nav a:hover { color: var(--muted); }
+.header-cta { font-size: 12px; font-weight: 500; color: var(--amber); text-decoration: none; border: 1px solid rgba(245,158,11,0.3); padding: 6px 14px; border-radius: 2px; }
+.header-cta:hover { background: rgba(245,158,11,0.08); }
+
+/* Article layout */
+.article-wrap { max-width: 680px; margin: 0 auto; padding: 0 24px; }
+
+.article-header { padding: 64px 0 48px; }
+.breadcrumb { font-family: var(--mono); font-size: 11px; color: var(--label); letter-spacing: 0.06em; margin-bottom: 24px; }
+.breadcrumb a { color: var(--label); text-decoration: none; }
+.breadcrumb a:hover { color: var(--amber); }
+.breadcrumb span { margin: 0 8px; opacity: 0.4; }
+.article-tag { font-family: var(--mono); font-size: 10px; color: var(--amber); letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 10px; border: 1px solid rgba(245,158,11,0.25); border-radius: 2px; display: inline-block; margin-bottom: 20px; }
+.article-header h1 { font-size: clamp(22px, 3vw, 34px); font-weight: 500; letter-spacing: -0.02em; line-height: 1.2; color: var(--ink); margin-bottom: 20px; }
+.article-meta-row { display: flex; align-items: center; gap: 20px; padding: 16px 0; border-top: 1px solid var(--b0); border-bottom: 1px solid var(--b0); margin-bottom: 48px; }
+.article-meta-row .date { font-family: var(--mono); font-size: 11px; color: var(--label); letter-spacing: 0.06em; }
+.article-meta-row .author { font-size: 13px; color: var(--muted); }
+.article-meta-row .author strong { color: var(--ink); font-weight: 500; }
+
+/* Article body */
+.article-body { font-size: 16px; line-height: 1.75; color: var(--muted); margin-bottom: 64px; }
+.article-body p { margin-bottom: 24px; }
+.article-body p:last-child { margin-bottom: 0; }
+.article-body h2 {
+  font-size: 13px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--label); margin: 48px 0 24px; padding-top: 24px;
+  border-top: 1px solid var(--b0); font-family: var(--mono);
+}
+.article-body strong { color: var(--ink); font-weight: 500; }
+.article-body em { font-style: italic; color: var(--ink); }
+
+/* Question blocks */
+.question-block {
+  background: var(--s1); border: 1px solid var(--b1); border-radius: 3px;
+  padding: 28px 32px; margin: 32px 0; position: relative; overflow: hidden;
+}
+.question-block::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+  width: 2px; background: var(--amber); opacity: 0.6;
+}
+.question-num { font-family: var(--mono); font-size: 10px; color: var(--amber); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 10px; display: block; }
+.question-block p { font-size: 15px; color: var(--ink); font-weight: 500; margin-bottom: 12px; line-height: 1.4; }
+.question-block .answer { font-size: 14px; color: var(--muted); line-height: 1.65; margin-bottom: 0; }
+
+/* CTA block */
+.article-cta {
+  background: var(--s1); border: 1px solid var(--b1); border-radius: 3px;
+  padding: 36px 40px; margin-bottom: 64px; position: relative; overflow: hidden;
+  text-align: center;
+}
+.article-cta::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(to right, transparent, var(--amber), transparent); opacity: 0.6; }
+.article-cta h3 { font-size: 18px; font-weight: 500; color: var(--ink); margin-bottom: 10px; letter-spacing: -0.01em; }
+.article-cta p { font-size: 14px; color: var(--muted); line-height: 1.65; margin-bottom: 24px; max-width: 480px; margin-left: auto; margin-right: auto; }
+.btn-primary { display: inline-flex; align-items: center; gap: 8px; background: var(--amber); color: #080b10; font-family: var(--sans); font-size: 14px; font-weight: 500; text-decoration: none; padding: 12px 24px; border-radius: 2px; transition: opacity 0.15s; }
+.btn-primary:hover { opacity: 0.9; }
+.btn-secondary { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 500; color: var(--amber); text-decoration: none; border: 1px solid rgba(245,158,11,0.25); padding: 8px 16px; border-radius: 2px; font-family: var(--mono); letter-spacing: 0.04em; margin-top: 12px; }
+.btn-secondary:hover { background: rgba(245,158,11,0.07); }
+
+/* Back link */
+.back-link { font-family: var(--mono); font-size: 12px; color: var(--label); text-decoration: none; letter-spacing: 0.06em; display: inline-flex; align-items: center; gap: 6px; margin-bottom: 40px; display: block; padding: 20px 0; border-bottom: 1px solid var(--b0); }
+.back-link:hover { color: var(--amber); }
+
+/* Footer */
+footer { border-top: 1px solid var(--b0); padding: 24px 0; }
+.footer-inner { max-width: 960px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+.footer-logo { display: flex; align-items: center; gap: 10px; }
+.footer-logo-text { display: flex; flex-direction: column; gap: 2px; }
+.footer-logo-name { font-size: 15px; font-weight: 500; color: var(--ink); letter-spacing: 0.01em; }
+.footer-colon { color: var(--amber); }
+.footer-logo-sub { font-size: 11px; color: var(--label); line-height: 1.5; }
+.footer-logo-sub a { color: var(--label); text-decoration: none; }
+.footer-copy { font-size: 12px; color: var(--label); }
+.footer-copy a { color: var(--label); text-decoration: none; }
+
+/* Mobile nav */
+@media (max-width: 680px) {
+  .header-inner { height: auto; min-height: 52px; flex-wrap: wrap; padding: 12px 24px; gap: 0; }
+  .header-nav { display: none; width: 100%; flex-direction: column; align-items: flex-start; gap: 0; padding: 12px 0 4px; border-top: 1px solid var(--b0); margin-top: 8px; }
+  .header-nav.open { display: flex; }
+  .header-nav a, .header-nav .header-cta { padding: 10px 0; font-size: 14px; width: 100%; border: none; border-radius: 0; background: none; }
+  .header-nav .header-cta { color: var(--amber); border-bottom: 1px solid rgba(245,158,11,0.2); }
+  .hamburger { display: flex; flex-direction: column; justify-content: center; gap: 5px; width: 28px; height: 28px; cursor: pointer; background: none; border: none; padding: 0; }
+  .hamburger span { display: block; width: 100%; height: 1.5px; background: var(--muted); transition: transform 0.2s, opacity 0.15s; }
+  .hamburger[aria-expanded="true"] span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+  .hamburger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+  .hamburger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+  .article-cta { padding: 28px 24px; }
+  .question-block { padding: 20px 20px 20px 28px; }
+  .footer-inner { flex-direction: column; }
+}
+@media (min-width: 681px) { .hamburger { display: none; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="/en/" class="logo">
+      <svg class="logo-icon" viewBox="0 0 22 22" fill="none">
+        <rect x="1" y="1" width="20" height="20" rx="3" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+        <circle cx="11" cy="11" r="4.5" stroke="#f59e0b" stroke-width="1.5"/>
+        <circle cx="11" cy="11" r="1.5" fill="#f59e0b"/>
+      </svg>
+      <span class="logo-name">RE<span>:</span>MARK</span>
+    </a>
+    <button class="hamburger" aria-expanded="false" aria-label="Menu" onclick="
+      const nav = this.closest('.header-inner').querySelector('.header-nav');
+      const open = nav.classList.toggle('open');
+      this.setAttribute('aria-expanded', open);
+    "><span></span><span></span><span></span></button>
+    <nav class="header-nav">
+      <a href="/en/opportunity-map/">Opportunity Map →</a>
+      <a href="/en/samd-validation/">SaMD Validation →</a>
+      <a href="/en/manufacturing/">Inspector →</a>
+    </nav>
+    <a href="https://calendly.com/giuliopiana" class="header-cta" target="_blank">Book a call</a>
+  </div>
+</header>
+
+<div class="article-wrap">
+
+  <div class="article-header">
+    <div class="breadcrumb">
+      <a href="/en/insights/">Insights</a>
+      <span>→</span>
+      SaMD · EU AI Act
+    </div>
+    <span class="article-tag">SaMD · EU AI Act</span>
+    <h1>The Notified Body AI Questionnaire: Six Questions That Catch Teams Off Guard</h1>
+    <div class="article-meta-row">
+      <span class="date">August 2026</span>
+      <span class="author"><strong>Giulio Piana</strong> · Founder and Principal, RE:MARK</span>
+    </div>
+  </div>
+
+  <div class="article-body">
+
+    <p>In November 2024, Team-NB — the association representing Europe's medical device Notified Bodies — published a questionnaire on artificial intelligence in medical devices. It contains 189 questions.</p>
+
+    <p>That is 189 questions a Notified Body auditor can now ask, one by one, when reviewing the technical file of any medical device that uses AI. They cover everything from training data sourcing to model validation to post-market monitoring — and they come on top of the existing MDR technical documentation requirements, not instead of them.</p>
+
+    <p>The questionnaire exists because there is no harmonised standard for AI in medical devices yet. CEN-CENELEC is working on it — EN 18286 entered public enquiry in late 2025 — but until it is published, Notified Bodies need something to audit against. So they wrote their own checklist. It is thorough. It is public. And it is already being used in audits.</p>
+
+    <p>Most of the 189 questions are manageable if your quality system is in order. But a handful require evidence that most technical files do not contain today. Here are six that consistently catch teams off guard.</p>
+
+    <h2>The six questions</h2>
+
+    <div class="question-block">
+      <span class="question-num">Question 01</span>
+      <p>Can you reproduce your training and validation results?</p>
+      <p class="answer">Not "did you save the final model weights." Can someone re-run your training pipeline from raw data and arrive at the same model, with the same performance numbers? This requires version control on the data, the preprocessing steps, and the training configuration — not just the code. Most teams version the model. Very few version the full reproducibility chain.</p>
+    </div>
+
+    <div class="question-block">
+      <span class="question-num">Question 02</span>
+      <p>How did you verify that your training data is representative of your intended patient population?</p>
+      <p class="answer">The questionnaire references ISO 13485 design input requirements. "We used a public dataset" is not an answer. The auditor wants documented evidence that you assessed demographic coverage, site-level variation, and known subgroup gaps — and that you made a conscious, recorded risk decision about whatever gaps remain.</p>
+    </div>
+
+    <div class="question-block">
+      <span class="question-num">Question 03</span>
+      <p>What is your model's performance across clinically relevant subgroups?</p>
+      <p class="answer">Not overall accuracy. Stratified performance — broken out by the patient characteristics and operating conditions that matter for your intended use. If your device processes chest X-rays, what is the performance on portable versus fixed-unit acquisitions? On paediatric versus adult patients? One aggregate number does not satisfy this question, regardless of how high it is.</p>
+    </div>
+
+    <div class="question-block">
+      <span class="question-num">Question 04</span>
+      <p>How do you detect that real-world input data has shifted away from what the model was trained on?</p>
+      <p class="answer">This is asking whether you have a drift detection mechanism in place. Most teams do not. The questionnaire expects a documented approach — not necessarily a fully automated system, but a defined method and monitoring plan. A vague statement about "ongoing monitoring" in the post-market surveillance plan does not cover this question.</p>
+    </div>
+
+    <div class="question-block">
+      <span class="question-num">Question 05</span>
+      <p>What measures ensure the AI model operates safely within its validated scope?</p>
+      <p class="answer">This is the continuous-learning trap. The German Notified Bodies Alliance has stated explicitly that "dynamic AI" — systems that continue learning after deployment — are "not certifiable in principle" unless the manufacturer can validate safety at a defined development state. If your model updates in the field, this question requires serious, specific documentation of how safety is maintained between validation cycles.</p>
+    </div>
+
+    <div class="question-block">
+      <span class="question-num">Question 06</span>
+      <p>Can you provide the Notified Body with access to your training, validation, and test datasets?</p>
+      <p class="answer">This one comes from Annex IV of the AI Act itself. The regulation states that the Notified Body shall be granted full access to training, validation, and testing datasets, including through API or other technical means enabling remote access. If your training data includes patient images, you need a documented plan for how to satisfy this requirement while maintaining data protection compliance. This is an open tension in the regulation — and "we did not think about it" is not a position you want to be in during an audit.</p>
+    </div>
+
+    <h2>What this means in practice</h2>
+
+    <p>None of these questions are unreasonable. All of them require evidence that takes time to produce — in some cases, time that requires going back to the data, re-running analyses, or implementing monitoring infrastructure that was not in scope during the original development cycle.</p>
+
+    <p>The Team-NB questionnaire is public. The gap analysis — identifying which of the 189 questions your current technical file cannot answer — takes an afternoon. The evidence production takes considerably longer, and that is the constraint that matters given where the calendar sits relative to December 2027.</p>
+
+    <p>The most useful thing you can do with the questionnaire is not read it as a compliance checklist to fill in. Read it as a window into what an auditor is actually looking for: reproducibility, representativeness, subgroup honesty, and a documented plan for what happens after deployment. Those four themes run through most of the questions that catch teams off guard.</p>
+
+  </div>
+
+  <div class="article-cta">
+    <h3>Which of these six does your technical file currently answer?</h3>
+    <p>RE:MARK produces independent statistical evidence packages for SaMD AI models — structured for Notified Body submission and mapped to AI Act and MDR requirements. A 30-minute call to understand your device and your current documentation.</p>
+    <a href="https://calendly.com/giuliopiana" class="btn-primary" target="_blank">Book 30 minutes →</a>
+    <br>
+    <a href="/en/samd-validation/" class="btn-secondary">See the SaMD validation service →</a>
+  </div>
+
+  <a href="/en/insights/" class="back-link">← Back to Insights</a>
+
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <svg viewBox="0 0 22 22" fill="none" style="width:20px;height:20px;flex-shrink:0;">
+        <rect x="1" y="1" width="20" height="20" rx="3" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
+        <circle cx="11" cy="11" r="4.5" stroke="#f59e0b" stroke-width="1.5"/>
+        <circle cx="11" cy="11" r="1.5" fill="#f59e0b"/>
+      </svg>
+      <div class="footer-logo-text">
+        <span class="footer-logo-name">RE<span class="footer-colon">:</span>MARK</span>
+        <span class="footer-logo-sub">a <a href="https://brandcraft.it" target="_blank">Brandcraft srl</a> service &nbsp;·&nbsp; P.IVA IT13291650961 &nbsp;·&nbsp; Milan, Italy</span>
+      </div>
+    </div>
+    <div class="footer-copy">
+      <a href="mailto:giulio.piana@brandcraft.it">giulio.piana@brandcraft.it</a> &nbsp;·&nbsp; remark-vision.com
+    </div>
+  </div>
+</footer>
+
+<script type="text/javascript" id="hs-script-loader" async defer src="//js-eu1.hs-scripts.com/148276793.js"></script>
+</body>
+</html>
