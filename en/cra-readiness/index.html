@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>RE:MARK — CRA Article 14 Readiness Sprint | Vulnerability Reporting for EU Manufacturers</title>
+<meta name="description" content="Fixed-scope readiness sprint for manufacturers of connected products facing the CRA Article 14 vulnerability reporting obligation (September 11, 2026). SBOM audit, CVE-to-product tracing, 24-hour reporting runbook, designated-reporter setup, tabletop exercise. Built by a physicist with 15 years in regulated industries.">
+
+<link rel="canonical" href="https://remark-vision.com/en/cra-readiness/">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="512x512" href="/favicon-512.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="alternate" hreflang="it" href="https://remark-vision.com/it/cra-readiness/">
+<link rel="alternate" hreflang="en" href="https://remark-vision.com/en/cra-readiness/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "CRA Article 14 Readiness Sprint",
+  "provider": {
+    "@type": "Person",
+    "name": "Giulio Piana",
+    "jobTitle": "Founder and Principal, RE:MARK",
+    "sameAs": "https://www.linkedin.com/in/giuliopiana/",
+    "description": "PhD Physics (CERN/INFN) · 15 years in regulated industries · Industrial AI & Cybersecurity",
+    "url": "https://remark-vision.com"
+  },
+  "areaServed": "EU",
+  "description": "Fixed-scope, fixed-price readiness sprint for manufacturers of products with digital elements. Covers SBOM audit, CVE-to-product tracing, 24-hour reporting runbook, designated-reporter authorisation, and a tabletop exercise of the 2am scenario — all before the September 11, 2026 CRA Article 14 deadline.",
+  "serviceType": "CRA Compliance Readiness",
+  "url": "https://remark-vision.com/en/cra-readiness/"
+}
+</script>
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:    #080b10;
+  --s1:    #0d1117;
+  --s2:    #131920;
+  --b0:    rgba(255,255,255,0.05);
+  --b1:    rgba(255,255,255,0.09);
+  --amber: #f59e0b;
+  --pass:  #22c55e;
+  --fail:  #ef4444;
+  --blue:  #3b82f6;
+  --ink:   #e8edf5;
+  --muted: #a8b3c4;
+  --label: #7a8799;
+  --mono:  'JetBrains Mono', monospace;
+  --sans:  'DM Sans', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+
+.container { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+
+/* ── Header ── */
+header {
+  border-bottom: 1px solid var(--b0);
+  background: rgba(8,11,16,0.92);
+  backdrop-filter: blur(8px);
+  position: sticky; top: 0; z-index: 50;
+}
+.header-inner {
+  max-width: 960px; margin: 0 auto; padding: 0 24px;
+  height: 52px; display: flex; align-items: center; justify-content: space-between;
+}
+.logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.logo-icon { width: 22px; height: 22px; flex-shrink: 0; }
+.logo-name { font-size: 15px; font-weight: 500; letter-spacing: 0.01em; color: var(--ink); }
+.logo-name span { color: var(--amber); }
+.header-nav { display: flex; align-items: center; gap: 24px; }
+.header-nav a { font-size: 13px; color: var(--label); text-decoration: none; transition: color 0.15s; }
+.header-nav a:hover { color: var(--muted); }
+.header-nav a.active { color: var(--amber); }
+.header-cta {
+  font-size: 12px; font-weight: 500; color: var(--amber);
+  text-decoration: none; border: 1px solid rgba(245,158,11,0.3);
+  padding: 6px 14px; border-radius: 2px; transition: background 0.15s, border-color 0.15s;
+}
+.header-cta:hover { background: rgba(245,158,11,0.08); border-color: rgba(245,158,11,0.5); }
+
+/* ── Hero ── */
+.hero { padding: 80px 0 64px; text-align: center; }
+.hero-eyebrow {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--amber); margin-bottom: 28px;
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+}
+.hero-eyebrow::before, .hero-eyebrow::after {
+  content: ''; display: block; width: 28px; height: 1px; background: rgba(245,158,11,0.4);
+}
+.hero h1 {
+  font-size: clamp(26px, 3.6vw, 44px); font-weight: 500; line-height: 1.15;
+  letter-spacing: -0.025em; color: var(--ink); max-width: 700px; margin: 0 auto 10px;
+}
+.hero h1 em { font-style: normal; color: var(--amber); }
+.hero-thesis {
+  font-size: clamp(14px, 1.6vw, 17px); color: var(--muted);
+  max-width: 560px; margin: 0 auto 40px; line-height: 1.7;
+}
+
+/* ── Deadline counter ── */
+.deadline-block {
+  display: flex; gap: 0; flex-wrap: wrap; justify-content: center;
+  margin: 0 auto 44px; max-width: 720px;
+  background: var(--s1); border: 1px solid var(--b1); border-radius: 3px;
+  border-top: 2px solid rgba(239,68,68,0.6); overflow: hidden;
+}
+.deadline-item {
+  flex: 1; min-width: 140px; padding: 20px 24px; text-align: center;
+  border-right: 1px solid var(--b0);
+}
+.deadline-item:last-child { border-right: none; }
+.deadline-value {
+  font-family: var(--mono); font-size: 22px; font-weight: 500;
+  color: var(--fail); letter-spacing: -0.02em; line-height: 1; display: block; margin-bottom: 4px;
+}
+.deadline-value.amber { color: var(--amber); }
+.deadline-label { font-size: 11px; color: var(--label); line-height: 1.4; }
+
+/* ── CTA buttons ── */
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--amber); color: #080b10; font-family: var(--sans);
+  font-size: 15px; font-weight: 500; text-decoration: none;
+  padding: 14px 28px; border-radius: 2px; transition: opacity 0.15s;
+}
+.btn-primary:hover { opacity: 0.9; }
+.btn-secondary {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 13px; font-weight: 500; color: var(--amber);
+  text-decoration: none; border: 1px solid rgba(245,158,11,0.25);
+  padding: 8px 16px; border-radius: 2px; transition: background 0.15s, border-color 0.15s;
+  font-family: var(--mono); letter-spacing: 0.04em;
+}
+.btn-secondary:hover { background: rgba(245,158,11,0.07); border-color: rgba(245,158,11,0.4); }
+.btn-note { font-size: 12px; color: var(--label); margin-top: 10px; display: block; }
+
+/* ── Sections ── */
+.section { margin-bottom: 72px; }
+.section-label {
+  font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--label); margin-bottom: 32px; padding-bottom: 12px; border-bottom: 1px solid var(--b0);
+}
+
+/* ── Credentials strip ── */
+.credentials-strip {
+  display: flex; align-items: center; justify-content: center;
+  gap: 0; flex-wrap: wrap;
+  padding: 20px 0; border-top: 1px solid var(--b0); border-bottom: 1px solid var(--b0);
+  margin-bottom: 72px;
+}
+.cred-item { font-family: var(--mono); font-size: 11px; color: var(--label); letter-spacing: 0.08em; text-transform: uppercase; padding: 0 18px; }
+.cred-sep { color: var(--b1); font-size: 14px; }
+
+/* ── Cascade timeline SVG ── */
+.timeline-wrapper {
+  background: var(--s1); border: 1px solid var(--b1); border-radius: 3px;
+  padding: 36px 40px; margin-bottom: 16px; overflow-x: auto;
+}
+.timeline-caption {
+  font-size: 13px; color: var(--label); text-align: center; margin-top: 20px;
+  font-family: var(--mono); letter-spacing: 0.04em;
+}
+
+/* ── Argument grid ── */
+.argument-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 2px;
+  background: var(--b0); border: 1px solid var(--b1); border-radius: 3px; overflow: hidden;
+}
+.argument-cell { background: var(--s1); padding: 28px 32px; }
+.argument-cell-label {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--label); margin-bottom: 12px;
+}
+.argument-cell h3 { font-size: 15px; font-weight: 500; color: var(--ink); margin-bottom: 8px; letter-spacing: -0.01em; }
+.argument-cell p { font-size: 13px; color: var(--muted); line-height: 1.65; }
+.argument-cell.highlight { background: var(--s2); border-left: 2px solid var(--amber); }
+.argument-cell.highlight h3 { color: var(--amber); }
+
+/* ── Sprint modules ── */
+.modules {
+  display: flex; flex-direction: column; gap: 2px;
+  background: var(--b0); border: 1px solid var(--b1); border-radius: 3px; overflow: hidden;
+}
+.module {
+  background: var(--s1); padding: 28px 32px 28px 28px;
+  display: grid; grid-template-columns: 56px 1fr; gap: 20px; align-items: start;
+}
+.module + .module { border-top: 1px solid var(--b0); }
+.module-code {
+  font-family: var(--mono); font-size: 20px; font-weight: 500;
+  color: rgba(245,158,11,0.28); letter-spacing: -0.02em; padding-top: 2px; line-height: 1;
+}
+.module-body h3 { font-size: 15px; font-weight: 500; color: var(--ink); margin-bottom: 4px; }
+.module-output { font-size: 12px; color: var(--muted); line-height: 1.6; margin-bottom: 10px; margin-top: 4px; }
+.module-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.module-tag {
+  font-family: var(--mono); font-size: 10px; color: var(--label); letter-spacing: 0.06em;
+  padding: 3px 8px; border: 1px solid var(--b1); border-radius: 2px;
+}
+.module-tag.reg { color: rgba(245,158,11,0.7); border-color: rgba(245,158,11,0.2); }
+.module-tag.out { color: rgba(34,197,94,0.7); border-color: rgba(34,197,94,0.2); }
+
+/* ── Who it's for ── */
+.audience-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.audience-card {
+  background: var(--s1); border: 1px solid var(--b1); border-radius: 3px; padding: 24px 28px;
+}
+.audience-role {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--pass); margin-bottom: 10px;
+}
+.audience-card h3 { font-size: 14px; font-weight: 500; color: var(--ink); margin-bottom: 8px; }
+.audience-card p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+/* ── How it works ── */
+.method-strip {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
+  background: var(--b0); border: 1px solid var(--b1); border-radius: 3px; overflow: hidden;
+}
+.method-step { background: var(--s1); padding: 24px; }
+.method-step-num {
+  font-family: var(--mono); font-size: 10px; color: var(--amber);
+  letter-spacing: 0.1em; margin-bottom: 10px; display: block;
+}
+.method-step h3 { font-size: 14px; font-weight: 500; color: var(--ink); margin-bottom: 6px; }
+.method-step p { font-size: 12px; color: var(--muted); line-height: 1.6; }
+
+/* ── Differentiator ── */
+.diff-block {
+  background: var(--s1); border: 1px solid var(--b1); border-radius: 3px;
+  padding: 36px 40px; position: relative; overflow: hidden;
+}
+.diff-block::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(to right, transparent, var(--amber), transparent); opacity: 0.5;
+}
+.diff-block p { font-size: 15px; color: var(--muted); line-height: 1.8; }
+.diff-block strong { color: var(--ink); font-weight: 500; }
+.diff-block em { font-style: normal; color: var(--label); font-size: 13px; }
+
+/* ── Cost callout ── */
+.cost-callout {
+  background: rgba(245,158,11,0.04); border: 1px solid rgba(245,158,11,0.18);
+  border-radius: 3px; padding: 20px 28px; margin-top: 24px;
+  display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+}
+.cost-callout-label { font-family: var(--mono); font-size: 10px; color: var(--label); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 4px; }
+.cost-callout-value { font-family: var(--mono); font-size: 22px; font-weight: 500; color: var(--amber); }
+.cost-callout-note { font-size: 13px; color: var(--muted); flex: 1; }
+
+/* ── CTA ── */
+.cta-section {
+  background: var(--s1); border: 1px solid var(--b1); border-radius: 3px;
+  padding: 48px 52px; text-align: center; position: relative; overflow: hidden;
+}
+.cta-section::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(to right, transparent, var(--amber), transparent); opacity: 0.7;
+}
+.cta-section h2 { font-size: clamp(18px, 2.2vw, 26px); font-weight: 500; color: var(--ink); margin-bottom: 12px; letter-spacing: -0.015em; }
+.cta-section p { font-size: 14px; color: var(--muted); margin-bottom: 28px; line-height: 1.7; max-width: 480px; margin-left: auto; margin-right: auto; }
+.cta-inner { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.contact-details { margin-top: 16px; display: flex; flex-direction: column; gap: 2px; }
+.contact-name { font-size: 13px; font-weight: 500; color: var(--ink); }
+.contact-role { font-size: 12px; color: var(--label); font-family: var(--mono); letter-spacing: 0.04em; }
+.contact-email { font-size: 13px; color: var(--amber); text-decoration: none; font-family: var(--mono); }
+.contact-email:hover { text-decoration: underline; }
+
+/* ── Footer ── */
+footer { border-top: 1px solid var(--b0); padding: 28px 0; }
+.footer-inner {
+  max-width: 960px; margin: 0 auto; padding: 0 24px;
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;
+}
+.footer-logo { display: flex; align-items: center; gap: 12px; }
+.footer-logo-text { display: flex; flex-direction: column; }
+.footer-logo-name { font-size: 13px; font-weight: 500; color: var(--ink); letter-spacing: 0.02em; }
+.footer-colon { color: var(--amber); }
+.footer-logo-sub { font-size: 11px; color: var(--label); font-family: var(--mono); }
+.footer-logo-sub a { color: var(--label); text-decoration: none; }
+.footer-copy { font-size: 12px; color: var(--label); text-align: right; line-height: 1.7; }
+.footer-copy a { color: var(--label); text-decoration: none; }
+.footer-copy a:hover { color: var(--amber); }
+
+/* ── Lang switcher ── */
+.lang-switch {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em;
+  color: var(--label); text-decoration: none; border: 1px solid var(--b1);
+  padding: 4px 10px; border-radius: 2px; transition: color 0.15s, border-color 0.15s;
+}
+.lang-switch:hover { color: var(--amber); border-color: rgba(245,158,11,0.3); }
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .argument-grid { grid-template-columns: 1fr; }
+  .audience-grid { grid-template-columns: 1fr; }
+  .method-strip { grid-template-columns: 1fr; }
+  .hero { padding: 52px 0 40px; }
+  .cta-section { padding: 32px 24px; }
+  .diff-block { padding: 28px 24px; }
+  .cost-callout { flex-direction: column; gap: 10px; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ── Header ── -->
+<header>
+  <div class="header-inner">
+    <a href="/en/" class="logo">
+      <svg class="logo-icon" viewBox="0 0 22 22" fill="none">
+        <rect x="1" y="1" width="20" height="20" rx="3" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
+        <circle cx="11" cy="11" r="4.5" stroke="#f59e0b" stroke-width="1.5"/>
+        <circle cx="11" cy="11" r="1.5" fill="#f59e0b"/>
+      </svg>
+      <span class="logo-name">RE<span>:</span>MARK</span>
+    </a>
+    <nav class="header-nav">
+      <a href="/en/">Due Diligence</a>
+      <a href="/en/samd-validation/">SaMD Validation</a>
+      <a href="/en/cra-readiness/" class="active">CRA Readiness</a>
+      <a href="/it/cra-readiness/" class="lang-switch">IT</a>
+      <a href="https://calendly.com/giuliopiana" class="header-cta" target="_blank">Book a call</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ── Hero ── -->
+<section class="hero container">
+  <div class="hero-eyebrow">CRA · Article 14 · September 11, 2026</div>
+  <h1>September 11. <em>Twenty-four hours.</em><br>Can you trace a CVE to your products before the clock runs out?</h1>
+  <p class="hero-thesis">
+    The Cyber Resilience Act requires manufacturers of connected products to report
+    actively exploited vulnerabilities to ENISA within 24 hours of becoming aware.
+    Most manufacturers cannot do this today. We can help close that gap with a quick sprint — before the deadline, not after the first fine.
+  </p>
+
+  <div class="deadline-block">
+    <div class="deadline-item">
+      <span class="deadline-value">11 Sep</span>
+      <span class="deadline-label">CRA Article 14 mandatory vulnerability reporting begins</span>
+    </div>
+    <div class="deadline-item">
+      <span class="deadline-value">24 h</span>
+      <span class="deadline-label">Early warning to ENISA once you become aware</span>
+    </div>
+    <div class="deadline-item">
+      <span class="deadline-value">€15 M</span>
+      <span class="deadline-label">Or 2.5% of global turnover — whichever is higher</span>
+    </div>
+    <div class="deadline-item">
+      <span class="deadline-value amber">11 Dec</span>
+      <span class="deadline-label">CRA full compliance deadline — SBOM obligations, conformity assessments, CE marking</span>
+    </div>
+  </div>
+
+  <a href="https://calendly.com/giuliopiana" class="btn-primary" target="_blank">Book a scoping call →</a>
+  <span class="btn-note">30 minutes · No commitment · Honest answer even if it is no</span>
+</section>
+
+<!-- ── Credentials ── -->
+<div class="credentials-strip container">
+  <span class="cred-item">PhD Physics · CERN</span>
+  <span class="cred-sep">·</span>
+  <span class="cred-item">15y Regulated Industries</span>
+  <span class="cred-sep">·</span>
+  <span class="cred-item">Industrial AI & Cybersecurity</span>
+  <span class="cred-sep">·</span>
+  <span class="cred-item">EU Regulatory</span>
+  <span class="cred-sep">·</span>
+  <span class="cred-item">RE:MARK · Milan</span>
+</div>
+
+<!-- ── Cascade timeline ── -->
+<section class="section container">
+  <div class="section-label">The reporting cascade you must be ready for</div>
+  <div class="timeline-wrapper">
+    <svg viewBox="0 0 920 240" xmlns="http://www.w3.org/2000/svg" style="width:100%;min-width:600px;">
+      <defs>
+        <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+          <path d="M0,0 L0,6 L8,3 z" fill="rgba(245,158,11,0.5)"/>
+        </marker>
+      </defs>
+
+      <!-- CVE event -->
+      <circle cx="56" cy="120" r="6" fill="#ef4444" opacity="0.9"/>
+      <text x="56" y="100" font-family="'JetBrains Mono',monospace" font-size="12" font-weight="500" fill="#ef4444" text-anchor="middle" letter-spacing="0.06em">CVE HIT</text>
+      <text x="56" y="152" font-family="'JetBrains Mono',monospace" font-size="11" fill="rgba(232,237,245,0.45)" text-anchor="middle">t = 0</text>
+
+      <!-- Arrow -->
+      <line x1="70" y1="120" x2="108" y2="120" stroke="rgba(245,158,11,0.4)" stroke-width="1.5" marker-end="url(#arr)"/>
+
+      <!-- 24h block -->
+      <rect x="114" y="88" width="174" height="64" rx="3" fill="rgba(239,68,68,0.09)" stroke="rgba(239,68,68,0.4)" stroke-width="1"/>
+      <text x="201" y="110" font-family="'JetBrains Mono',monospace" font-size="11" font-weight="500" fill="#e8edf5" text-anchor="middle" letter-spacing="0.06em">EARLY WARNING</text>
+      <text x="201" y="128" font-family="'JetBrains Mono',monospace" font-size="11" fill="rgba(168,179,196,0.7)" text-anchor="middle">notify ENISA + CSIRT</text>
+      <text x="201" y="172" font-family="'JetBrains Mono',monospace" font-size="13" font-weight="500" fill="#ef4444" text-anchor="middle">24 HOURS</text>
+
+      <!-- Arrow -->
+      <line x1="294" y1="120" x2="332" y2="120" stroke="rgba(245,158,11,0.4)" stroke-width="1.5" marker-end="url(#arr)"/>
+
+      <!-- 72h block -->
+      <rect x="338" y="88" width="196" height="64" rx="3" fill="rgba(245,158,11,0.06)" stroke="rgba(245,158,11,0.28)" stroke-width="1"/>
+      <text x="436" y="110" font-family="'JetBrains Mono',monospace" font-size="11" font-weight="500" fill="#e8edf5" text-anchor="middle" letter-spacing="0.04em">VULNERABILITY NOTICE</text>
+      <text x="436" y="128" font-family="'JetBrains Mono',monospace" font-size="11" fill="rgba(168,179,196,0.7)" text-anchor="middle">scope · severity · mitigation</text>
+      <text x="436" y="172" font-family="'JetBrains Mono',monospace" font-size="13" font-weight="500" fill="rgba(245,158,11,0.8)" text-anchor="middle">72 HOURS</text>
+
+      <!-- Arrow -->
+      <line x1="540" y1="120" x2="578" y2="120" stroke="rgba(245,158,11,0.4)" stroke-width="1.5" marker-end="url(#arr)"/>
+
+      <!-- 14d block -->
+      <rect x="584" y="88" width="196" height="64" rx="3" fill="rgba(59,130,246,0.06)" stroke="rgba(59,130,246,0.28)" stroke-width="1"/>
+      <text x="682" y="110" font-family="'JetBrains Mono',monospace" font-size="11" font-weight="500" fill="#e8edf5" text-anchor="middle" letter-spacing="0.04em">FINAL REPORT</text>
+      <text x="682" y="128" font-family="'JetBrains Mono',monospace" font-size="11" fill="rgba(168,179,196,0.7)" text-anchor="middle">root cause · fix · patch</text>
+      <text x="682" y="172" font-family="'JetBrains Mono',monospace" font-size="13" font-weight="500" fill="rgba(59,130,246,0.7)" text-anchor="middle">14 DAYS AFTER FIX</text>
+
+      <!-- Arrow -->
+      <line x1="786" y1="120" x2="840" y2="120" stroke="rgba(245,158,11,0.4)" stroke-width="1.5" marker-end="url(#arr)"/>
+
+      <!-- Fine marker -->
+      <circle cx="862" cy="120" r="6" fill="#f59e0b" opacity="0.9"/>
+      <text x="862" y="100" font-family="'JetBrains Mono',monospace" font-size="12" font-weight="500" fill="#f59e0b" text-anchor="middle" letter-spacing="0.04em">€15 M</text>
+      <text x="862" y="152" font-family="'JetBrains Mono',monospace" font-size="11" fill="rgba(232,237,245,0.45)" text-anchor="middle">if missed</text>
+
+      <!-- Span label -->
+      <line x1="56" y1="210" x2="862" y2="210" stroke="rgba(255,255,255,0.05)" stroke-width="1" stroke-dasharray="4,4"/>
+      <text x="459" y="234" font-family="'JetBrains Mono',monospace" font-size="11" font-weight="500" fill="rgba(232,237,245,0.35)" text-anchor="middle" letter-spacing="0.08em">CLOCK STARTS AT AWARENESS · NOT AT CONFIRMATION · RUNS OVER WEEKENDS</text>
+    </svg>
+    <p class="timeline-caption">
+      Article 14 CRA — mandatory from September 11, 2026. The 24-hour window starts the moment you become aware of active exploitation — regardless of whether you have confirmed it internally.
+    </p>
+  </div>
+</section>
+
+<!-- ── The gap argument ── -->
+<section class="section container">
+  <div class="section-label">Why your SBOM does not satisfy Article 14</div>
+  <div class="argument-grid">
+    <div class="argument-cell">
+      <div class="argument-cell-label">What companies assume</div>
+      <h3>"We have a component list — we're covered"</h3>
+      <p>An SBOM file is the starting point, not the finish line. Article 14 requires that you can query your SBOM against live vulnerability feeds in real time, determine which products and versions are affected, assess whether exploitation is active, and file with ENISA — all within 24 hours. A spreadsheet or a static file cannot do this at 2am on a Friday.</p>
+    </div>
+    <div class="argument-cell">
+      <div class="argument-cell-label">What Article 14 actually requires</div>
+      <h3>Awareness triggers the clock — monitoring is not optional</h3>
+      <p>The regulation is explicit: "becomes aware" is a low bar. A market surveillance authority will ask what monitoring process was in place. "We had no process" is not a compliant answer — it is evidence that you could not have become aware, which is itself a violation. The obligation to monitor is implicit in the obligation to report.</p>
+    </div>
+    <div class="argument-cell highlight">
+      <div class="argument-cell-label">What the sprint delivers</div>
+      <h3>A working process — not another checklist</h3>
+      <p>Five modules. Two weeks. A documented, tested process that your team can operate independently: component inventory that can be queried against CVE feeds, a reporting runbook with pre-authorised decision rights, and a dry run of the exact scenario. Fixed price, defined deliverables, no open billing.</p>
+    </div>
+    <div class="argument-cell">
+      <div class="argument-cell-label">The cost of inaction</div>
+      <h3>One missed deadline costs more than one hundred sprints</h3>
+      <p>The fine ceiling is €15 million or 2.5% of global annual turnover. But the operational cost lands first: a crisis-mode legal review of a missed 24-hour window, the scramble to reconstruct what components were in which products, the reputational cost of a late or incomplete filing. The sprint costs less than one hour of that review.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── Sprint modules ── -->
+<section class="section container">
+  <div class="section-label">Five sprint modules · One working process</div>
+  <div class="modules">
+
+    <div class="module">
+      <div class="module-code">S1</div>
+      <div class="module-body">
+        <h3>SBOM Status Assessment</h3>
+        <p class="module-output">Audit of your current component inventory: format (CycloneDX / SPDX / ad hoc), depth (top-level vs. transitive dependencies), freshness (sync with current release), and queryability (can you run a CVE lookup against this in under an hour?). Identifies the gap between what you have and what Article 14 requires. Covers firmware, embedded software, standalone applications, and edge devices.</p>
+        <div class="module-tags">
+          <span class="module-tag reg">CRA Art. 13 · SBOM obligation</span>
+          <span class="module-tag reg">CRA Art. 14 · Reporting prerequisite</span>
+          <span class="module-tag out">Output: SBOM gap report + remediation priorities</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="module">
+      <div class="module-code">S2</div>
+      <div class="module-body">
+        <h3>CVE-to-Product Tracing Verification</h3>
+        <p class="module-output">Live test of your current ability to answer the critical question: if a CVE is published against a component you use, how long does it take to determine which of your products and versions are affected? We run this against a real current CVE on a component typical of your product class. Time-to-determine is the metric. If it takes more than an hour, you cannot meet the 24-hour window.</p>
+        <div class="module-tags">
+          <span class="module-tag reg">CRA Art. 14 · 24-hour early warning</span>
+          <span class="module-tag out">Output: time-to-determine benchmark + tooling recommendations</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="module">
+      <div class="module-code">S3</div>
+      <div class="module-body">
+        <h3>24-Hour Reporting Runbook</h3>
+        <p class="module-output">A documented, step-by-step process for the full Article 14 cascade: detection trigger → internal triage → 24-hour early warning → 72-hour notification → 14-day final report. Includes ENISA SRP form pre-fill templates, escalation path, decision criteria for the "is this actively exploited?" judgment, and versioned record-keeping for market surveillance audits. Written for the person who will actually operate it at 2am.</p>
+        <div class="module-tags">
+          <span class="module-tag reg">CRA Art. 14 · Full cascade</span>
+          <span class="module-tag reg">NIS2 Art. 23 · Compatible structure</span>
+          <span class="module-tag out">Output: runbook document + ENISA SRP templates</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="module">
+      <div class="module-code">S4</div>
+      <div class="module-body">
+        <h3>Designated Reporter Setup</h3>
+        <p class="module-output">Article 14 requires early warning "without undue delay." In practice this means someone must have pre-authorised decision rights to assess and file — without waiting for CEO sign-off. We define the role, draft the authority matrix, document the escalation path, and ensure the designated person has everything they need to act independently. This is an organisational step, not a technical one, and it is the step most companies skip.</p>
+        <div class="module-tags">
+          <span class="module-tag reg">CRA Art. 14 · "Without undue delay"</span>
+          <span class="module-tag out">Output: authority matrix + role documentation</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="module">
+      <div class="module-code">S5</div>
+      <div class="module-body">
+        <h3>Tabletop Exercise — The 2am Scenario</h3>
+        <p class="module-output">A structured dry run of the full reporting cascade, run with the actual people who would handle a real incident. Scenario: a critical CVE is published on Friday evening against a component in your firmware. Walk through the process end to end — detection, triage, 24-hour filing, 72-hour notification. Gaps in the runbook, unclear decision rights, and missing information surface in the exercise, not in a real incident. The organisations that handle incident reporting well are the ones that practised.</p>
+        <div class="module-tags">
+          <span class="module-tag reg">CRA Art. 14 · Process validation</span>
+          <span class="module-tag out">Output: exercise report + gap closure list</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── How it runs ── -->
+<section class="section container">
+  <div class="section-label">How the sprint runs</div>
+  <div class="method-strip">
+    <div class="method-step">
+      <span class="method-step-num">Phase 01 · Day 1–2 · Scope</span>
+      <h3>Understand your product landscape</h3>
+      <p>Map the connected products in scope (firmware, embedded software, edge devices, standalone applications). Identify the SBOM status, existing tooling, and team structure. Scoping defines which modules require the most depth and produces the sprint plan.</p>
+    </div>
+    <div class="method-step">
+      <span class="method-step-num">Phase 02 · Days 3–8 · Execution</span>
+      <h3>Run the five modules</h3>
+      <p>SBOM audit, CVE-tracing live test, runbook drafting, authority matrix, and tabletop exercise preparation. Conducted remotely with your engineering and security team. Each module produces a structured output. Gaps are flagged with severity and a recommended closure action.</p>
+    </div>
+    <div class="method-step">
+      <span class="method-step-num">Phase 03 · Days 9–10 · Handoff</span>
+      <h3>Deliver the working process</h3>
+      <p>All module outputs compiled, the tabletop exercise conducted with your team, gaps closed or documented with clear owners and timelines. You leave with a process your designated reporter can operate independently — no dependency on RE:MARK after the sprint.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── Who commissions this ── -->
+<section class="section container">
+  <div class="section-label">Who commissions this</div>
+  <div class="audience-grid">
+    <div class="audience-card">
+      <div class="audience-role">CTO · Connected-Product Manufacturer</div>
+      <h3>A process that works before the first real incident</h3>
+      <p>Your team built the product. Nobody built the incident response process. You need a documented, tested reporting workflow in place before September 11 — one your team can operate without external support when it matters.</p>
+    </div>
+    <div class="audience-card">
+      <div class="audience-role">Head of Engineering · IoT / Industrial / Edge</div>
+      <h3>Know exactly where you stand — before the MSA asks</h3>
+      <p>You have connected products on the EU market. You are not certain your SBOM is queryable or your reporting path is clear. The sprint produces an honest gap assessment and closes the critical ones — not a compliance report that sits in a folder.</p>
+    </div>
+    <div class="audience-card">
+      <div class="audience-role">CEO · SME Manufacturer</div>
+      <h3>Fixed scope, fixed price, defined output</h3>
+      <p>You need CRA Article 14 readiness before September. You do not have a dedicated PSIRT or security team. The sprint is designed for exactly this situation: a working process, delivered in two weeks, without building internal capability you don't yet need.</p>
+    </div>
+    <div class="audience-card">
+      <div class="audience-role">Quality / Regulatory Manager</div>
+      <h3>One sprint, two obligations covered</h3>
+      <p>CRA Article 14 reporting begins September 11. NIS2 incident reporting follows a compatible cascade structure — 24h early warning, 72h notification, final report. A process built for CRA Article 14 satisfies the NIS2 reporting workflow for the same incident. One sprint addresses both, regardless of which member state's transposition applies to your operations.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── Differentiator ── */-->
+<section class="section container">
+  <div class="diff-block">
+    <p>
+      A cybersecurity consultant maps your gaps against a checklist and tells you what to fix.
+      A legal firm explains what Article 14 requires and what the fines are.
+      <strong>Neither produces a working, tested process that your engineer can operate at 2am on a Friday without calling anyone.</strong>
+      <br><br>
+      The combination that makes this work is specific: a physicist who has spent 15 years inside regulated industry development —
+      at the intersection of engineering, compliance, and data infrastructure — and who understands both what the
+      regulation requires operationally and how connected-product engineering actually works.
+      Firmware SBOMs are structurally different from web-application dependency trees.
+      Vulnerability triage for an embedded RTOS is different from patching a cloud service.
+      The runbook reflects that.
+      <br><br>
+      <em>Fixed-price sprint · Scope agreed before we start · No open-ended billing · Two weeks to a working process</em>
+    </p>
+
+    <div class="cost-callout">
+      <div>
+        <div class="cost-callout-label">Sprint investment</div>
+        <div class="cost-callout-value">From €3,500</div>
+      </div>
+      <p class="cost-callout-note">
+        Fixed price. Scope agreed upfront. Includes all five modules and the tabletop exercise.
+        Final cost depends on the number of distinct product lines in scope.
+        The sprint costs less than one hour of crisis-mode legal review after a missed 24-hour window.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ── -->
+<section class="section container">
+  <div class="cta-section">
+    <h2>Connected products on the EU market and a September 11 deadline?</h2>
+    <p>
+      A 30-minute call to understand your product landscape, your current SBOM status,
+      and whether the sprint is the right next step. No commitment.
+      Honest answer even if the sprint is not the right fit.
+    </p>
+    <div class="cta-inner">
+      <a href="https://calendly.com/giuliopiana" class="btn-primary" target="_blank">
+        Book 30 minutes →
+      </a>
+      <span class="btn-note">Or write directly</span>
+      <div class="contact-details">
+        <span class="contact-name">Giulio Piana</span>
+        <span class="contact-role">Founder and Principal · RE:MARK</span>
+        <a href="mailto:giulio.piana@brandcraft.it" class="contact-email">
+          giulio.piana@brandcraft.it
+        </a>
+      </div>
+    </div>
+
+    <div style="margin-top:32px; padding-top:24px; border-top:1px solid rgba(255,255,255,0.05); text-align:center;">
+      <p style="font-size:13px; color:var(--label); margin-bottom:10px;">
+        AI model in a medical device facing an EU AI Act deadline?
+      </p>
+      <a href="/en/samd-validation/" style="font-size:13px; color:var(--amber); text-decoration:none; font-family:'JetBrains Mono',monospace; letter-spacing:0.04em;">
+        RE:MARK SaMD AI Validation →
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <svg viewBox="0 0 22 22" fill="none" style="width:20px;height:20px;flex-shrink:0;">
+        <rect x="1" y="1" width="20" height="20" rx="3" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
+        <circle cx="11" cy="11" r="4.5" stroke="#f59e0b" stroke-width="1.5"/>
+        <circle cx="11" cy="11" r="1.5" fill="#f59e0b"/>
+      </svg>
+      <div class="footer-logo-text">
+        <span class="footer-logo-name">RE<span class="footer-colon">:</span>MARK</span>
+        <span class="footer-logo-sub">
+          a <a href="https://brandcraft.it" target="_blank">Brandcraft srl</a> service
+          &nbsp;·&nbsp; P.IVA IT13291650961 &nbsp;·&nbsp; Milan, Italy
+        </span>
+      </div>
+    </div>
+    <div class="footer-copy">
+      <a href="mailto:giulio.piana@brandcraft.it">giulio.piana@brandcraft.it</a>
+      &nbsp;·&nbsp; remark-vision.com<br>
+      <a href="/it/cra-readiness/">Versione italiana (CRA + NIS2 Italia) →</a>
+    </div>
+  </div>
+</footer>
+
+<script type="text/javascript" id="hs-script-loader" async defer src="//js-eu1.hs-scripts.com/148276793.js"></script>
+</body>
+</html>
