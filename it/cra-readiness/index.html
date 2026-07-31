@@ -449,12 +449,15 @@ footer { border-top: 1px solid var(--b0); padding: 28px 0; }
 <!-- ── Hero ── -->
 <section class="hero container">
   <div class="hero-eyebrow">CRA · Articolo 14 · 11 Settembre 2026</div>
-  <h1>11 settembre. <em>Ventiquattro ore.</em><br>Riesci a tracciare un CVE sui tuoi prodotti prima che il clock si fermi?</h1>
+  <h1>11 settembre. <em>Ventiquattro ore per segnalare.</em><br>Sai in quali dei tuoi prodotti si trova il componente vulnerabile?</h1>
   <p class="hero-thesis">
-    Il Cyber Resilience Act impone ai produttori di prodotti connessi di segnalare
-    le vulnerabilità attivamente sfruttate a ENISA entro 24 ore dal momento in cui ne diventano consapevoli.
-    La maggior parte dei produttori non ha ancora un processo funzionante.
-    Possiamo aiutare a costruirlo con un rapido sprint — prima dell'11 settembre, non dopo la prima sanzione.<br>
+    Dall'11 settembre 2026, quando una vulnerabilità in un componente software che utilizzi
+    viene sfruttata da un attaccante, hai 24 ore per segnalarlo a ENISA, l'agenzia europea
+    per la cybersicurezza. Il tempo decorre da quando ne vieni a conoscenza, non da quando
+    lo confermi internamente. Oggi la maggior parte dei produttori non riuscirebbe a
+    rispondere in tempo, per un motivo semplice: nessuno ha mai mappato quali componenti
+    finiscono in quali prodotti.
+    Possiamo aiutare a costruire quel processo con un rapido sprint — prima della scadenza, non dopo la prima sanzione.<br>
     Per i produttori italiani: il NIS2 entra in vigore il 1° ottobre con la stessa cascata di segnalazione.
   </p>
 
@@ -478,7 +481,7 @@ footer { border-top: 1px solid var(--b0); padding: 28px 0; }
   </div>
 
   <a href="https://calendly.com/giuliopiana" class="btn-primary" target="_blank">Prenota una call di scoping →</a>
-  <span class="btn-note">30 minuti · Nessun impegno · Risposta onesta anche se il sprint non è la soluzione giusta</span>
+  <span class="btn-note">30 minuti · Nessun impegno · Risposta onesta anche se lo sprint non è la soluzione giusta</span>
 </section>
 
 <!-- ── Credentials ── -->
@@ -562,7 +565,7 @@ footer { border-top: 1px solid var(--b0); padding: 28px 0; }
       <text x="459" y="234" font-family="'JetBrains Mono',monospace" font-size="11" font-weight="500" fill="rgba(232,237,245,0.35)" text-anchor="middle" letter-spacing="0.06em">IL CLOCK PARTE DALLA CONSAPEVOLEZZA · NON DALLA CONFERMA · SCORRE NEI WEEKEND</text>
     </svg>
     <p class="timeline-caption">
-      Art. 14 CRA — obbligatorio dall'11 settembre 2026. La finestra di 24 ore inizia nel momento in cui diventi consapevole dello sfruttamento attivo — indipendentemente da una conferma interna.
+      Art. 14 CRA — obbligatorio dall'11 settembre 2026. Un CVE è l'identificativo pubblico assegnato a una vulnerabilità quando viene resa nota. La finestra di 24 ore inizia nel momento in cui vieni a conoscenza dello sfruttamento attivo — indipendentemente da una conferma interna.
     </p>
   </div>
 </section>
@@ -582,14 +585,14 @@ footer { border-top: 1px solid var(--b0); padding: 28px 0; }
       <p>Il regolamento è esplicito: "diventare consapevole" è una soglia bassa. Un'autorità di sorveglianza del mercato chiederà quale processo di monitoraggio era in atto. "Non avevamo un processo" non è una risposta conforme — è la prova che non potevi diventare consapevole, il che è di per sé una violazione.</p>
     </div>
     <div class="argument-cell highlight">
-      <div class="argument-cell-label">Cosa produce il sprint</div>
+      <div class="argument-cell-label">Cosa produce lo sprint</div>
       <h3>Evidenza che puoi consegnare a un auditor</h3>
       <p>Nove documenti controllati, redatti nel formato del sistema qualità con controllo delle revisioni e firme di approvazione: la procedura, il registro dei componenti, la delega firmata, l'albero decisionale, i template di segnalazione, e la registrazione datata che il processo è stato testato. Due settimane, prezzo fisso. Il tuo team invia un file e partecipa a due sessioni.</p>
     </div>
     <div class="argument-cell">
       <div class="argument-cell-label">Il costo dell'inazione</div>
       <h3>Una scadenza mancata costa più di cento sprint</h3>
-      <p>Il tetto delle sanzioni è €15 milioni o il 2,5% del fatturato globale. Ma il costo operativo arriva prima: una revisione legale in modalità crisi per una finestra di 24 ore mancata, la ricostruzione di emergenza di quali componenti erano in quali prodotti, il costo reputazionale di una segnalazione tardiva o incompleta. Il sprint costa meno di un'ora di quella revisione.</p>
+      <p>Il tetto delle sanzioni è €15 milioni o il 2,5% del fatturato globale. Ma il costo operativo arriva prima: una revisione legale in modalità crisi per una finestra di 24 ore mancata, la ricostruzione di emergenza di quali componenti erano in quali prodotti, il costo reputazionale di una segnalazione tardiva o incompleta. Lo sprint costa meno di un'ora di quella revisione.</p>
     </div>
   </div>
 </section>
@@ -621,7 +624,7 @@ footer { border-top: 1px solid var(--b0); padding: 28px 0; }
 
 <!-- ── Sprint modules ── -->
 <section class="section container">
-  <div class="section-label">Cinque moduli del sprint · Un processo funzionante</div>
+  <div class="section-label">Cinque moduli dello sprint · Un processo funzionante</div>
   <div class="modules">
 
     <div class="module">
@@ -779,12 +782,12 @@ footer { border-top: 1px solid var(--b0); padding: 28px 0; }
 
 <!-- ── How it runs ── -->
 <section class="section container">
-  <div class="section-label">Come si svolge il sprint</div>
+  <div class="section-label">Come si svolge lo sprint</div>
   <div class="method-strip">
     <div class="method-step">
       <span class="method-step-num">Fase 01 · Giorni 1–2 · Scoping</span>
       <h3>Mappatura del panorama prodotti</h3>
-      <p>Identificazione dei prodotti connessi in perimetro (firmware, software embedded, edge device, applicazioni standalone). Verifica dello stato SBOM, degli strumenti esistenti e della struttura del team. Lo scoping definisce quali moduli richiedono maggiore profondità e produce il piano del sprint.</p>
+      <p>Identificazione dei prodotti connessi in perimetro (firmware, software embedded, edge device, applicazioni standalone). Verifica dello stato SBOM, degli strumenti esistenti e della struttura del team. Lo scoping definisce quali moduli richiedono maggiore profondità e produce il piano dello sprint.</p>
     </div>
     <div class="method-step">
       <span class="method-step-num">Fase 02 · Giorni 3–8 · Esecuzione</span>
@@ -794,7 +797,7 @@ footer { border-top: 1px solid var(--b0); padding: 28px 0; }
     <div class="method-step">
       <span class="method-step-num">Fase 03 · Giorni 9–10 · Handoff</span>
       <h3>Consegna del processo funzionante</h3>
-      <p>Tutti gli output compilati, tabletop exercise condotto con il team, gap chiusi o documentati con owner e scadenze chiare. Il team esce con un processo che il designated reporter può operare in autonomia — nessuna dipendenza da RE:MARK dopo il sprint.</p>
+      <p>Tutti gli output compilati, tabletop exercise condotto con il team, gap chiusi o documentati con owner e scadenze chiare. Il team esce con un processo che il designated reporter può operare in autonomia — nessuna dipendenza da RE:MARK dopo lo sprint.</p>
     </div>
   </div>
 </section>
@@ -811,17 +814,17 @@ footer { border-top: 1px solid var(--b0); padding: 28px 0; }
     <div class="audience-card">
       <div class="audience-role">Head of Engineering · IoT / Industriale / Edge</div>
       <h3>Sapere esattamente dove sei — prima che te lo chieda l'autorità</h3>
-      <p>Hai prodotti connessi sul mercato UE. Non sei certo che il tuo SBOM sia interrogabile o che il tuo percorso di segnalazione sia chiaro. Il sprint produce una valutazione onesta dei gap e chiude quelli critici — non un report di compliance che resta in una cartella.</p>
+      <p>Hai prodotti connessi sul mercato UE. Non sei certo che il tuo SBOM sia interrogabile o che il tuo percorso di segnalazione sia chiaro. Lo sprint produce una valutazione onesta dei gap e chiude quelli critici — non un report di compliance che resta in una cartella.</p>
     </div>
     <div class="audience-card">
       <div class="audience-role">CEO · PMI Manifatturiera</div>
       <h3>Scope fisso, prezzo fisso, output definito</h3>
-      <p>Hai bisogno di essere pronto per il CRA Art. 14 prima di settembre. Non hai un PSIRT dedicato o un team di sicurezza interno. Il sprint è progettato esattamente per questa situazione: un processo funzionante, consegnato in due settimane, senza costruire capacità interna che non ti serve ancora.</p>
+      <p>Hai bisogno di essere pronto per il CRA Art. 14 prima di settembre. Non hai un PSIRT dedicato o un team di sicurezza interno. Lo sprint è progettato esattamente per questa situazione: un processo funzionante, consegnato in due settimane, senza costruire capacità interna che non ti serve ancora.</p>
     </div>
     <div class="audience-card">
       <div class="audience-role">Responsabile Qualità / Regulatory</div>
       <h3>CRA + NIS2 Italia: stessa cascata, tre settimane di distanza</h3>
-      <p>La struttura di segnalazione CRA (24/72 ore/14 giorni) è compatibile con quella NIS2. Un processo ben costruito in risposta al sprint copre entrambi gli obblighi. Per i produttori italiani di prodotti connessi, la finestra utile si chiude il 31 agosto — non il 10 settembre.</p>
+      <p>La struttura di segnalazione CRA (24/72 ore/14 giorni) è compatibile con quella NIS2. Un processo ben costruito in risposta allo sprint copre entrambi gli obblighi. Per i produttori italiani di prodotti connessi, la finestra utile si chiude il 31 agosto — non il 10 settembre.</p>
     </div>
   </div>
 </section>
@@ -914,8 +917,8 @@ footer { border-top: 1px solid var(--b0); padding: 28px 0; }
     <h2>Prodotti connessi sul mercato UE e una scadenza all'11 settembre?</h2>
     <p>
       30 minuti per capire il tuo panorama prodotti, lo stato attuale dello SBOM,
-      e se il sprint è il passo giusto. Nessun impegno.
-      Risposta onesta anche se il sprint non è la soluzione adatta.
+      e se lo sprint è il passo giusto. Nessun impegno.
+      Risposta onesta anche se lo sprint non è la soluzione adatta.
     </p>
     <div class="cta-inner">
       <a href="https://calendly.com/giuliopiana" class="btn-primary" target="_blank">
