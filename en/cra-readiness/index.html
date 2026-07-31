@@ -313,8 +313,108 @@ footer { border-top: 1px solid var(--b0); padding: 28px 0; }
 }
 .lang-switch:hover { color: var(--amber); border-color: rgba(245,158,11,0.3); }
 
+/* ── Zero-effort strip ── */
+.effort-strip {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
+  background: var(--b0); border: 1px solid var(--b1); border-radius: 3px;
+  overflow: hidden; margin-bottom: 20px;
+}
+.effort-cell { background: var(--s1); padding: 26px 28px; text-align: center; }
+.effort-icon {
+  font-family: var(--mono); font-size: 22px; font-weight: 500;
+  color: var(--amber); display: block; margin-bottom: 10px; letter-spacing: -0.02em;
+}
+.effort-cell h3 { font-size: 14px; font-weight: 500; color: var(--ink); margin-bottom: 6px; }
+.effort-cell p { font-size: 12px; color: var(--muted); line-height: 1.6; }
+.effort-note {
+  font-family: var(--mono); font-size: 11px; color: var(--label);
+  text-align: center; letter-spacing: 0.04em;
+}
+
+/* ── Deliverables accordion ── */
+.deliverables { border: 1px solid var(--b1); border-radius: 3px; overflow: hidden; background: var(--s1); }
+.deliverables summary {
+  list-style: none; cursor: pointer; padding: 24px 28px;
+  display: flex; align-items: center; gap: 14px; user-select: none;
+  transition: background 0.15s;
+}
+.deliverables summary::-webkit-details-marker { display: none; }
+.deliverables summary:hover { background: var(--s2); }
+.deliverables summary .plus {
+  font-family: var(--mono); font-size: 20px; font-weight: 500;
+  color: var(--amber); width: 20px; flex-shrink: 0; line-height: 1;
+  transition: transform 0.2s;
+}
+.deliverables[open] summary .plus { transform: rotate(45deg); }
+.deliverables summary .sum-title { font-size: 15px; font-weight: 500; color: var(--ink); }
+.deliverables summary .sum-hint {
+  margin-left: auto; font-family: var(--mono); font-size: 11px;
+  color: var(--label); letter-spacing: 0.06em;
+}
+.deliverables-body { border-top: 1px solid var(--b0); }
+.deliv-row {
+  display: grid; grid-template-columns: 92px 1fr; gap: 18px;
+  padding: 18px 28px; border-bottom: 1px solid var(--b0); align-items: start;
+}
+.deliv-row:last-child { border-bottom: none; }
+.deliv-code {
+  font-family: var(--mono); font-size: 11px; color: rgba(245,158,11,0.75);
+  letter-spacing: 0.06em; padding-top: 2px;
+}
+.deliv-body h4 { font-size: 14px; font-weight: 500; color: var(--ink); margin-bottom: 3px; }
+.deliv-body p { font-size: 12.5px; color: var(--muted); line-height: 1.6; }
+
+/* ── Tier cards ── */
+.tiers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.tier {
+  background: var(--s1); border: 1px solid var(--b1); border-radius: 3px;
+  padding: 28px 26px; display: flex; flex-direction: column;
+}
+.tier.featured { border-color: rgba(245,158,11,0.45); background: var(--s2); position: relative; }
+.tier.featured::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(to right, transparent, var(--amber), transparent);
+}
+.tier-tag {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--label); margin-bottom: 12px;
+}
+.tier.featured .tier-tag { color: var(--amber); }
+.tier h3 { font-size: 16px; font-weight: 500; color: var(--ink); margin-bottom: 4px; }
+.tier-price {
+  font-family: var(--mono); font-size: 24px; font-weight: 500;
+  color: var(--amber); letter-spacing: -0.02em; margin: 12px 0 4px;
+}
+.tier-price.free { color: var(--pass); }
+.tier-price-sub { font-size: 11px; color: var(--label); font-family: var(--mono); margin-bottom: 16px; }
+.tier ul { list-style: none; margin: 0 0 18px; padding: 0; }
+.tier li {
+  font-size: 12.5px; color: var(--muted); line-height: 1.5;
+  padding: 5px 0 5px 18px; position: relative;
+}
+.tier li::before {
+  content: '▸'; position: absolute; left: 0; color: rgba(245,158,11,0.6); font-size: 11px;
+}
+.tier-foot { margin-top: auto; }
+.tier-cta {
+  display: block; text-align: center; font-family: var(--mono);
+  font-size: 12px; letter-spacing: 0.06em; text-decoration: none;
+  padding: 10px; border-radius: 2px; transition: background 0.15s, border-color 0.15s;
+  border: 1px solid rgba(245,158,11,0.25); color: var(--amber);
+}
+.tier-cta:hover { background: rgba(245,158,11,0.08); border-color: rgba(245,158,11,0.5); }
+.tier-cta.solid { background: var(--amber); color: #080b10; border-color: var(--amber); font-weight: 500; }
+.tier-cta.solid:hover { opacity: 0.9; background: var(--amber); }
+.capacity-note {
+  font-family: var(--mono); font-size: 11px; color: var(--label);
+  text-align: center; margin-top: 20px; letter-spacing: 0.04em;
+}
+
 /* ── Responsive ── */
 @media (max-width: 640px) {
+  .tiers { grid-template-columns: 1fr; }
+  .effort-strip { grid-template-columns: 1fr; }
+  .deliv-row { grid-template-columns: 1fr; gap: 6px; }
   .argument-grid { grid-template-columns: 1fr; }
   .audience-grid { grid-template-columns: 1fr; }
   .method-strip { grid-template-columns: 1fr; }
@@ -472,8 +572,8 @@ footer { border-top: 1px solid var(--b0); padding: 28px 0; }
     </div>
     <div class="argument-cell highlight">
       <div class="argument-cell-label">What the sprint delivers</div>
-      <h3>A working process — not another checklist</h3>
-      <p>Five modules. Two weeks. A documented, tested process that your team can operate independently: component inventory that can be queried against CVE feeds, a reporting runbook with pre-authorised decision rights, and a dry run of the exact scenario. Fixed price, defined deliverables, no open billing.</p>
+      <h3>Evidence you can hand to an auditor</h3>
+      <p>Nine controlled documents, written in quality-system format with revision control and approval signatures: the procedure, the component register, the signed delegation, the decision tree, the submission templates, and the dated record that the process was tested. Two weeks, fixed price. Your team sends one file and attends two sessions.</p>
     </div>
     <div class="argument-cell">
       <div class="argument-cell-label">The cost of inaction</div>
@@ -481,6 +581,31 @@ footer { border-top: 1px solid var(--b0); padding: 28px 0; }
       <p>The fine ceiling is €15 million or 2.5% of global annual turnover. But the operational cost lands first: a crisis-mode legal review of a missed 24-hour window, the scramble to reconstruct what components were in which products, the reputational cost of a late or incomplete filing. The sprint costs less than one hour of that review.</p>
     </div>
   </div>
+</section>
+
+<!-- ── What you actually have to do ── -->
+<section class="section container">
+  <div class="section-label">What your team actually has to do</div>
+  <div class="effort-strip">
+    <div class="effort-cell">
+      <span class="effort-icon">01</span>
+      <h3>Send one file</h3>
+      <p>Your dependency manifest, build output, or component list — whatever form it currently exists in. A requirements.txt, a package.json, a Yocto manifest, or a spreadsheet. If you have nothing, that is also an answer, and we start from there.</p>
+    </div>
+    <div class="effort-cell">
+      <span class="effort-icon">02</span>
+      <h3>Two short sessions</h3>
+      <p>One scoping call to map your products, and one working session with the people who would actually handle an incident. Around three hours of your team's time in total across the two weeks.</p>
+    </div>
+    <div class="effort-cell">
+      <span class="effort-icon">03</span>
+      <h3>Review and sign</h3>
+      <p>You receive the finished document pack. Your team reviews it, signs the delegation, and files it in your quality system. From that point the process is yours to operate.</p>
+    </div>
+  </div>
+  <p class="effort-note">
+    You install nothing. You run no tools. There is no software to evaluate, procure, or maintain.
+  </p>
 </section>
 
 <!-- ── Sprint modules ── -->
@@ -553,6 +678,93 @@ footer { border-top: 1px solid var(--b0); padding: 28px 0; }
   </div>
 </section>
 
+<!-- ── Deliverables accordion ── -->
+<section class="section container">
+  <div class="section-label">What you receive · Nine controlled documents</div>
+  <details class="deliverables">
+    <summary>
+      <span class="plus">+</span>
+      <span class="sum-title">The document pack — designed to be filed in your quality system</span>
+      <span class="sum-hint">9 ITEMS</span>
+    </summary>
+    <div class="deliverables-body">
+
+      <div class="deliv-row">
+        <div class="deliv-code">D1</div>
+        <div class="deliv-body">
+          <h4>Readiness Assessment Report</h4>
+          <p>Dated baseline: what components you ship, which carry known vulnerabilities, which are confirmed as actively exploited, and where the gaps sit against Article 14. This is the document that establishes your starting position on a specific date.</p>
+        </div>
+      </div>
+
+      <div class="deliv-row">
+        <div class="deliv-code">D2</div>
+        <div class="deliv-body">
+          <h4>Component Inventory Register</h4>
+          <p>Your SBOM, formalised into a machine-readable register that can be queried against vulnerability feeds — plus the written procedure for keeping it current on every release. Covers firmware, embedded software, and bundled third-party components.</p>
+        </div>
+      </div>
+
+      <div class="deliv-row">
+        <div class="deliv-code">D3</div>
+        <div class="deliv-body">
+          <h4>SOP-CRA-01 — Vulnerability Monitoring and Reporting Procedure</h4>
+          <p>The core procedure, written in standard quality-system format with document control, revision history, and approval signatures. Defines the awareness trigger, the monitoring inputs, the triage decision, and the full reporting cascade. Ready to approve and issue under your existing QMS.</p>
+        </div>
+      </div>
+
+      <div class="deliv-row">
+        <div class="deliv-code">D4</div>
+        <div class="deliv-body">
+          <h4>Authority Matrix and Designated Reporter Appointment</h4>
+          <p>A signable delegation naming who may submit an ENISA notification without further approval, with the limits of that authority stated explicitly. This is the document that evidences "without undue delay" — and the one most companies discover they are missing.</p>
+        </div>
+      </div>
+
+      <div class="deliv-row">
+        <div class="deliv-code">D5</div>
+        <div class="deliv-body">
+          <h4>Incident Decision Tree</h4>
+          <p>One page, three questions, designed to be printed and put on a wall. Is the component in a marketed product? Is it actively exploited? Is it reachable as shipped? The judgment call at 2am, reduced to something a tired engineer can follow correctly.</p>
+        </div>
+      </div>
+
+      <div class="deliv-row">
+        <div class="deliv-code">D6</div>
+        <div class="deliv-body">
+          <h4>ENISA SRP Submission Templates</h4>
+          <p>Three pre-structured templates matching the 24-hour early warning, the 72-hour notification, and the 14-day final report. Fields for your product identifiers and version ranges are pre-filled from the Component Inventory, so the reporter is completing a form rather than composing one.</p>
+        </div>
+      </div>
+
+      <div class="deliv-row">
+        <div class="deliv-code">D7</div>
+        <div class="deliv-body">
+          <h4>Tabletop Exercise Record</h4>
+          <p>Dated evidence that the procedure was tested with the people who would actually run it, including the gaps the exercise surfaced and how they were closed. A Market Surveillance Authority asking whether your process works will accept a tested procedure; an untested one invites the next question.</p>
+        </div>
+      </div>
+
+      <div class="deliv-row">
+        <div class="deliv-code">D8</div>
+        <div class="deliv-body">
+          <h4>Technical File Annex</h4>
+          <p>A drop-in section for your CRA technical documentation describing your vulnerability handling process, formatted to sit alongside your existing CE marking evidence. Written so it can be included without rewriting.</p>
+        </div>
+      </div>
+
+      <div class="deliv-row">
+        <div class="deliv-code">D9</div>
+        <div class="deliv-body">
+          <h4>Monitoring Evidence Log</h4>
+          <p>The running record of every monitoring run, every finding, and every assessment decision. Article 14 obliges you to report what you become aware of — this log is how you demonstrate that you had the capability to become aware in the first place.</p>
+        </div>
+      </div>
+
+    </div>
+  </details>
+</section>
+
 <!-- ── How it runs ── -->
 <section class="section container">
   <div class="section-label">How the sprint runs</div>
@@ -620,18 +832,68 @@ footer { border-top: 1px solid var(--b0); padding: 28px 0; }
       <em>Fixed-price sprint · Scope agreed before we start · No open-ended billing · Two weeks to a working process</em>
     </p>
 
-    <div class="cost-callout">
-      <div>
-        <div class="cost-callout-label">Sprint investment</div>
-        <div class="cost-callout-value">From €3,500</div>
-      </div>
-      <p class="cost-callout-note">
-        Fixed price. Scope agreed upfront. Includes all five modules and the tabletop exercise.
-        Final cost depends on the number of distinct product lines in scope.
-        The sprint costs less than one hour of crisis-mode legal review after a missed 24-hour window.
-      </p>
-    </div>
   </div>
+</section>
+
+<!-- ── Tiers ── -->
+<section class="section container">
+  <div class="section-label">Three ways to start</div>
+  <div class="tiers">
+
+    <div class="tier">
+      <div class="tier-tag">Start here</div>
+      <h3>Exposure Snapshot</h3>
+      <div class="tier-price free">Free</div>
+      <div class="tier-price-sub">Within 24 hours · No obligation</div>
+      <ul>
+        <li>Send your dependency manifest or component list</li>
+        <li>We scan it against live vulnerability databases</li>
+        <li>Cross-referenced against the CISA catalogue of confirmed actively exploited vulnerabilities</li>
+        <li>Two-page summary: what you ship, what carries known issues, what would trigger an Article 14 obligation today</li>
+      </ul>
+      <div class="tier-foot">
+        <a href="mailto:giulio.piana@brandcraft.it?subject=CRA%20Exposure%20Snapshot" class="tier-cta">Request a snapshot →</a>
+      </div>
+    </div>
+
+    <div class="tier featured">
+      <div class="tier-tag">Before September 11</div>
+      <h3>Readiness Sprint</h3>
+      <div class="tier-price">€3,900</div>
+      <div class="tier-price-sub">One product line · Two weeks · Fixed scope<br>€6,900 for up to three product lines</div>
+      <ul>
+        <li>All five modules, S1 through S5</li>
+        <li>The full pack of nine controlled documents</li>
+        <li>Procedure and delegation written in your quality-system format, ready to approve</li>
+        <li>Live tabletop exercise with your team</li>
+        <li>Three months of Continuous Coverage included with the three-line option</li>
+      </ul>
+      <div class="tier-foot">
+        <a href="https://calendly.com/giuliopiana" class="tier-cta solid" target="_blank">Book a scoping call →</a>
+      </div>
+    </div>
+
+    <div class="tier">
+      <div class="tier-tag">After the sprint</div>
+      <h3>Continuous Coverage</h3>
+      <div class="tier-price">€290<span style="font-size:13px;color:var(--label);">/mo</span></div>
+      <div class="tier-price-sub">Per product line · €2,900 prepaid annually</div>
+      <ul>
+        <li>Monthly monitoring run against your current inventory</li>
+        <li>Alert within 24 hours if a component you ship is confirmed as actively exploited</li>
+        <li>Dated monthly evidence pack for your audit file</li>
+        <li>Annual procedure review and re-issue</li>
+        <li>Incident support available when a real notification is required</li>
+      </ul>
+      <div class="tier-foot">
+        <a href="https://calendly.com/giuliopiana" class="tier-cta" target="_blank">Discuss coverage →</a>
+      </div>
+    </div>
+
+  </div>
+  <p class="capacity-note">
+    Sprint delivery is one engagement at a time. Capacity before September 11 is limited to six engagements.
+  </p>
 </section>
 
 <!-- ── CTA ── -->
