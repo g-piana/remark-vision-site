@@ -4,13 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>RE:MARK — Percorso di adeguamento CRA Articolo 14 | Segnalazione Vulnerabilità per Produttori EU</title>
-<meta name="description" content="Percorso di adeguamento a scope fisso per produttori di prodotti connessi soggetti all'obbligo di segnalazione vulnerabilità CRA Articolo 14 (11 settembre 2026) e NIS2 (1 ottobre 2026 in Italia). Audit SBOM, tracciabilità CVE, runbook di segnalazione 24 ore, designated reporter, tabletop exercise.">
+<title>RE:MARK — CRA Articolo 14 Adeguamento | Segnalazione vulnerabilità per produttori UE</title>
+<meta name="description" content="Percorso di adeguamento a scope fisso per produttori di prodotti connessi soggetti all'obbligo di segnalazione vulnerabilità CRA Articolo 14 (11 settembre 2026) e NIS2 (1° ottobre 2026 in Italia). Setup del processo + monitoraggio continuo giornaliero.">
 
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://remark-vision.com/it/cra-readiness/">
-<meta property="og:title" content="CRA Articolo 14 — Percorso di adeguamento">
-<meta property="og:description" content="Dall'11 settembre 2026 hai 24 ore per segnalare una vulnerabilità a ENISA. Due settimane per un processo documentato e verificabile.">
+<meta property="og:title" content="CRA Articolo 14 — Monitoraggio Continuo">
+<meta property="og:description" content="24 ore per segnalare una vulnerabilità a ENISA, dall'11 settembre 2026. Noi costruiamo il processo e monitoriamo i tuoi componenti ogni giorno.">
 <meta property="og:image" content="https://remark-vision.com/img/og-cra-it.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -18,8 +18,8 @@
 <meta property="og:locale:alternate" content="en_GB">
 <meta property="og:site_name" content="RE:MARK">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Percorso di adeguamento CRA Articolo 14">
-<meta name="twitter:description" content="Dall'11 settembre 2026 hai 24 ore per segnalare una vulnerabilità a ENISA. Due settimane per un processo documentato.">
+<meta name="twitter:title" content="CRA Articolo 14 — Monitoraggio Continuo">
+<meta name="twitter:description" content="24 ore per segnalare una vulnerabilità a ENISA, dall'11 settembre 2026. Noi costruiamo il processo e monitoriamo ogni giorno.">
 <meta name="twitter:image" content="https://remark-vision.com/img/og-cra-it.png">
 
 <link rel="canonical" href="https://remark-vision.com/it/cra-readiness/">
@@ -27,8 +27,8 @@
 <link rel="icon" type="image/png" sizes="512x512" href="/favicon-512.png">
 <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
 <link rel="shortcut icon" href="/favicon.ico">
-<link rel="alternate" hreflang="en" href="https://remark-vision.com/en/cra-readiness/">
 <link rel="alternate" hreflang="it" href="https://remark-vision.com/it/cra-readiness/">
+<link rel="alternate" hreflang="en" href="https://remark-vision.com/en/cra-readiness/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
@@ -36,20 +36,19 @@
 {
   "@context": "https://schema.org",
   "@type": "Service",
-  "name": "Percorso di adeguamento CRA Articolo 14",
+  "name": "CRA Articolo 14 — Setup e Monitoraggio Continuo",
   "provider": {
     "@type": "Person",
     "name": "Giulio Piana",
     "jobTitle": "Founder and Principal, RE:MARK",
     "sameAs": "https://www.linkedin.com/in/giuliopiana/",
-    "description": "PhD Fisica (CERN/INFN) · 15 anni in settori regolamentati · AI Industriale e Cybersecurity",
+    "description": "PhD Physics (CERN/INFN) · 15 anni in industrie regolamentate · AI industriale e cybersecurity",
     "url": "https://remark-vision.com"
   },
-  "areaServed": "IT",
-  "description": "Percorso di adeguamento a scope fisso per produttori di prodotti con elementi digitali soggetti all'obbligo di segnalazione vulnerabilità CRA Articolo 14 (11 settembre 2026) e NIS2 (1 ottobre 2026 Italia). Audit SBOM, tracciabilità CVE→prodotto, runbook di segnalazione 24 ore, designated reporter, tabletop exercise dello scenario alle 2 di notte.",
-  "serviceType": "CRA Compliance Readiness",
-  "url": "https://remark-vision.com/it/cra-readiness/",
-  "inLanguage": "it"
+  "areaServed": "EU",
+  "description": "Setup del processo di segnalazione vulnerabilità CRA Articolo 14 e monitoraggio continuo giornaliero dei componenti per produttori di prodotti con elementi digitali. Include audit SBOM, runbook 24 ore, delega designated reporter, tabletop exercise, e monitoraggio automatico giornaliero con alert immediato su KEV.",
+  "serviceType": "CRA Compliance — Setup e Monitoraggio",
+  "url": "https://remark-vision.com/it/cra-readiness/"
 }
 </script>
 
@@ -90,6 +89,7 @@ body {
 
 .container { max-width: 960px; margin: 0 auto; padding: 0 24px; }
 
+/* ── Header ── */
 header {
   border-bottom: 1px solid var(--b0);
   background: rgba(8,11,16,0.92);
@@ -115,6 +115,7 @@ header {
 }
 .header-cta:hover { background: rgba(245,158,11,0.08); border-color: rgba(245,158,11,0.5); }
 
+/* ── Hero ── */
 .hero { padding: 80px 0 64px; text-align: center; }
 .hero-eyebrow {
   font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em;
@@ -126,17 +127,18 @@ header {
 }
 .hero h1 {
   font-size: clamp(26px, 3.6vw, 44px); font-weight: 500; line-height: 1.15;
-  letter-spacing: -0.025em; color: var(--ink); max-width: 720px; margin: 0 auto 10px;
+  letter-spacing: -0.025em; color: var(--ink); max-width: 700px; margin: 0 auto 10px;
 }
 .hero h1 em { font-style: normal; color: var(--amber); }
 .hero-thesis {
   font-size: clamp(14px, 1.6vw, 17px); color: var(--muted);
-  max-width: 580px; margin: 0 auto 40px; line-height: 1.7;
+  max-width: 560px; margin: 0 auto 40px; line-height: 1.7;
 }
 
+/* ── Deadline counter ── */
 .deadline-block {
   display: flex; gap: 0; flex-wrap: wrap; justify-content: center;
-  margin: 0 auto 44px; max-width: 760px;
+  margin: 0 auto 44px; max-width: 720px;
   background: var(--s1); border: 1px solid var(--b1); border-radius: 3px;
   border-top: 2px solid rgba(239,68,68,0.6); overflow: hidden;
 }
@@ -150,9 +152,9 @@ header {
   color: var(--fail); letter-spacing: -0.02em; line-height: 1; display: block; margin-bottom: 4px;
 }
 .deadline-value.amber { color: var(--amber); }
-.deadline-value.warn { color: #f97316; }
 .deadline-label { font-size: 11px; color: var(--label); line-height: 1.4; }
 
+/* ── CTA buttons ── */
 .btn-primary {
   display: inline-flex; align-items: center; gap: 8px;
   background: var(--amber); color: #080b10; font-family: var(--sans);
@@ -160,14 +162,24 @@ header {
   padding: 14px 28px; border-radius: 2px; transition: opacity 0.15s;
 }
 .btn-primary:hover { opacity: 0.9; }
+.btn-secondary {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 13px; font-weight: 500; color: var(--amber);
+  text-decoration: none; border: 1px solid rgba(245,158,11,0.25);
+  padding: 8px 16px; border-radius: 2px; transition: background 0.15s, border-color 0.15s;
+  font-family: var(--mono); letter-spacing: 0.04em;
+}
+.btn-secondary:hover { background: rgba(245,158,11,0.07); border-color: rgba(245,158,11,0.4); }
 .btn-note { font-size: 12px; color: var(--label); margin-top: 10px; display: block; }
 
+/* ── Sections ── */
 .section { margin-bottom: 72px; }
 .section-label {
   font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase;
   color: var(--label); margin-bottom: 32px; padding-bottom: 12px; border-bottom: 1px solid var(--b0);
 }
 
+/* ── Credentials strip ── */
 .credentials-strip {
   display: flex; align-items: center; justify-content: center;
   gap: 0; flex-wrap: wrap;
@@ -177,6 +189,7 @@ header {
 .cred-item { font-family: var(--mono); font-size: 11px; color: var(--label); letter-spacing: 0.08em; text-transform: uppercase; padding: 0 18px; }
 .cred-sep { color: var(--b1); font-size: 14px; }
 
+/* ── Cascade timeline SVG ── */
 .timeline-wrapper {
   background: var(--s1); border: 1px solid var(--b1); border-radius: 3px;
   padding: 36px 40px; margin-bottom: 16px; overflow-x: auto;
@@ -186,7 +199,7 @@ header {
   font-family: var(--mono); letter-spacing: 0.04em;
 }
 
-/* Doppia scadenza IT */
+/* ── Dual deadline (IT only) ── */
 .dual-deadline {
   display: grid; grid-template-columns: 1fr 1fr; gap: 2px;
   background: var(--b0); border: 1px solid var(--b1); border-radius: 3px;
@@ -208,6 +221,7 @@ header {
 .dual-cell .date-big.cra { color: var(--fail); }
 .dual-cell .date-big.nis2 { color: #f97316; }
 
+/* ── Argument grid ── */
 .argument-grid {
   display: grid; grid-template-columns: 1fr 1fr; gap: 2px;
   background: var(--b0); border: 1px solid var(--b1); border-radius: 3px; overflow: hidden;
@@ -217,11 +231,12 @@ header {
   font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em;
   text-transform: uppercase; color: var(--label); margin-bottom: 12px;
 }
-.argument-cell h3 { font-size: 15px; font-weight: 500; color: var(--ink); margin-bottom: 8px; }
+.argument-cell h3 { font-size: 15px; font-weight: 500; color: var(--ink); margin-bottom: 8px; letter-spacing: -0.01em; }
 .argument-cell p { font-size: 13px; color: var(--muted); line-height: 1.65; }
 .argument-cell.highlight { background: var(--s2); border-left: 2px solid var(--amber); }
 .argument-cell.highlight h3 { color: var(--amber); }
 
+/* ── Modules ── */
 .modules {
   display: flex; flex-direction: column; gap: 2px;
   background: var(--b0); border: 1px solid var(--b1); border-radius: 3px; overflow: hidden;
@@ -245,6 +260,7 @@ header {
 .module-tag.reg { color: rgba(245,158,11,0.7); border-color: rgba(245,158,11,0.2); }
 .module-tag.out { color: rgba(34,197,94,0.7); border-color: rgba(34,197,94,0.2); }
 
+/* ── Who it's for ── */
 .audience-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .audience-card {
   background: var(--s1); border: 1px solid var(--b1); border-radius: 3px; padding: 24px 28px;
@@ -256,6 +272,7 @@ header {
 .audience-card h3 { font-size: 14px; font-weight: 500; color: var(--ink); margin-bottom: 8px; }
 .audience-card p { font-size: 13px; color: var(--muted); line-height: 1.6; }
 
+/* ── How it works ── */
 .method-strip {
   display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
   background: var(--b0); border: 1px solid var(--b1); border-radius: 3px; overflow: hidden;
@@ -268,6 +285,7 @@ header {
 .method-step h3 { font-size: 14px; font-weight: 500; color: var(--ink); margin-bottom: 6px; }
 .method-step p { font-size: 12px; color: var(--muted); line-height: 1.6; }
 
+/* ── Differentiator ── */
 .diff-block {
   background: var(--s1); border: 1px solid var(--b1); border-radius: 3px;
   padding: 36px 40px; position: relative; overflow: hidden;
@@ -280,6 +298,7 @@ header {
 .diff-block strong { color: var(--ink); font-weight: 500; }
 .diff-block em { font-style: normal; color: var(--label); font-size: 13px; }
 
+/* ── Cost callout ── */
 .cost-callout {
   background: rgba(245,158,11,0.04); border: 1px solid rgba(245,158,11,0.18);
   border-radius: 3px; padding: 20px 28px; margin-top: 24px;
@@ -289,6 +308,7 @@ header {
 .cost-callout-value { font-family: var(--mono); font-size: 22px; font-weight: 500; color: var(--amber); }
 .cost-callout-note { font-size: 13px; color: var(--muted); flex: 1; }
 
+/* ── CTA ── */
 .cta-section {
   background: var(--s1); border: 1px solid var(--b1); border-radius: 3px;
   padding: 48px 52px; text-align: center; position: relative; overflow: hidden;
@@ -306,6 +326,7 @@ header {
 .contact-email { font-size: 13px; color: var(--amber); text-decoration: none; font-family: var(--mono); }
 .contact-email:hover { text-decoration: underline; }
 
+/* ── Footer ── */
 footer { border-top: 1px solid var(--b0); padding: 28px 0; }
 .footer-inner {
   max-width: 960px; margin: 0 auto; padding: 0 24px;
@@ -321,6 +342,7 @@ footer { border-top: 1px solid var(--b0); padding: 28px 0; }
 .footer-copy a { color: var(--label); text-decoration: none; }
 .footer-copy a:hover { color: var(--amber); }
 
+/* ── Lang switcher ── */
 .lang-switch {
   font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em;
   color: var(--label); text-decoration: none; border: 1px solid var(--b1);
@@ -425,11 +447,15 @@ footer { border-top: 1px solid var(--b0); padding: 28px 0; }
   text-align: center; margin-top: 20px; letter-spacing: 0.04em;
 }
 
+/* ── Responsive ── */
 @media (max-width: 640px) {
   .tiers { grid-template-columns: 1fr; }
   .effort-strip { grid-template-columns: 1fr; }
   .deliv-row { grid-template-columns: 1fr; gap: 6px; }
-  .argument-grid, .audience-grid, .method-strip, .dual-deadline { grid-template-columns: 1fr; }
+  .argument-grid { grid-template-columns: 1fr; }
+  .audience-grid { grid-template-columns: 1fr; }
+  .method-strip { grid-template-columns: 1fr; }
+  .dual-deadline { grid-template-columns: 1fr; }
   .hero { padding: 52px 0 40px; }
   .cta-section { padding: 32px 24px; }
   .diff-block { padding: 28px 24px; }
@@ -452,11 +478,11 @@ footer { border-top: 1px solid var(--b0); padding: 28px 0; }
       <span class="logo-name">RE<span>:</span>MARK</span>
     </a>
     <nav class="header-nav">
-      <a href="/en/">Due Diligence</a>
-      <a href="/en/samd-validation/">SaMD Validation</a>
-      <a href="/it/cra-readiness/" class="active">CRA Readiness</a>
+      <a href="/it/">Due Diligence</a>
+      <a href="/it/samd-validation/">SaMD Validation</a>
+      <a href="/it/cra-readiness/" class="active">CRA Adeguamento</a>
       <a href="/en/cra-readiness/" class="lang-switch">EN</a>
-      <a href="https://calendly.com/giuliopiana" class="header-cta" target="_blank">Prenota una call</a>
+      <a href="https://calendly.com/giuliopiana" class="header-cta" target="_blank">Prenota</a>
     </nav>
   </div>
 </header>
@@ -464,50 +490,47 @@ footer { border-top: 1px solid var(--b0); padding: 28px 0; }
 <!-- ── Hero ── -->
 <section class="hero container">
   <div class="hero-eyebrow">CRA · Articolo 14 · 11 Settembre 2026</div>
-  <h1>11 settembre. <em>Ventiquattro ore per segnalare.</em><br>Sai in quali dei tuoi prodotti si trova il componente vulnerabile?</h1>
+  <h1>11 settembre. <em>Ventiquattro ore.</em><br>Noi monitoriamo i tuoi componenti.<br>Tu pensi al tuo prodotto.</h1>
   <p class="hero-thesis">
-    Dall'11 settembre 2026, quando una vulnerabilità in un componente software che utilizzi
-    viene sfruttata da un attaccante, hai 24 ore per segnalarlo a ENISA, l'agenzia europea
-    per la cybersicurezza. Il tempo decorre da quando ne vieni a conoscenza, non da quando
-    lo confermi internamente. Oggi la maggior parte dei produttori non riuscirebbe a
-    rispondere in tempo, per un motivo semplice: nessuno ha mai mappato quali componenti
-    finiscono in quali prodotti.
-    Possiamo aiutare a costruire quel processo con un percorso strutturato di due settimane — prima della scadenza, non dopo la prima sanzione.<br>
+    Dall'11 settembre, i produttori di prodotti connessi devono segnalare a ENISA le vulnerabilità
+    attivamente sfruttate entro 24 ore dal momento in cui ne diventano consapevoli.
     Per i produttori italiani: il NIS2 entra in vigore il 1° ottobre con la stessa cascata di segnalazione.
+    Noi costruiamo il processo, poi monitoriamo ogni giorno — così la prima volta che ricevi un alert,
+    hai già tutto per rispondere.
   </p>
 
   <div class="deadline-block">
     <div class="deadline-item">
       <span class="deadline-value">11 Set</span>
-      <span class="deadline-label">CRA Art. 14 — obbligo di segnalazione vulnerabilità attivamente sfruttate</span>
+      <span class="deadline-label">CRA Articolo 14 — obbligo di segnalazione vulnerabilità</span>
     </div>
     <div class="deadline-item">
       <span class="deadline-value">24 h</span>
-      <span class="deadline-label">Early warning a ENISA dal momento in cui diventi consapevole</span>
+      <span class="deadline-label">Early warning a ENISA dal momento di consapevolezza</span>
     </div>
     <div class="deadline-item">
-      <span class="deadline-value warn">1 Ott</span>
+      <span class="deadline-value">€15 M</span>
+      <span class="deadline-label">O il 2,5% del fatturato globale — il maggiore tra i due</span>
+    </div>
+    <div class="deadline-item">
+      <span class="deadline-value" style="color:#f97316;">1 Ott</span>
       <span class="deadline-label">NIS2 in vigore in Italia — stessa struttura di segnalazione</span>
-    </div>
-    <div class="deadline-item">
-      <span class="deadline-value amber">€15 M</span>
-      <span class="deadline-label">O il 2,5% del fatturato globale — la cifra più alta</span>
     </div>
   </div>
 
-  <a href="https://calendly.com/giuliopiana" class="btn-primary" target="_blank">Prenota una call di scoping →</a>
-  <span class="btn-note">30 minuti · Nessun impegno · Risposta onesta anche se il percorso non è la soluzione giusta</span>
+  <a href="https://calendly.com/giuliopiana" class="btn-primary" target="_blank">Prenota una call →</a>
+  <span class="btn-note">30 minuti · Nessun impegno · Risposta onesta anche se non è il servizio giusto per te</span>
 </section>
 
 <!-- ── Credentials ── -->
 <div class="credentials-strip container">
   <span class="cred-item">PhD Fisica · CERN</span>
   <span class="cred-sep">·</span>
-  <span class="cred-item">15 anni in settori regolamentati</span>
+  <span class="cred-item">15 anni Industrie Regolamentate</span>
   <span class="cred-sep">·</span>
   <span class="cred-item">AI Industriale & Cybersecurity</span>
   <span class="cred-sep">·</span>
-  <span class="cred-item">Regulatory EU</span>
+  <span class="cred-item">Normativa UE</span>
   <span class="cred-sep">·</span>
   <span class="cred-item">RE:MARK · Milano</span>
 </div>
@@ -520,7 +543,7 @@ footer { border-top: 1px solid var(--b0); padding: 28px 0; }
       <div class="dual-cell-tag cra">Cyber Resilience Act · Art. 14</div>
       <span class="date-big cra">11 Set 2026</span>
       <h3>Segnalazione vulnerabilità a ENISA</h3>
-      <p>I produttori di prodotti con elementi digitali — IoT, controller industriali, edge gateway, firmware, software standalone, componentistica robotica — devono segnalare le vulnerabilità attivamente sfruttate entro 24 ore da quando ne diventano consapevoli. L'obbligo vale per tutti i prodotti già sul mercato UE, non solo per quelli nuovi.</p>
+      <p>I produttori di prodotti con elementi digitali — IoT, controller industriali, edge gateway, firmware, software standalone — devono segnalare le vulnerabilità attivamente sfruttate entro 24 ore da quando ne diventano consapevoli. L'obbligo vale per tutti i prodotti già sul mercato UE, non solo per quelli nuovi.</p>
     </div>
     <div class="dual-cell">
       <div class="dual-cell-tag nis2">NIS2 · Italia · D.Lgs. di recepimento</div>
@@ -540,329 +563,189 @@ footer { border-top: 1px solid var(--b0); padding: 28px 0; }
   <div class="timeline-wrapper">
     <svg viewBox="0 0 920 240" xmlns="http://www.w3.org/2000/svg" style="width:100%;min-width:600px;">
       <defs>
-        <marker id="arr2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+        <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
           <path d="M0,0 L0,6 L8,3 z" fill="rgba(245,158,11,0.5)"/>
         </marker>
       </defs>
-
       <circle cx="56" cy="120" r="6" fill="#ef4444" opacity="0.9"/>
-      <text x="56" y="100" font-family="'JetBrains Mono',monospace" font-size="12" font-weight="500" fill="#ef4444" text-anchor="middle" letter-spacing="0.06em">CVE</text>
+      <text x="56" y="100" font-family="'JetBrains Mono',monospace" font-size="12" font-weight="500" fill="#ef4444" text-anchor="middle" letter-spacing="0.06em">CVE HIT</text>
       <text x="56" y="152" font-family="'JetBrains Mono',monospace" font-size="11" fill="rgba(232,237,245,0.45)" text-anchor="middle">t = 0</text>
-
-      <line x1="70" y1="120" x2="108" y2="120" stroke="rgba(245,158,11,0.4)" stroke-width="1.5" marker-end="url(#arr2)"/>
-
+      <line x1="70" y1="120" x2="108" y2="120" stroke="rgba(245,158,11,0.4)" stroke-width="1.5" marker-end="url(#arr)"/>
       <rect x="114" y="88" width="174" height="64" rx="3" fill="rgba(239,68,68,0.09)" stroke="rgba(239,68,68,0.4)" stroke-width="1"/>
-      <text x="201" y="110" font-family="'JetBrains Mono',monospace" font-size="11" font-weight="500" fill="#e8edf5" text-anchor="middle" letter-spacing="0.05em">EARLY WARNING</text>
+      <text x="201" y="110" font-family="'JetBrains Mono',monospace" font-size="11" font-weight="500" fill="#e8edf5" text-anchor="middle" letter-spacing="0.06em">EARLY WARNING</text>
       <text x="201" y="128" font-family="'JetBrains Mono',monospace" font-size="11" fill="rgba(168,179,196,0.7)" text-anchor="middle">ENISA + CSIRT-IT</text>
       <text x="201" y="172" font-family="'JetBrains Mono',monospace" font-size="13" font-weight="500" fill="#ef4444" text-anchor="middle">24 ORE</text>
-
-      <line x1="294" y1="120" x2="332" y2="120" stroke="rgba(245,158,11,0.4)" stroke-width="1.5" marker-end="url(#arr2)"/>
-
+      <line x1="294" y1="120" x2="332" y2="120" stroke="rgba(245,158,11,0.4)" stroke-width="1.5" marker-end="url(#arr)"/>
       <rect x="338" y="88" width="196" height="64" rx="3" fill="rgba(245,158,11,0.06)" stroke="rgba(245,158,11,0.28)" stroke-width="1"/>
       <text x="436" y="110" font-family="'JetBrains Mono',monospace" font-size="11" font-weight="500" fill="#e8edf5" text-anchor="middle" letter-spacing="0.04em">NOTIFICA VULNERABILITÀ</text>
-      <text x="436" y="128" font-family="'JetBrains Mono',monospace" font-size="11" fill="rgba(168,179,196,0.7)" text-anchor="middle">portata · gravità · mitigazione</text>
+      <text x="436" y="128" font-family="'JetBrains Mono',monospace" font-size="11" fill="rgba(168,179,196,0.7)" text-anchor="middle">scope · severity · mitigazione</text>
       <text x="436" y="172" font-family="'JetBrains Mono',monospace" font-size="13" font-weight="500" fill="rgba(245,158,11,0.8)" text-anchor="middle">72 ORE</text>
-
-      <line x1="540" y1="120" x2="578" y2="120" stroke="rgba(245,158,11,0.4)" stroke-width="1.5" marker-end="url(#arr2)"/>
-
+      <line x1="540" y1="120" x2="578" y2="120" stroke="rgba(245,158,11,0.4)" stroke-width="1.5" marker-end="url(#arr)"/>
       <rect x="584" y="88" width="196" height="64" rx="3" fill="rgba(59,130,246,0.06)" stroke="rgba(59,130,246,0.28)" stroke-width="1"/>
-      <text x="682" y="110" font-family="'JetBrains Mono',monospace" font-size="11" font-weight="500" fill="#e8edf5" text-anchor="middle" letter-spacing="0.04em">RELAZIONE FINALE</text>
-      <text x="682" y="128" font-family="'JetBrains Mono',monospace" font-size="11" fill="rgba(168,179,196,0.7)" text-anchor="middle">causa · fix · patch</text>
-      <text x="682" y="172" font-family="'JetBrains Mono',monospace" font-size="13" font-weight="500" fill="rgba(59,130,246,0.7)" text-anchor="middle">14 GIORNI DAL FIX</text>
-
-      <line x1="786" y1="120" x2="840" y2="120" stroke="rgba(245,158,11,0.4)" stroke-width="1.5" marker-end="url(#arr2)"/>
-
+      <text x="682" y="110" font-family="'JetBrains Mono',monospace" font-size="11" font-weight="500" fill="#e8edf5" text-anchor="middle" letter-spacing="0.04em">REPORT FINALE</text>
+      <text x="682" y="128" font-family="'JetBrains Mono',monospace" font-size="11" fill="rgba(168,179,196,0.7)" text-anchor="middle">root cause · fix · patch</text>
+      <text x="682" y="172" font-family="'JetBrains Mono',monospace" font-size="13" font-weight="500" fill="rgba(59,130,246,0.7)" text-anchor="middle">14 GIORNI DALLA FIX</text>
+      <line x1="786" y1="120" x2="840" y2="120" stroke="rgba(245,158,11,0.4)" stroke-width="1.5" marker-end="url(#arr)"/>
       <circle cx="862" cy="120" r="6" fill="#f59e0b" opacity="0.9"/>
       <text x="862" y="100" font-family="'JetBrains Mono',monospace" font-size="12" font-weight="500" fill="#f59e0b" text-anchor="middle" letter-spacing="0.04em">€15 M</text>
       <text x="862" y="152" font-family="'JetBrains Mono',monospace" font-size="11" fill="rgba(232,237,245,0.45)" text-anchor="middle">se mancata</text>
-
       <line x1="56" y1="210" x2="862" y2="210" stroke="rgba(255,255,255,0.05)" stroke-width="1" stroke-dasharray="4,4"/>
-      <text x="459" y="234" font-family="'JetBrains Mono',monospace" font-size="11" font-weight="500" fill="rgba(232,237,245,0.35)" text-anchor="middle" letter-spacing="0.06em">IL CLOCK PARTE DALLA CONSAPEVOLEZZA · NON DALLA CONFERMA · SCORRE NEI WEEKEND</text>
+      <text x="459" y="234" font-family="'JetBrains Mono',monospace" font-size="11" font-weight="500" fill="rgba(232,237,245,0.35)" text-anchor="middle" letter-spacing="0.08em">IL CLOCK PARTE ALLA CONSAPEVOLEZZA · NON ALLA CONFERMA · CORRE NEI WEEKEND</text>
     </svg>
     <p class="timeline-caption">
-      Art. 14 CRA — obbligatorio dall'11 settembre 2026. Un CVE è l'identificativo pubblico assegnato a una vulnerabilità quando viene resa nota. La finestra di 24 ore inizia nel momento in cui vieni a conoscenza dello sfruttamento attivo — indipendentemente da una conferma interna.
+      Articolo 14 CRA — obbligatorio dall'11 settembre 2026. La finestra di 24 ore parte dal momento in cui diventi consapevole dello sfruttamento attivo — indipendentemente dalla conferma interna.
     </p>
   </div>
 </section>
 
-<!-- ── The gap argument ── -->
+<!-- ── Il vero problema ── -->
 <section class="section container">
-  <div class="section-label">Perché il tuo SBOM non soddisfa l'Articolo 14</div>
+  <div class="section-label">L'obbligo per cui la maggior parte dei produttori non è pronta</div>
   <div class="argument-grid">
     <div class="argument-cell">
-      <div class="argument-cell-label">Cosa assumono le aziende</div>
-      <h3>"Abbiamo una lista dei componenti — siamo a posto"</h3>
-      <p>Un file SBOM è il punto di partenza, non il traguardo. L'Art. 14 richiede che tu possa interrogare il tuo SBOM in tempo reale contro i feed di vulnerabilità, determinare quali prodotti e versioni sono coinvolti, valutare se lo sfruttamento è attivo, e inviare la notifica a ENISA — il tutto entro 24 ore. Un foglio Excel o un file statico non possono farlo alle 2 di notte di un venerdì.</p>
+      <div class="argument-cell-label">Cosa pensano le aziende</div>
+      <h3>"Abbiamo una lista componenti — siamo a posto"</h3>
+      <p>Un file SBOM è il punto di partenza, non di arrivo. L'Articolo 14 richiede che tu possa interrogare il tuo SBOM contro feed di vulnerabilità in tempo reale, determinare quali prodotti sono coinvolti, verificare se c'è sfruttamento attivo, e segnalare a ENISA — tutto entro 24 ore. Un foglio Excel non può farlo alle 2 di notte di venerdì.</p>
     </div>
     <div class="argument-cell">
-      <div class="argument-cell-label">Cosa richiede effettivamente l'Art. 14</div>
-      <h3>"Diventare consapevole" fa scattare il clock — il monitoraggio non è opzionale</h3>
-      <p>Il regolamento è esplicito: "diventare consapevole" è una soglia bassa. Un'autorità di sorveglianza del mercato chiederà quale processo di monitoraggio era in atto. "Non avevamo un processo" non è una risposta conforme — è la prova che non potevi diventare consapevole, il che è di per sé una violazione.</p>
+      <div class="argument-cell-label">Cosa richiede realmente l'Articolo 14</div>
+      <h3>La consapevolezza fa scattare il clock — il monitoraggio non è opzionale</h3>
+      <p>Il regolamento è esplicito: "diventa consapevole" è una soglia bassa. Un'autorità di vigilanza del mercato chiederà quale processo di monitoraggio fosse in atto. "Non avevamo un processo" non è una risposta conforme — è la prova che non potevi diventare consapevole, il che è di per sé una violazione.</p>
     </div>
     <div class="argument-cell highlight">
-      <div class="argument-cell-label">Cosa produce il percorso</div>
-      <h3>Evidenza che puoi consegnare a un auditor</h3>
-      <p>Nove documenti controllati, redatti nel formato del sistema qualità con controllo delle revisioni e firme di approvazione: la procedura, il registro dei componenti, la delega firmata, l'albero decisionale, i template di segnalazione, e la registrazione datata che il processo è stato testato. Due settimane, prezzo fisso. Il tuo team invia un file e partecipa a due sessioni.</p>
+      <div class="argument-cell-label">Cosa facciamo noi</div>
+      <h3>Costruiamo il processo, poi facciamo la guardia</h3>
+      <p>Due settimane per costruire un processo documentato e testato — con delega firmata, catena di escalation e template ENISA precompilati. Poi continuiamo a monitorare: scansione automatica giornaliera del tuo inventario componenti, alert immediato sulle vulnerabilità attivamente sfruttate, evidenza datata per il tuo fascicolo di audit. Tu sei proprietario del processo. Noi operiamo la sorveglianza.</p>
     </div>
     <div class="argument-cell">
       <div class="argument-cell-label">Il costo dell'inazione</div>
-      <h3>Una scadenza mancata costa più di cento percorsi come questo</h3>
-      <p>Il tetto delle sanzioni è €15 milioni o il 2,5% del fatturato globale. Ma il costo operativo arriva prima: una revisione legale in modalità crisi per una finestra di 24 ore mancata, la ricostruzione di emergenza di quali componenti erano in quali prodotti, il costo reputazionale di una segnalazione tardiva o incompleta. Il percorso costa meno di un'ora di quella revisione.</p>
+      <h3>Una scadenza mancata costa più di cento engagement come questo</h3>
+      <p>Il tetto sanzionatorio è €15 milioni o il 2,5% del fatturato globale annuo. Ma il costo operativo arriva prima: una revisione legale d'emergenza per una finestra di 24 ore mancata, la corsa a ricostruire quali componenti fossero in quali prodotti, il danno reputazionale di una segnalazione tardiva. Questo servizio costa meno di un'ora di quella revisione.</p>
     </div>
   </div>
 </section>
 
-<!-- ── Cosa deve fare il team ── -->
+<!-- ── Cosa fa il monitoraggio ── -->
 <section class="section container">
-  <div class="section-label">Cosa deve fare concretamente il tuo team</div>
+  <div class="section-label">Cosa succede ogni giorno</div>
   <div class="effort-strip">
     <div class="effort-cell">
-      <span class="effort-icon">01</span>
-      <h3>Inviare un file</h3>
-      <p>Il manifest delle dipendenze, l'output della build, o l'elenco dei componenti — nella forma in cui esiste oggi. Un requirements.txt, un package.json, un manifest Yocto, o un foglio di calcolo. Se non esiste nulla, anche questa è una risposta, e si parte da lì.</p>
+      <span class="effort-icon" style="font-size:16px;">06:00 UTC</span>
+      <h3>Scansione automatica giornaliera</h3>
+      <p>Il tuo inventario componenti viene verificato contro il database vulnerabilità OSV e il catalogo CISA delle vulnerabilità attivamente sfruttate (KEV). Ogni giorno. Nessun intervento umano. I risultati sono archiviati con timestamp per il tuo audit trail.</p>
     </div>
     <div class="effort-cell">
-      <span class="effort-icon">02</span>
-      <h3>Due sessioni brevi</h3>
-      <p>Una call di scoping per mappare i prodotti, e una sessione di lavoro con le persone che gestirebbero davvero un incidente. In totale circa tre ore del tempo del tuo team, distribuite sulle due settimane.</p>
+      <span class="effort-icon" style="font-size:16px;">⚡ KEV hit</span>
+      <h3>Alert immediato</h3>
+      <p>Se un componente che utilizzi è confermato come attivamente sfruttato, il tuo designated reporter riceve un'email entro minuti — non ore, non giorni. L'email specifica il componente, il CVE, quali dei tuoi prodotti sono coinvolti, e cosa fare. Le tue 24 ore partono dal timestamp di quella email.</p>
     </div>
     <div class="effort-cell">
-      <span class="effort-icon">03</span>
-      <h3>Revisionare e firmare</h3>
-      <p>Ricevi il pacchetto documentale completo. Il tuo team lo revisiona, firma la delega, e lo archivia nel sistema qualità. Da quel momento il processo è vostro da operare.</p>
+      <span class="effort-icon" style="font-size:16px;">1°</span>
+      <h3>Pacchetto evidenze mensile</h3>
+      <p>Un report datato che copre ogni scansione, ogni finding e ogni valutazione del mese. Archiviato nella tua cartella condivisa. Quando un'autorità di vigilanza chiede quale monitoraggio fosse in atto, consegni questo.</p>
     </div>
   </div>
   <p class="effort-note">
-    Non installi nulla. Non esegui alcuno strumento. Non c'è software da valutare, acquistare o mantenere.
+    Non installi nulla. Non esegui nessun tool. Il monitoraggio gira che tu sia in ufficio, in ferie o a dormire.
   </p>
 </section>
 
-<!-- ── Moduli ── -->
+<!-- ── Setup: cosa succede nelle prime due settimane ── -->
 <section class="section container">
-  <div class="section-label">Cinque moduli · Un processo funzionante</div>
-  <div class="modules">
-
-    <div class="module">
-      <div class="module-code">S1</div>
-      <div class="module-body">
-        <h3>Audit dello stato SBOM</h3>
-        <p class="module-output">Verifica del tuo inventario componenti attuale: formato (CycloneDX / SPDX / ad hoc), profondità (dipendenze di primo livello vs. transitive), aggiornamento (sincronizzazione con il release corrente), e interrogabilità (riesci a eseguire una ricerca CVE su questo in meno di un'ora?). Identifica il gap tra ciò che hai e ciò che richiede l'Art. 14. Copre firmware, software embedded, applicazioni standalone e dispositivi edge.</p>
-        <div class="module-tags">
-          <span class="module-tag reg">CRA Art. 13 · Obbligo SBOM</span>
-          <span class="module-tag reg">CRA Art. 14 · Prerequisito segnalazione</span>
-          <span class="module-tag out">Output: report gap SBOM + priorità di remediation</span>
-        </div>
-      </div>
+  <div class="section-label">Prima che il monitoraggio parta — due settimane di setup</div>
+  <div class="method-strip">
+    <div class="method-step">
+      <span class="method-step-num">Invii un file</span>
+      <h3>Il tuo manifesto dipendenze</h3>
+      <p>requirements.txt, package-lock.json, un manifesto Yocto, o un foglio di calcolo — in qualunque forma esista. Se non hai nulla, anche quello è una risposta, e partiamo da lì. Noi generiamo un SBOM machine-readable e lanciamo la prima scansione vulnerabilità.</p>
     </div>
-
-    <div class="module">
-      <div class="module-code">S2</div>
-      <div class="module-body">
-        <h3>Verifica tracciabilità CVE→Prodotto</h3>
-        <p class="module-output">Test live della tua capacità attuale di rispondere alla domanda critica: se viene pubblicato un CVE contro un componente che usi, quanto tempo impieghi a determinare quali tuoi prodotti e versioni sono coinvolti? Lo eseguiamo su un CVE reale e attuale su un componente tipico della tua categoria di prodotto. Il tempo-di-determinazione è la metrica. Se supera un'ora, non puoi rispettare la finestra di 24 ore.</p>
-        <div class="module-tags">
-          <span class="module-tag reg">CRA Art. 14 · Early warning 24 ore</span>
-          <span class="module-tag out">Output: benchmark tempo-di-determinazione + raccomandazioni tooling</span>
-        </div>
-      </div>
+    <div class="method-step">
+      <span class="method-step-num">Due brevi sessioni</span>
+      <h3>Mappiamo i prodotti, testiamo il processo</h3>
+      <p>Una call di scoping per mappare i tuoi prodotti connessi e chi gestisce gli incidenti. Una sessione di lavoro per percorrere lo scenario delle 2 di notte dall'inizio alla fine — detection, triage, segnalazione 24 ore. Circa tre ore del tempo del tuo team in due settimane.</p>
     </div>
-
-    <div class="module">
-      <div class="module-code">S3</div>
-      <div class="module-body">
-        <h3>Runbook di segnalazione 24 ore</h3>
-        <p class="module-output">Un processo documentato passo per passo per l'intera cascata Art. 14: trigger di rilevamento → triage interno → early warning 24 ore → notifica 72 ore → relazione finale 14 giorni. Include template pre-compilati per il portale ENISA SRP, percorso di escalation, criteri decisionali per il giudizio "è sfruttamento attivo?", e tracciabilità documentale per audit delle autorità di sorveglianza. Scritto per la persona che lo opererà alle 2 di notte.</p>
-        <div class="module-tags">
-          <span class="module-tag reg">CRA Art. 14 · Cascata completa</span>
-          <span class="module-tag reg">NIS2 Art. 23 · Struttura compatibile</span>
-          <span class="module-tag out">Output: runbook + template portale ENISA SRP</span>
-        </div>
-      </div>
+    <div class="method-step">
+      <span class="method-step-num">Rivedi, firma, si parte</span>
+      <h3>Il monitoraggio va live</h3>
+      <p>Il tuo team rivede il pacchetto documenti, firma la delega del designated reporter e lo archivia nel sistema qualità. Il monitoraggio giornaliero va live. Da quel momento: non fai nulla finché qualcosa non scatta — e quando scatta, tutto è già pronto.</p>
     </div>
-
-    <div class="module">
-      <div class="module-code">S4</div>
-      <div class="module-body">
-        <h3>Designated Reporter — Setup e Delega</h3>
-        <p class="module-output">L'Art. 14 richiede l'early warning "senza indebito ritardo." In pratica questo significa che qualcuno deve avere diritti decisionali pre-autorizzati per valutare e inviare la notifica — senza aspettare l'approvazione del CEO. Definiamo il ruolo, stendiamo la matrice di autorità, documentiamo il percorso di escalation, e assicuriamo che il designated reporter abbia tutto il necessario per agire in autonomia. Questo è un passo organizzativo, non tecnico, ed è quello che la maggior parte delle aziende salta.</p>
-        <div class="module-tags">
-          <span class="module-tag reg">CRA Art. 14 · "Senza indebito ritardo"</span>
-          <span class="module-tag reg">NIS2 Art. 20 · Responsabilità management</span>
-          <span class="module-tag out">Output: matrice di autorità + documentazione del ruolo</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="module">
-      <div class="module-code">S5</div>
-      <div class="module-body">
-        <h3>Tabletop Exercise — Lo scenario delle 2 di notte</h3>
-        <p class="module-output">Una simulazione strutturata dell'intera cascata di segnalazione, condotta con le persone reali che gestirebbero un incidente reale. Scenario: viene pubblicato un CVE critico venerdì sera su un componente nel tuo firmware. Si percorre il processo dall'inizio alla fine — rilevamento, triage, invio dell'early warning in 24 ore, notifica in 72 ore. I gap nel runbook, i diritti decisionali non chiari, e le informazioni mancanti emergono nell'esercizio — non nell'incidente reale. Le organizzazioni che gestiscono bene la segnalazione degli incidenti sono quelle che si sono esercitate prima.</p>
-        <div class="module-tags">
-          <span class="module-tag reg">CRA Art. 14 · Validazione del processo</span>
-          <span class="module-tag out">Output: report dell'esercizio + lista gap da chiudere</span>
-        </div>
-      </div>
-    </div>
-
   </div>
 </section>
 
-<!-- ── Deliverables accordion ── -->
+<!-- ── Documenti (collassati) ── -->
 <section class="section container">
-  <div class="section-label">Cosa ricevi · Nove documenti controllati</div>
   <details class="deliverables">
     <summary>
       <span class="plus">+</span>
-      <span class="sum-title">Il pacchetto documentale — progettato per essere archiviato nel tuo sistema qualità</span>
+      <span class="sum-title">Il pacchetto documenti — nove documenti controllati, da archiviare nel tuo sistema qualità</span>
       <span class="sum-hint">9 DOCUMENTI</span>
     </summary>
     <div class="deliverables-body">
-
       <div class="deliv-row">
         <div class="deliv-code">D1</div>
         <div class="deliv-body">
-          <h4>Report di Valutazione Iniziale</h4>
-          <p>Baseline datata: quali componenti distribuisci, quali presentano vulnerabilità note, quali sono confermate come attivamente sfruttate, e dove sono i gap rispetto all'Articolo 14. È il documento che fissa la tua posizione di partenza a una data precisa.</p>
+          <h4>Report di Valutazione</h4>
+          <p>Baseline datata: quali componenti spedisci, quali portano vulnerabilità note, quali sono confermate come attivamente sfruttate. Stabilisce il punto di partenza a una data specifica.</p>
         </div>
       </div>
-
       <div class="deliv-row">
         <div class="deliv-code">D2</div>
         <div class="deliv-body">
-          <h4>Registro Inventario Componenti</h4>
-          <p>Il tuo SBOM, formalizzato in un registro leggibile da macchina e interrogabile contro i feed di vulnerabilità — più la procedura scritta per mantenerlo aggiornato a ogni release. Copre firmware, software embedded e componenti di terze parti inclusi nel prodotto.</p>
+          <h4>Registro Inventario Componenti (SBOM)</h4>
+          <p>Il tuo SBOM in formato CycloneDX, interrogabile contro i feed di vulnerabilità — più la procedura per mantenerlo aggiornato ad ogni release.</p>
         </div>
       </div>
-
       <div class="deliv-row">
         <div class="deliv-code">D3</div>
         <div class="deliv-body">
           <h4>SOP-CRA-01 — Procedura di Monitoraggio e Segnalazione Vulnerabilità</h4>
-          <p>La procedura centrale, redatta nel formato standard del sistema qualità con controllo documentale, storico revisioni e firme di approvazione. Definisce il trigger di consapevolezza, le fonti di monitoraggio, la decisione di triage e l'intera cascata di segnalazione. Pronta per essere approvata ed emessa nel tuo QMS.</p>
+          <p>La procedura core che definisce i trigger di consapevolezza, gli input di monitoraggio, le decisioni di triage e l'intera cascata di segnalazione. In formato QMS con controllo documenti e firme di approvazione.</p>
         </div>
       </div>
-
       <div class="deliv-row">
         <div class="deliv-code">D4</div>
         <div class="deliv-body">
-          <h4>Matrice di Autorità e Nomina del Designated Reporter</h4>
-          <p>Una delega firmabile che indica chi può inviare una notifica a ENISA senza ulteriori approvazioni, con i limiti di tale autorità dichiarati esplicitamente. È il documento che dimostra il "senza indebito ritardo" — e quello che la maggior parte delle aziende scopre di non avere.</p>
+          <h4>Matrice di Autorità e Nomina Designated Reporter</h4>
+          <p>Delega firmabile che designa chi può sottomettere una notifica ENISA senza ulteriore approvazione, con i limiti dell'autorità esplicitati. Il documento che evidenzia "senza indebito ritardo."</p>
         </div>
       </div>
-
       <div class="deliv-row">
         <div class="deliv-code">D5</div>
         <div class="deliv-body">
-          <h4>Albero Decisionale per l'Incidente</h4>
-          <p>Una pagina, tre domande, pensata per essere stampata e affissa. Il componente è in un prodotto immesso sul mercato? È attivamente sfruttato? È raggiungibile nella configurazione distribuita? Il giudizio delle 2 di notte, ridotto a qualcosa che un ingegnere stanco può seguire correttamente.</p>
+          <h4>Albero Decisionale Incidente</h4>
+          <p>Una pagina, tre domande. Il componente è in un prodotto a mercato? È attivamente sfruttato? È raggiungibile nella configurazione spedita? Fatto per essere stampato e appeso al muro.</p>
         </div>
       </div>
-
       <div class="deliv-row">
         <div class="deliv-code">D6</div>
         <div class="deliv-body">
-          <h4>Template di Segnalazione ENISA SRP</h4>
-          <p>Tre template pre-strutturati corrispondenti all'early warning a 24 ore, alla notifica a 72 ore e alla relazione finale a 14 giorni. I campi relativi a identificativi di prodotto e range di versioni sono pre-compilati dal Registro Componenti: chi segnala compila un modulo, non lo redige da zero.</p>
+          <h4>Template di Sottomissione ENISA SRP</h4>
+          <p>Tre template precompilati per l'early warning 24 ore, la notifica 72 ore e il report finale 14 giorni. Il reporter compila un form, non compone un documento.</p>
         </div>
       </div>
-
       <div class="deliv-row">
         <div class="deliv-code">D7</div>
         <div class="deliv-body">
-          <h4>Verbale del Tabletop Exercise</h4>
-          <p>Evidenza datata che la procedura è stata testata con le persone che la eseguirebbero davvero, inclusi i gap emersi durante l'esercizio e come sono stati chiusi. Un'autorità di sorveglianza che chiede se il processo funziona accetta una procedura testata; una non testata invita la domanda successiva.</p>
+          <h4>Verbale Tabletop Exercise</h4>
+          <p>Evidenza datata che la procedura è stata testata con le persone che la eseguirebbero realmente, incluse le lacune emerse e come sono state chiuse.</p>
         </div>
       </div>
-
       <div class="deliv-row">
         <div class="deliv-code">D8</div>
         <div class="deliv-body">
           <h4>Allegato al Fascicolo Tecnico</h4>
-          <p>Una sezione pronta da inserire nella documentazione tecnica CRA, che descrive il processo di gestione delle vulnerabilità, formattata per affiancarsi all'evidenza esistente per la marcatura CE. Scritta per essere inclusa senza riscritture.</p>
+          <p>Una sezione drop-in per la tua documentazione tecnica CRA, formattata per affiancarsi alle evidenze CE marking esistenti.</p>
         </div>
       </div>
-
       <div class="deliv-row">
         <div class="deliv-code">D9</div>
         <div class="deliv-body">
-          <h4>Log delle Evidenze di Monitoraggio</h4>
-          <p>La registrazione continua di ogni esecuzione del monitoraggio, ogni finding e ogni decisione di valutazione. L'Articolo 14 obbliga a segnalare ciò di cui si diventa consapevoli — questo log è il modo in cui dimostri di avere avuto la capacità di diventarne consapevole.</p>
+          <h4>Log Evidenze di Monitoraggio</h4>
+          <p>Il registro corrente di ogni scansione, ogni finding, ogni valutazione. Popolato automaticamente dal monitoraggio giornaliero. È così che dimostri di avere avuto la capacità di diventare consapevole.</p>
         </div>
       </div>
-
     </div>
   </details>
-</section>
-
-<!-- ── How it runs ── -->
-<section class="section container">
-  <div class="section-label">Come si svolge il percorso</div>
-  <div class="method-strip">
-    <div class="method-step">
-      <span class="method-step-num">Fase 01 · Giorni 1–2 · Scoping</span>
-      <h3>Mappatura del panorama prodotti</h3>
-      <p>Identificazione dei prodotti connessi in perimetro (firmware, software embedded, edge device, applicazioni standalone). Verifica dello stato SBOM, degli strumenti esistenti e della struttura del team. Lo scoping definisce quali moduli richiedono maggiore profondità e produce il piano di lavoro.</p>
-    </div>
-    <div class="method-step">
-      <span class="method-step-num">Fase 02 · Giorni 3–8 · Esecuzione</span>
-      <h3>Cinque moduli in parallelo</h3>
-      <p>Audit SBOM, test live di tracciabilità CVE, stesura del runbook, matrice di autorità, preparazione del tabletop exercise. Condotto da remoto con il team di engineering e sicurezza. Ogni modulo produce un output strutturato. I gap vengono segnalati con severità e un'azione di chiusura raccomandata.</p>
-    </div>
-    <div class="method-step">
-      <span class="method-step-num">Fase 03 · Giorni 9–10 · Handoff</span>
-      <h3>Consegna del processo funzionante</h3>
-      <p>Tutti gli output compilati, tabletop exercise condotto con il team, gap chiusi o documentati con owner e scadenze chiare. Il team esce con un processo che il designated reporter può operare in autonomia — nessuna dipendenza da RE:MARK al termine.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ── Who commissions this ── -->
-<section class="section container">
-  <div class="section-label">Chi commissiona questo percorso</div>
-  <div class="audience-grid">
-    <div class="audience-card">
-      <div class="audience-role">CTO · Produttore di Prodotti Connessi</div>
-      <h3>Un processo funzionante prima del primo incidente reale</h3>
-      <p>Il tuo team ha costruito il prodotto. Nessuno ha costruito il processo di incident response. Hai bisogno di un runbook documentato e testato prima dell'11 settembre — uno che il tuo team possa operare senza supporto esterno quando conta.</p>
-    </div>
-    <div class="audience-card">
-      <div class="audience-role">Head of Engineering · IoT / Industriale / Edge</div>
-      <h3>Sapere esattamente dove sei — prima che te lo chieda l'autorità</h3>
-      <p>Hai prodotti connessi sul mercato UE. Non sei certo che il tuo SBOM sia interrogabile o che il tuo percorso di segnalazione sia chiaro. Il percorso produce una valutazione onesta dei gap e chiude quelli critici — non un report di compliance che resta in una cartella.</p>
-    </div>
-    <div class="audience-card">
-      <div class="audience-role">CEO · PMI Manifatturiera</div>
-      <h3>Scope fisso, prezzo fisso, output definito</h3>
-      <p>Hai bisogno di essere pronto per il CRA Art. 14 prima di settembre. Non hai un PSIRT dedicato o un team di sicurezza interno. Il percorso è progettato esattamente per questa situazione: un processo funzionante, consegnato in due settimane, senza costruire capacità interna che non ti serve ancora.</p>
-    </div>
-    <div class="audience-card">
-      <div class="audience-role">Responsabile Qualità / Regulatory</div>
-      <h3>CRA + NIS2 Italia: stessa cascata, tre settimane di distanza</h3>
-      <p>La struttura di segnalazione CRA (24/72 ore/14 giorni) è compatibile con quella NIS2. Un processo ben costruito al termine del percorso copre entrambi gli obblighi. Per i produttori italiani di prodotti connessi, la finestra utile si chiude il 31 agosto — non il 10 settembre.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ── Differentiator ── -->
-<section class="section container">
-  <div class="diff-block">
-    <p>
-      Un consulente di cybersecurity mappa i tuoi gap contro una checklist e ti dice cosa correggere.
-      Uno studio legale spiega cosa richiede l'Art. 14 e quali sono le sanzioni.
-      <strong>Nessuno dei due produce un processo funzionante e testato che il tuo ingegnere può operare alle 2 di notte di un venerdì senza chiamare nessuno.</strong>
-      <br><br>
-      La combinazione che rende questo efficace è specifica: un fisico che ha trascorso 15 anni all'interno
-      dello sviluppo di prodotti in settori regolamentati — all'intersezione tra engineering, compliance
-      e infrastruttura dati — e che capisce sia cosa richiede il regolamento operativamente, sia come funziona
-      davvero l'engineering di prodotti connessi. Gli SBOM del firmware sono strutturalmente diversi
-      dagli alberi di dipendenze delle applicazioni web. Il triage delle vulnerabilità per un RTOS embedded
-      è diverso dal patching di un servizio cloud. Il runbook riflette questa differenza.
-      <br><br>
-      <em>Percorso a prezzo fisso · Scope concordato prima di iniziare · Nessuna fatturazione aperta · Due settimane a un processo funzionante</em>
-    </p>
-
-  </div>
 </section>
 
 <!-- ── Tiers ── -->
@@ -871,59 +754,106 @@ footer { border-top: 1px solid var(--b0); padding: 28px 0; }
   <div class="tiers">
 
     <div class="tier">
-      <div class="tier-tag">Punto di partenza</div>
-      <h3>Fotografia dell'Esposizione</h3>
-      <div class="tier-price free">Gratuita</div>
+      <div class="tier-tag">Scopri dove sei</div>
+      <h3>Snapshot Esposizione</h3>
+      <div class="tier-price free">Gratuito</div>
       <div class="tier-price-sub">Entro 24 ore · Nessun impegno</div>
       <ul>
-        <li>Invii il manifest delle dipendenze o l'elenco componenti</li>
-        <li>Lo analizziamo contro i database di vulnerabilità aggiornati</li>
-        <li>Verifica incrociata con il catalogo CISA delle vulnerabilità confermate come attivamente sfruttate</li>
-        <li>Sintesi di due pagine: cosa distribuisci, cosa presenta criticità note, cosa farebbe scattare oggi un obbligo ex Art. 14</li>
+        <li>Invii il tuo manifesto dipendenze o lista componenti</li>
+        <li>Lo scansioniamo contro i database di vulnerabilità e il catalogo CISA KEV</li>
+        <li>Sommario di due pagine: cosa spedisci, cosa ha problemi noti, cosa farebbe scattare un obbligo Articolo 14 oggi</li>
       </ul>
       <div class="tier-foot">
-        <a href="mailto:giulio.piana@brandcraft.it?subject=CRA%20Fotografia%20Esposizione" class="tier-cta">Richiedi la fotografia →</a>
+        <a href="mailto:giulio.piana@brandcraft.it?subject=CRA%20Snapshot%20Esposizione" class="tier-cta">Richiedi uno snapshot →</a>
       </div>
     </div>
 
     <div class="tier featured">
       <div class="tier-tag">Prima dell'11 settembre</div>
-      <h3>Percorso di adeguamento</h3>
+      <h3>Setup + Monitoraggio Giornaliero</h3>
       <div class="tier-price">€3.900</div>
-      <div class="tier-price-sub">Una linea di prodotto · Due settimane · Scope fisso<br>€6.900 fino a tre linee di prodotto</div>
+      <div class="tier-price-sub">Una linea prodotto · Due settimane setup · Scope fisso<br>€6.900 fino a tre linee prodotto</div>
       <ul>
-        <li>Tutti e cinque i moduli, da S1 a S5</li>
-        <li>Il pacchetto completo di nove documenti controllati</li>
-        <li>Procedura e delega redatte nel formato del tuo sistema qualità, pronte da approvare</li>
-        <li>Tabletop exercise condotto dal vivo con il tuo team</li>
-        <li>Tre mesi di Copertura Continua inclusi nell'opzione a tre linee</li>
+        <li>Setup completo del processo: audit SBOM, runbook di segnalazione, delega designated reporter, tabletop exercise</li>
+        <li>Nove documenti controllati scritti nel formato del tuo sistema qualità</li>
+        <li>Monitoraggio automatico giornaliero live all'handoff</li>
+        <li>Tre mesi di sorveglianza continua inclusi</li>
+        <li>Alert KEV immediato al tuo designated reporter</li>
+        <li>Pacchetto evidenze mensile datato per il tuo fascicolo di audit</li>
       </ul>
       <div class="tier-foot">
-        <a href="https://calendly.com/giuliopiana" class="tier-cta solid" target="_blank">Prenota una call di scoping →</a>
+        <a href="https://calendly.com/giuliopiana" class="tier-cta solid" target="_blank">Prenota una scoping call →</a>
       </div>
     </div>
 
     <div class="tier">
-      <div class="tier-tag">Al termine del percorso</div>
-      <h3>Copertura Continua</h3>
+      <div class="tier-tag">Dopo i primi tre mesi</div>
+      <h3>Sorveglianza Continua</h3>
       <div class="tier-price">€290<span style="font-size:13px;color:var(--label);">/mese</span></div>
-      <div class="tier-price-sub">Per linea di prodotto · €2.900 con pagamento annuale</div>
+      <div class="tier-price-sub">Per linea prodotto · €2.900 prepagato annualmente</div>
       <ul>
-        <li>Esecuzione mensile del monitoraggio sull'inventario aggiornato</li>
-        <li>Alert entro 24 ore se un componente che distribuisci viene confermato come attivamente sfruttato</li>
-        <li>Pacchetto di evidenze datato ogni mese per il fascicolo di audit</li>
-        <li>Revisione annuale della procedura e riemissione</li>
-        <li>Supporto all'incidente disponibile quando serve una segnalazione reale</li>
+        <li>Scansione automatica giornaliera del tuo inventario componenti</li>
+        <li>Alert immediato se un componente è confermato come attivamente sfruttato</li>
+        <li>Pacchetto evidenze mensile datato</li>
+        <li>Revisione annuale della procedura e ri-emissione</li>
+        <li>Supporto incidente quando serve una segnalazione ENISA reale</li>
       </ul>
       <div class="tier-foot">
-        <a href="https://calendly.com/giuliopiana" class="tier-cta" target="_blank">Parliamo della copertura →</a>
+        <a href="https://calendly.com/giuliopiana" class="tier-cta" target="_blank">Discuti la copertura →</a>
       </div>
     </div>
 
   </div>
   <p class="capacity-note">
-    Il percorso viene erogato un ingaggio alla volta. La capacità disponibile prima dell'11 settembre è limitata a sei ingaggi.
+    Lavoriamo un engagement alla volta. La capacità prima dell'11 settembre è limitata a sei engagement.
   </p>
+</section>
+
+<!-- ── A chi è rivolto ── -->
+<section class="section container">
+  <div class="section-label">A chi è rivolto</div>
+  <div class="audience-grid">
+    <div class="audience-card">
+      <div class="audience-role">CTO · Produttore di prodotti connessi</div>
+      <h3>Un processo che funziona prima del primo vero incidente</h3>
+      <p>Il tuo team ha costruito il prodotto. Nessuno ha costruito il processo di risposta agli incidenti. Ti serve un workflow di segnalazione documentato e testato e qualcuno che monitori i feed — prima dell'11 settembre, non dopo la prima sanzione.</p>
+    </div>
+    <div class="audience-card">
+      <div class="audience-role">Head of Engineering · IoT / Industriale / Edge</div>
+      <h3>Sapere esattamente dove sei — prima che lo chieda l'MSA</h3>
+      <p>Hai prodotti connessi sul mercato UE. Non sei certo che il tuo SBOM sia interrogabile o che il percorso di segnalazione sia chiaro. Questo produce una gap analysis onesta, chiude le criticità, e continua a monitorare dopo la valutazione.</p>
+    </div>
+    <div class="audience-card">
+      <div class="audience-role">CEO · PMI Manifatturiera</div>
+      <h3>Scope fisso, prezzo fisso, copertura continua</h3>
+      <p>Ti serve l'adeguamento CRA Articolo 14 prima di settembre. Non hai un PSIRT o team di sicurezza dedicato. Questo servizio è progettato per esattamente questa situazione: un processo funzionante in due settimane, con monitoraggio continuo — senza costruire competenze interne che non ti servono ancora.</p>
+    </div>
+    <div class="audience-card">
+      <div class="audience-role">Quality / Regulatory Manager</div>
+      <h3>CRA + NIS2 Italia: stessa cascata, tre settimane di distanza</h3>
+      <p>La struttura di segnalazione CRA (24/72 ore/14 giorni) è compatibile con quella NIS2. Un processo ben costruito copre entrambi gli obblighi. Per i produttori italiani di prodotti connessi, la finestra utile si chiude il 31 agosto — non il 10 settembre.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── Differenziazione ── -->
+<section class="section container">
+  <div class="diff-block">
+    <p>
+      Un consulente di cybersecurity mappa le tue lacune contro una checklist e ti dice cosa sistemare.
+      Uno studio legale spiega cosa richiede l'Articolo 14 e a quanto ammontano le sanzioni.
+      <strong>Nessuno dei due costruisce il processo, monitora i tuoi componenti ogni giorno e sveglia il tuo reporter quando qualcosa scatta.</strong>
+      <br><br>
+      La combinazione che fa funzionare questo servizio è specifica: un fisico che ha trascorso 15 anni nello sviluppo industriale regolamentato —
+      all'intersezione tra ingegneria, compliance e infrastruttura dati — e che comprende sia cosa richiede operativamente il regolamento
+      sia come funziona realmente l'ingegneria dei prodotti connessi.
+      Gli SBOM firmware sono strutturalmente diversi dagli alberi di dipendenze delle web application.
+      Il triage vulnerabilità per un RTOS embedded è diverso dal patching di un servizio cloud.
+      Il processo riflette questo.
+      <br><br>
+      <em>Tu sei proprietario del processo e delle evidenze. Noi operiamo la sorveglianza giornaliera. Nessun lock-in — la procedura, la delega e i documenti sono tuoi in ogni caso.</em>
+    </p>
+  </div>
 </section>
 
 <!-- ── CTA ── -->
@@ -931,15 +861,15 @@ footer { border-top: 1px solid var(--b0); padding: 28px 0; }
   <div class="cta-section">
     <h2>Prodotti connessi sul mercato UE e una scadenza all'11 settembre?</h2>
     <p>
-      30 minuti per capire il tuo panorama prodotti, lo stato attuale dello SBOM,
-      e se il percorso è il passo giusto. Nessun impegno.
-      Risposta onesta anche se il percorso non è la soluzione adatta.
+      Una call di 30 minuti per capire il tuo panorama prodotti, lo stato attuale del tuo SBOM,
+      e se questo è il passo giusto. Nessun impegno.
+      Risposta onesta anche se non è il servizio giusto per te.
     </p>
     <div class="cta-inner">
       <a href="https://calendly.com/giuliopiana" class="btn-primary" target="_blank">
         Prenota 30 minuti →
       </a>
-      <span class="btn-note">O scrivi direttamente</span>
+      <span class="btn-note">Oppure scrivi direttamente</span>
       <div class="contact-details">
         <span class="contact-name">Giulio Piana</span>
         <span class="contact-role">Founder and Principal · RE:MARK</span>
@@ -951,9 +881,9 @@ footer { border-top: 1px solid var(--b0); padding: 28px 0; }
 
     <div style="margin-top:32px; padding-top:24px; border-top:1px solid rgba(255,255,255,0.05); text-align:center;">
       <p style="font-size:13px; color:var(--label); margin-bottom:10px;">
-        Modello AI in un dispositivo medico di fronte a una scadenza EU AI Act?
+        Modello AI in un dispositivo medico con scadenza EU AI Act?
       </p>
-      <a href="/en/samd-validation/" style="font-size:13px; color:var(--amber); text-decoration:none; font-family:'JetBrains Mono',monospace; letter-spacing:0.04em;">
+      <a href="/it/samd-validation/" style="font-size:13px; color:var(--amber); text-decoration:none; font-family:'JetBrains Mono',monospace; letter-spacing:0.04em;">
         RE:MARK SaMD AI Validation →
       </a>
     </div>
