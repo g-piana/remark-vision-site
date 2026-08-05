@@ -1,31 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18372329641"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
-
-  // EU consent defaults — set before gtag config
   gtag('consent', 'default', {
     'ad_storage': 'denied',
     'analytics_storage': 'denied',
     'wait_for_update': 500
   });
-
   gtag('js', new Date());
   gtag('config', 'AW-18372329641');
 </script>
 
-<!-- Conversion event — fires only on the thank-you page -->
+<!-- Conversion event — fires on thank-you page load = Google Ads conversion -->
 <script>
-  gtag('event', 'conversion', {
-    'send_to': 'AW-18372329641'
-  });
+  gtag('event', 'conversion', {'send_to': 'AW-18372329641'});
 </script>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Scan Requested — RE:MARK</title>
 <meta name="robots" content="noindex, nofollow">
