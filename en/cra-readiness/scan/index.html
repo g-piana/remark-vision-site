@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Free CRA Article 14 Exposure Scan — RE:MARK</title>
+<meta name="description" content="Upload your dependency manifest. Get your Article 14 exposure report within 24 hours. Free, no obligation, no call required.">
+<meta name="robots" content="noindex, nofollow">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://remark-vision.com/en/cra-readiness/scan/">
+<meta property="og:title" content="Free CRA Article 14 Exposure Scan">
+<meta property="og:description" content="Upload your dependency manifest. Find out if your components carry actively exploited vulnerabilities. Free, within 24 hours.">
+<meta property="og:image" content="https://remark-vision.com/img/og-cra-en.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+
+<link rel="canonical" href="https://remark-vision.com/en/cra-readiness/scan/">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="512x512" href="/favicon-512.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:    #080b10;
+  --s1:    #0d1117;
+  --s2:    #131920;
+  --b0:    rgba(255,255,255,0.05);
+  --b1:    rgba(255,255,255,0.09);
+  --amber: #f59e0b;
+  --pass:  #22c55e;
+  --fail:  #ef4444;
+  --blue:  #3b82f6;
+  --ink:   #e8edf5;
+  --muted: #a8b3c4;
+  --label: #7a8799;
+  --mono:  'JetBrains Mono', monospace;
+  --sans:  'DM Sans', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+
+.container { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+
+/* ── Header ── */
+header {
+  border-bottom: 1px solid var(--b0);
+  background: rgba(8,11,16,0.92);
+  backdrop-filter: blur(8px);
+  position: sticky; top: 0; z-index: 50;
+}
+.header-inner {
+  max-width: 960px; margin: 0 auto; padding: 0 24px;
+  height: 52px; display: flex; align-items: center; justify-content: space-between;
+}
+.logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.logo-icon { width: 22px; height: 22px; flex-shrink: 0; }
+.logo-name { font-size: 15px; font-weight: 500; letter-spacing: 0.01em; color: var(--ink); }
+.logo-name span { color: var(--amber); }
+.header-nav { display: flex; align-items: center; gap: 24px; }
+.header-nav a { font-size: 13px; color: var(--label); text-decoration: none; transition: color 0.15s; }
+.header-nav a:hover { color: var(--muted); }
+.header-nav a.active { color: var(--amber); }
+
+/* ── Hero ── */
+.hero { padding: 72px 0 48px; text-align: center; }
+.hero-eyebrow {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--amber); margin-bottom: 24px;
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+}
+.hero-eyebrow::before, .hero-eyebrow::after {
+  content: ''; display: block; width: 28px; height: 1px; background: rgba(245,158,11,0.4);
+}
+.hero h1 {
+  font-size: clamp(24px, 3.2vw, 38px); font-weight: 500; line-height: 1.2;
+  letter-spacing: -0.025em; color: var(--ink); max-width: 680px; margin: 0 auto 12px;
+}
+.hero h1 em { font-style: normal; color: var(--amber); }
+.hero-sub {
+  font-size: clamp(14px, 1.5vw, 16px); color: var(--muted);
+  max-width: 520px; margin: 0 auto; line-height: 1.7;
+}
+
+/* ── Scan form section ── */
+.scan-section { margin-bottom: 64px; }
+
+.scan-card {
+  background: var(--s1); border: 1px solid var(--b1); border-radius: 3px;
+  max-width: 620px; margin: 0 auto; position: relative; overflow: hidden;
+}
+.scan-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(to right, transparent, var(--pass), transparent); opacity: 0.7;
+}
+
+.scan-card-header {
+  padding: 32px 36px 0;
+  display: flex; align-items: center; gap: 12px;
+}
+.scan-card-tag {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--pass);
+}
+.scan-card-price {
+  font-family: var(--mono); font-size: 13px; color: var(--pass);
+  margin-left: auto; letter-spacing: 0.04em;
+}
+.scan-card-body { padding: 20px 36px 8px; }
+.scan-card-body h2 {
+  font-size: 22px; font-weight: 500; color: var(--ink); margin-bottom: 8px;
+}
+.scan-card-body p {
+  font-size: 14px; color: var(--muted); line-height: 1.7; margin-bottom: 16px;
+}
+
+.scan-what-you-get {
+  padding: 0 36px 24px;
+}
+.scan-what-you-get ul { list-style: none; margin: 0; padding: 0; }
+.scan-what-you-get li {
+  font-size: 13px; color: var(--muted); line-height: 1.5;
+  padding: 5px 0 5px 18px; position: relative;
+}
+.scan-what-you-get li::before {
+  content: '▸'; position: absolute; left: 0; color: rgba(34,197,94,0.6); font-size: 11px;
+}
+
+.scan-form-area {
+  border-top: 1px solid var(--b0);
+  padding: 28px 36px 32px;
+}
+.scan-form-area .form-label {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--label); margin-bottom: 20px; display: block;
+}
+
+/* ── HubSpot form overrides ── */
+.scan-form-area .hs-form-field { margin-bottom: 18px; }
+
+.scan-form-area .hs-form-field > label {
+  font-family: var(--sans); font-size: 13px; font-weight: 400;
+  color: var(--muted); display: block; margin-bottom: 6px;
+}
+
+.scan-form-area .hs-input {
+  width: 100%; padding: 10px 14px;
+  background: var(--bg); border: 1px solid var(--b1); border-radius: 2px;
+  color: var(--ink); font-family: var(--sans); font-size: 14px;
+  transition: border-color 0.15s;
+}
+.scan-form-area .hs-input:focus {
+  outline: none; border-color: rgba(245,158,11,0.5);
+}
+.scan-form-area .hs-input::placeholder { color: var(--label); }
+
+.scan-form-area textarea.hs-input {
+  min-height: 60px; resize: vertical;
+}
+
+.scan-form-area .hs-button {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--pass); color: #080b10; font-family: var(--sans);
+  font-size: 15px; font-weight: 500; text-decoration: none;
+  padding: 14px 28px; border: none; border-radius: 2px;
+  cursor: pointer; transition: opacity 0.15s; width: 100%;
+  justify-content: center;
+}
+.scan-form-area .hs-button:hover { opacity: 0.9; }
+
+.scan-form-area .hs-error-msgs { list-style: none; padding: 0; margin: 4px 0 0; }
+.scan-form-area .hs-error-msgs li label {
+  font-size: 12px; color: var(--fail); font-family: var(--sans);
+}
+
+.scan-form-area .hs-form-required { color: var(--fail); }
+
+.scan-form-area .legal-consent-container {
+  font-size: 12px; color: var(--label); line-height: 1.6;
+}
+.scan-form-area .legal-consent-container a { color: var(--amber); }
+
+/* hide hubspot branding */
+.scan-form-area .hs-form .hs_submit + div,
+.scan-form-area .hubspot-link__container { display: none !important; }
+
+/* ── How it works strip ── */
+.section { margin-bottom: 64px; }
+.section-label {
+  font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--label); margin-bottom: 32px; padding-bottom: 12px; border-bottom: 1px solid var(--b0);
+}
+
+.how-strip {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
+  background: var(--b0); border: 1px solid var(--b1); border-radius: 3px; overflow: hidden;
+}
+.how-step { background: var(--s1); padding: 24px; }
+.how-step-num {
+  font-family: var(--mono); font-size: 10px; color: var(--amber);
+  letter-spacing: 0.1em; margin-bottom: 10px; display: block;
+}
+.how-step h3 { font-size: 14px; font-weight: 500; color: var(--ink); margin-bottom: 6px; }
+.how-step p { font-size: 12px; color: var(--muted); line-height: 1.6; }
+
+/* ── Sample report ── */
+.sample-block {
+  background: var(--s1); border: 1px solid var(--b1); border-radius: 3px;
+  padding: 24px 28px; max-width: 620px; margin: 0 auto;
+}
+.sample-label {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--label); margin-bottom: 16px; display: block;
+}
+.sample-table { width: 100%; border-collapse: collapse; }
+.sample-table th {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--label); text-align: left;
+  padding: 8px 12px; border-bottom: 1px solid var(--b0); font-weight: 400;
+}
+.sample-table td {
+  font-size: 13px; color: var(--muted); padding: 10px 12px;
+  border-bottom: 1px solid var(--b0);
+}
+.sample-table tr:last-child td { border-bottom: none; }
+.r-pass { color: var(--pass); font-family: var(--mono); font-size: 12px; }
+.r-flag { color: var(--amber); font-family: var(--mono); font-size: 12px; }
+.r-critical { color: var(--fail); font-family: var(--mono); font-size: 12px; }
+
+/* ── Deadline reminder ── */
+.deadline-strip {
+  display: flex; gap: 0; justify-content: center;
+  background: var(--s1); border: 1px solid var(--b1); border-radius: 3px;
+  border-top: 2px solid rgba(239,68,68,0.6); overflow: hidden;
+  max-width: 620px; margin: 0 auto 20px;
+}
+.deadline-item {
+  flex: 1; padding: 16px 20px; text-align: center;
+  border-right: 1px solid var(--b0);
+}
+.deadline-item:last-child { border-right: none; }
+.deadline-value {
+  font-family: var(--mono); font-size: 18px; font-weight: 500;
+  color: var(--fail); letter-spacing: -0.02em; line-height: 1; display: block; margin-bottom: 4px;
+}
+.deadline-value.amber { color: var(--amber); }
+.deadline-label { font-size: 10px; color: var(--label); line-height: 1.4; }
+
+/* ── Full engagement nudge ── */
+.upsell-note {
+  background: rgba(245,158,11,0.04); border: 1px solid rgba(245,158,11,0.18);
+  border-radius: 3px; padding: 24px 28px; max-width: 620px; margin: 0 auto;
+  text-align: center;
+}
+.upsell-note p { font-size: 14px; color: var(--muted); line-height: 1.7; margin-bottom: 14px; }
+.upsell-note a {
+  font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em;
+  color: var(--amber); text-decoration: none;
+  padding: 8px 16px; border: 1px solid rgba(245,158,11,0.25); border-radius: 2px;
+  transition: background 0.15s, border-color 0.15s;
+}
+.upsell-note a:hover { background: rgba(245,158,11,0.08); border-color: rgba(245,158,11,0.5); }
+
+/* ── Credentials ── */
+.credentials-strip {
+  display: flex; align-items: center; justify-content: center;
+  gap: 0; flex-wrap: wrap;
+  padding: 20px 0; border-top: 1px solid var(--b0); border-bottom: 1px solid var(--b0);
+  margin-bottom: 64px;
+}
+.cred-item { font-family: var(--mono); font-size: 11px; color: var(--label); letter-spacing: 0.08em; text-transform: uppercase; padding: 0 18px; }
+.cred-sep { color: var(--b1); font-size: 14px; }
+
+/* ── Footer ── */
+footer { border-top: 1px solid var(--b0); padding: 28px 0; }
+.footer-inner {
+  max-width: 960px; margin: 0 auto; padding: 0 24px;
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;
+}
+.footer-logo { display: flex; align-items: center; gap: 12px; }
+.footer-logo-text { display: flex; flex-direction: column; }
+.footer-logo-name { font-size: 13px; font-weight: 500; color: var(--ink); letter-spacing: 0.02em; }
+.footer-colon { color: var(--amber); }
+.footer-logo-sub { font-size: 11px; color: var(--label); font-family: var(--mono); }
+.footer-logo-sub a { color: var(--label); text-decoration: none; }
+.footer-copy { font-size: 12px; color: var(--label); text-align: right; line-height: 1.7; }
+.footer-copy a { color: var(--label); text-decoration: none; }
+.footer-copy a:hover { color: var(--amber); }
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .how-strip { grid-template-columns: 1fr; }
+  .hero { padding: 52px 0 36px; }
+  .scan-card-body, .scan-what-you-get, .scan-form-area, .scan-card-header { padding-left: 24px; padding-right: 24px; }
+  .deadline-strip { flex-direction: column; }
+  .deadline-item { border-right: none; border-bottom: 1px solid var(--b0); }
+  .deadline-item:last-child { border-bottom: none; }
+  .credentials-strip { gap: 4px; }
+  .cred-item { padding: 4px 12px; font-size: 10px; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ── Header (simplified — no full nav, keep them focused) ── -->
+<header>
+  <div class="header-inner">
+    <a href="/en/" class="logo">
+      <svg class="logo-icon" viewBox="0 0 22 22" fill="none">
+        <rect x="1" y="1" width="20" height="20" rx="3" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
+        <circle cx="11" cy="11" r="4.5" stroke="#f59e0b" stroke-width="1.5"/>
+        <circle cx="11" cy="11" r="1.5" fill="#f59e0b"/>
+      </svg>
+      <span class="logo-name">RE<span>:</span>MARK</span>
+    </a>
+    <nav class="header-nav">
+      <a href="/en/cra-readiness/" class="active">CRA Readiness</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ── Hero ── -->
+<section class="hero container">
+  <div class="hero-eyebrow">Free · 24 hours · No call required</div>
+  <h1>Do your components <br> carry vulnerabilities <em>right now?</em></h1>
+  <p class="hero-sub">
+    Upload your dependency manifest. Within 24 hours you receive a two-page
+    exposure report showing what you ship, what carries known vulnerabilities,
+    and what would trigger an Article 14 reporting obligation today.
+  </p>
+</section>
+
+<!-- ── Deadline reminder ── -->
+<div class="container">
+  <div class="deadline-strip">
+    <div class="deadline-item">
+      <span class="deadline-value">11 Sep 2026</span>
+      <span class="deadline-label">CRA Article 14 reporting begins</span>
+    </div>
+    <div class="deadline-item">
+      <span class="deadline-value">24 h</span>
+      <span class="deadline-label">To report to ENISA once aware</span>
+    </div>
+    <div class="deadline-item">
+      <span class="deadline-value amber">Free scan</span>
+      <span class="deadline-label">Find out where you stand first</span>
+    </div>
+  </div>
+</div>
+
+<!-- ── Scan form card ── -->
+<section class="scan-section container">
+  <div class="scan-card">
+
+    <div class="scan-card-header">
+      <span class="scan-card-tag">Exposure Snapshot</span>
+      <span class="scan-card-price">Free · No obligation</span>
+    </div>
+
+    <div class="scan-card-body">
+      <h2>Article 14 Exposure Report</h2>
+      <p>
+        We scan your dependency manifest against the PyPI/NVD advisory databases and the
+        CISA Known Exploited Vulnerabilities catalogue. You get a dated report — not a
+        sales pitch.
+      </p>
+    </div>
+
+    <div class="scan-what-you-get">
+      <ul>
+        <li>Your components checked against live vulnerability databases</li>
+        <li>Cross-referenced with the CISA KEV catalogue (active exploitation)</li>
+        <li>Two-page summary: what you ship, what carries known issues, what would trigger Article 14 today</li>
+        <li>Delivered within 24 hours to your inbox</li>
+      </ul>
+    </div>
+
+    <div class="scan-form-area">
+      <span class="form-label">Request your scan</span>
+
+      <script src="https://js-eu1.hsforms.net/forms/embed/148276793.js" defer></script>
+      <div class="hs-form-frame" data-region="eu1" data-form-id="776daa44-480a-4869-afcf-4e351bc8af08" data-portal-id="148276793"></div>
+
+      <noscript>
+        <p style="font-size:13px; color:var(--muted);">
+          JavaScript is required for the form. Alternatively, email your dependency manifest
+          (requirements.txt, package-lock.json, or similar) directly to
+          <a href="mailto:giulio.piana@brandcraft.it?subject=CRA%20Exposure%20Snapshot" style="color:var(--amber);">giulio.piana@brandcraft.it</a>.
+        </p>
+      </noscript>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── How it works ── -->
+<section class="section container">
+  <div class="section-label">How the free scan works</div>
+  <div class="how-strip">
+    <div class="how-step">
+      <span class="how-step-num">01</span>
+      <h3>You submit the form</h3>
+      <p>Name, email, and a note about your product. If you have your dependency manifest ready, mention it — we'll reply with a secure upload link, or you can simply email the file.</p>
+    </div>
+    <div class="how-step">
+      <span class="how-step-num">02</span>
+      <h3>We run the scan</h3>
+      <p>Your manifest is checked against the OSV vulnerability database and the CISA Known Exploited Vulnerabilities catalogue. Automated first pass, then human review of every finding.</p>
+    </div>
+    <div class="how-step">
+      <span class="how-step-num">03</span>
+      <h3>You receive your report</h3>
+      <p>A two-page dated summary in your inbox within 24 hours. What you ship, what carries known issues, and whether any component has confirmed active exploitation — which is what triggers Article 14.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── Sample report ── -->
+<section class="section container">
+  <div class="sample-block">
+    <span class="sample-label">What the report looks like</span>
+    <table class="sample-table">
+      <tr>
+        <th>Area</th>
+        <th>Finding</th>
+        <th style="text-align:right;">Rating</th>
+      </tr>
+      <tr>
+        <td>Component inventory</td>
+        <td style="color:var(--ink);">67 pinned packages scanned</td>
+        <td style="text-align:right;" class="r-pass">✓ PASS</td>
+      </tr>
+      <tr>
+        <td>Known vulnerabilities</td>
+        <td style="color:var(--ink);">41 records across 4 packages</td>
+        <td style="text-align:right;" class="r-flag">⚠ FLAG</td>
+      </tr>
+      <tr>
+        <td>Article 14 exposure</td>
+        <td style="color:var(--ink);">1 finding matches CISA KEV</td>
+        <td style="text-align:right;" class="r-critical">✗ CRITICAL</td>
+      </tr>
+      <tr>
+        <td>Remediation path</td>
+        <td style="color:var(--ink);">4 packages need major-version upgrade</td>
+        <td style="text-align:right;" class="r-flag">⚠ FLAG</td>
+      </tr>
+    </table>
+  </div>
+</section>
+
+<!-- ── Full engagement nudge ── -->
+<section class="section container">
+  <div class="upsell-note">
+    <p>
+      The free scan tells you where you stand. If you need a full readiness process —
+      SBOM audit, reporting runbook, designated reporter delegation, tabletop exercise,
+      and daily monitoring — before September 11:
+    </p>
+    <a href="/en/cra-readiness/">See the full CRA Readiness engagement →</a>
+  </div>
+</section>
+
+<!-- ── Credentials ── -->
+<div class="credentials-strip container">
+  <span class="cred-item">PhD Physics · CERN</span>
+  <span class="cred-sep">·</span>
+  <span class="cred-item">15y Regulated Industries</span>
+  <span class="cred-sep">·</span>
+  <span class="cred-item">RE:MARK · Milan</span>
+</div>
+
+<!-- ── Footer ── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <svg viewBox="0 0 22 22" fill="none" style="width:20px;height:20px;flex-shrink:0;">
+        <rect x="1" y="1" width="20" height="20" rx="3" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
+        <circle cx="11" cy="11" r="4.5" stroke="#f59e0b" stroke-width="1.5"/>
+        <circle cx="11" cy="11" r="1.5" fill="#f59e0b"/>
+      </svg>
+      <div class="footer-logo-text">
+        <span class="footer-logo-name">RE<span class="footer-colon">:</span>MARK</span>
+        <span class="footer-logo-sub">
+          a <a href="https://brandcraft.it" target="_blank">Brandcraft srl</a> service
+          &nbsp;·&nbsp; P.IVA IT13291650961 &nbsp;·&nbsp; Milan, Italy
+        </span>
+      </div>
+    </div>
+    <div class="footer-copy">
+      <a href="mailto:giulio.piana@brandcraft.it">giulio.piana@brandcraft.it</a>
+      &nbsp;·&nbsp; remark-vision.com
+    </div>
+  </div>
+</footer>
+
+<!-- HubSpot tracking (same as your main site) -->
+<script type="text/javascript" id="hs-script-loader" async defer src="//js-eu1.hs-scripts.com/148276793.js"></script>
+</body>
+</html>

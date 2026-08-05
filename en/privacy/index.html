@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Privacy Policy — RE:MARK</title>
+<meta name="description" content="Privacy policy for RE:MARK services operated by Brandcraft srl. How we collect, use, and protect your personal data under GDPR.">
+
+<link rel="canonical" href="https://remark-vision.com/en/privacy/">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="512x512" href="/favicon-512.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:    #080b10;
+  --s1:    #0d1117;
+  --s2:    #131920;
+  --b0:    rgba(255,255,255,0.05);
+  --b1:    rgba(255,255,255,0.09);
+  --amber: #f59e0b;
+  --pass:  #22c55e;
+  --fail:  #ef4444;
+  --ink:   #e8edf5;
+  --muted: #a8b3c4;
+  --label: #7a8799;
+  --mono:  'JetBrains Mono', monospace;
+  --sans:  'DM Sans', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Header ── */
+header {
+  border-bottom: 1px solid var(--b0);
+  background: rgba(8,11,16,0.92);
+  backdrop-filter: blur(8px);
+  position: sticky; top: 0; z-index: 50;
+}
+.header-inner {
+  max-width: 960px; margin: 0 auto; padding: 0 24px;
+  height: 52px; display: flex; align-items: center; justify-content: space-between;
+}
+.logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.logo-icon { width: 22px; height: 22px; flex-shrink: 0; }
+.logo-name { font-size: 15px; font-weight: 500; letter-spacing: 0.01em; color: var(--ink); }
+.logo-name span { color: var(--amber); }
+.header-nav { display: flex; align-items: center; gap: 24px; }
+.header-nav a { font-size: 13px; color: var(--label); text-decoration: none; transition: color 0.15s; }
+.header-nav a:hover { color: var(--muted); }
+
+/* ── Content ── */
+.policy-wrapper {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 64px 24px 80px;
+}
+
+.policy-eyebrow {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--label); margin-bottom: 16px;
+}
+
+.policy-wrapper h1 {
+  font-size: clamp(22px, 2.8vw, 32px); font-weight: 500;
+  letter-spacing: -0.02em; color: var(--ink); margin-bottom: 8px;
+}
+
+.policy-meta {
+  font-family: var(--mono); font-size: 12px; color: var(--label);
+  letter-spacing: 0.04em; margin-bottom: 40px; padding-bottom: 24px;
+  border-bottom: 1px solid var(--b0);
+}
+
+.policy-wrapper h2 {
+  font-size: 16px; font-weight: 500; color: var(--ink);
+  margin: 36px 0 12px; letter-spacing: -0.01em;
+}
+
+.policy-wrapper p {
+  font-size: 14px; color: var(--muted); line-height: 1.75;
+  margin-bottom: 14px;
+}
+
+.policy-wrapper a { color: var(--amber); text-decoration: none; }
+.policy-wrapper a:hover { text-decoration: underline; }
+
+.policy-table {
+  width: 100%; border-collapse: collapse;
+  margin: 12px 0 20px;
+  background: var(--s1); border: 1px solid var(--b1); border-radius: 3px;
+  overflow: hidden;
+}
+.policy-table th {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--label); text-align: left;
+  padding: 12px 16px; border-bottom: 1px solid var(--b0); font-weight: 400;
+  background: var(--s2);
+}
+.policy-table td {
+  font-size: 13px; color: var(--muted); padding: 12px 16px;
+  border-bottom: 1px solid var(--b0); vertical-align: top; line-height: 1.6;
+}
+.policy-table tr:last-child td { border-bottom: none; }
+
+.policy-wrapper ul {
+  list-style: none; margin: 0 0 16px; padding: 0;
+}
+.policy-wrapper li {
+  font-size: 14px; color: var(--muted); line-height: 1.7;
+  padding: 3px 0 3px 18px; position: relative;
+}
+.policy-wrapper li::before {
+  content: '▸'; position: absolute; left: 0;
+  color: rgba(245,158,11,0.5); font-size: 11px;
+}
+
+.contact-block {
+  background: var(--s1); border: 1px solid var(--b1); border-radius: 3px;
+  padding: 24px 28px; margin: 24px 0;
+}
+.contact-block p {
+  font-size: 13px; margin-bottom: 6px;
+}
+.contact-block .label {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--label); margin-bottom: 12px; display: block;
+}
+
+/* ── Footer ── */
+footer { border-top: 1px solid var(--b0); padding: 28px 0; }
+.footer-inner {
+  max-width: 960px; margin: 0 auto; padding: 0 24px;
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;
+}
+.footer-logo { display: flex; align-items: center; gap: 12px; }
+.footer-logo-text { display: flex; flex-direction: column; }
+.footer-logo-name { font-size: 13px; font-weight: 500; color: var(--ink); letter-spacing: 0.02em; }
+.footer-colon { color: var(--amber); }
+.footer-logo-sub { font-size: 11px; color: var(--label); font-family: var(--mono); }
+.footer-logo-sub a { color: var(--label); text-decoration: none; }
+.footer-copy { font-size: 12px; color: var(--label); text-align: right; line-height: 1.7; }
+.footer-copy a { color: var(--label); text-decoration: none; }
+.footer-copy a:hover { color: var(--amber); }
+
+@media (max-width: 640px) {
+  .policy-wrapper { padding: 40px 24px 60px; }
+  .policy-table th, .policy-table td { padding: 10px 12px; font-size: 12px; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="/en/" class="logo">
+      <svg class="logo-icon" viewBox="0 0 22 22" fill="none">
+        <rect x="1" y="1" width="20" height="20" rx="3" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
+        <circle cx="11" cy="11" r="4.5" stroke="#f59e0b" stroke-width="1.5"/>
+        <circle cx="11" cy="11" r="1.5" fill="#f59e0b"/>
+      </svg>
+      <span class="logo-name">RE<span>:</span>MARK</span>
+    </a>
+    <nav class="header-nav">
+      <a href="/en/">Due Diligence</a>
+      <a href="/en/samd-validation/">SaMD Validation</a>
+      <a href="/en/cra-readiness/">CRA Readiness</a>
+    </nav>
+  </div>
+</header>
+
+<div class="policy-wrapper">
+
+  <div class="policy-eyebrow">Legal</div>
+  <h1>Privacy Policy</h1>
+  <div class="policy-meta">Last updated: August 2026</div>
+
+  <h2>Who we are</h2>
+  <p>
+    RE:MARK is a service operated by <strong style="color:var(--ink);font-weight:500;">Brandcraft srl</strong>,
+    a company incorporated under Italian law.
+  </p>
+
+  <div class="contact-block">
+    <span class="label">Data controller</span>
+    <p><strong style="color:var(--ink);font-weight:500;">Brandcraft srl</strong></p>
+    <p>P.IVA IT13291650961</p>
+    <p>Milan, Italy</p>
+    <p>Data protection contact: <a href="mailto:giulio.piana@brandcraft.it">giulio.piana@brandcraft.it</a></p>
+  </div>
+
+  <p>
+    Under Articles 13 and 14 of the General Data Protection Regulation (EU) 2016/679 ("GDPR"),
+    this policy explains what personal data we collect, why, how we use it, who we share it with,
+    and what rights you have.
+  </p>
+
+  <h2>What data we collect and why</h2>
+
+  <table class="policy-table">
+    <tr>
+      <th style="width:28%;">Data</th>
+      <th style="width:32%;">Purpose</th>
+      <th style="width:22%;">Legal basis</th>
+      <th style="width:18%;">Retention</th>
+    </tr>
+    <tr>
+      <td>Name, email, company name</td>
+      <td>Deliver the requested service (exposure scan, readiness engagement, or scoping call)</td>
+      <td>Your consent — Art. 6(1)(a) GDPR</td>
+      <td>Until you withdraw consent, or 24 months from last contact</td>
+    </tr>
+    <tr>
+      <td>Product type, technical notes</td>
+      <td>Understand the scope of your product to deliver an accurate scan or assessment</td>
+      <td>Your consent — Art. 6(1)(a) GDPR</td>
+      <td>Same as above</td>
+    </tr>
+    <tr>
+      <td>Dependency manifests (requirements.txt, SBOM files, etc.)</td>
+      <td>Perform the vulnerability scan against advisory databases and the CISA KEV catalogue</td>
+      <td>Contract performance — Art. 6(1)(b) GDPR</td>
+      <td>Deleted within 30 days of delivering the report, unless you engage us for continuous monitoring</td>
+    </tr>
+    <tr>
+      <td>IP address, browser type, pages visited</td>
+      <td>Website analytics, security, and fraud prevention</td>
+      <td>Legitimate interest — Art. 6(1)(f) GDPR</td>
+      <td>26 months (HubSpot analytics default)</td>
+    </tr>
+    <tr>
+      <td>Calendly booking data (name, email, meeting time)</td>
+      <td>Schedule and conduct scoping calls</td>
+      <td>Your consent — Art. 6(1)(a) GDPR</td>
+      <td>Until you withdraw consent, or 24 months from last contact</td>
+    </tr>
+  </table>
+
+  <p>
+    We do not collect data beyond what is listed above. We do not use your data for profiling,
+    automated decision-making, or purposes unrelated to the service you requested.
+  </p>
+
+  <h2>Who receives your data</h2>
+  <p>
+    We share your personal data only with processors that are necessary
+    to deliver the service. Each operates under a data processing agreement
+    and processes data only on our instructions.
+  </p>
+
+  <table class="policy-table">
+    <tr>
+      <th style="width:30%;">Processor</th>
+      <th style="width:35%;">Purpose</th>
+      <th style="width:35%;">Data location</th>
+    </tr>
+    <tr>
+      <td>HubSpot Ireland Ltd</td>
+      <td>Form submissions, contact management, email</td>
+      <td>EU (Frankfurt data centre)</td>
+    </tr>
+    <tr>
+      <td>Calendly LLC</td>
+      <td>Appointment scheduling</td>
+      <td>USA — EU–US Data Privacy Framework certified</td>
+    </tr>
+    <tr>
+      <td>Hosting provider for remark-vision.com</td>
+      <td>Website delivery, access logs</td>
+      <td>EU</td>
+    </tr>
+  </table>
+
+  <p>
+    We do not sell, rent, or share your data with third parties for marketing purposes.
+    We do not transfer data outside the EU/EEA except where covered by an adequacy decision
+    or the EU–US Data Privacy Framework, as noted above.
+  </p>
+
+  <h2>Cookies and tracking</h2>
+  <p>
+    This website uses cookies set by HubSpot for analytics (pages visited, session duration,
+    referral source). These cookies help us understand how visitors use the site. HubSpot's
+    tracking cookie (<code style="font-family:var(--mono);font-size:13px;color:var(--label);">__hstc</code>)
+    has a 13-month expiry. You can block cookies in your browser settings at any time.
+    No advertising cookies or third-party trackers are used.
+  </p>
+
+  <h2>Your rights</h2>
+  <p>
+    Under GDPR you have the right to:
+  </p>
+  <ul>
+    <li><strong style="color:var(--ink);font-weight:500;">Access</strong> — request a copy of the personal data we hold about you</li>
+    <li><strong style="color:var(--ink);font-weight:500;">Rectification</strong> — correct inaccurate or incomplete data</li>
+    <li><strong style="color:var(--ink);font-weight:500;">Erasure</strong> — request deletion of your data ("right to be forgotten")</li>
+    <li><strong style="color:var(--ink);font-weight:500;">Restriction</strong> — ask us to limit how we use your data</li>
+    <li><strong style="color:var(--ink);font-weight:500;">Portability</strong> — receive your data in a structured, machine-readable format</li>
+    <li><strong style="color:var(--ink);font-weight:500;">Withdraw consent</strong> — at any time, without affecting the lawfulness of processing before withdrawal</li>
+    <li><strong style="color:var(--ink);font-weight:500;">Lodge a complaint</strong> — with the Italian Data Protection Authority (Garante per la Protezione dei Dati Personali) at <a href="https://www.garanteprivacy.it" target="_blank">garanteprivacy.it</a></li>
+  </ul>
+  <p>
+    To exercise any of these rights, write to
+    <a href="mailto:giulio.piana@brandcraft.it">giulio.piana@brandcraft.it</a>.
+    We will respond within 30 days.
+  </p>
+
+  <h2>Data security</h2>
+  <p>
+    All data is transmitted over HTTPS. Form submissions are stored in HubSpot's EU-hosted
+    infrastructure. Dependency manifests submitted for scanning are processed on
+    infrastructure under our direct control and are not shared with any third party.
+    Access to personal data is limited to Giulio Piana as sole operator of the service.
+  </p>
+
+  <h2>Changes to this policy</h2>
+  <p>
+    If we change how we process your data, we will update this page and the "Last updated" date above.
+    For material changes, we will notify you by email if we have your contact details.
+  </p>
+
+  <h2>Contact</h2>
+  <div class="contact-block">
+    <span class="label">Data protection enquiries</span>
+    <p>Giulio Piana</p>
+    <p><a href="mailto:giulio.piana@brandcraft.it">giulio.piana@brandcraft.it</a></p>
+    <p>Brandcraft srl · Milan, Italy</p>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <svg viewBox="0 0 22 22" fill="none" style="width:20px;height:20px;flex-shrink:0;">
+        <rect x="1" y="1" width="20" height="20" rx="3" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
+        <circle cx="11" cy="11" r="4.5" stroke="#f59e0b" stroke-width="1.5"/>
+        <circle cx="11" cy="11" r="1.5" fill="#f59e0b"/>
+      </svg>
+      <div class="footer-logo-text">
+        <span class="footer-logo-name">RE<span class="footer-colon">:</span>MARK</span>
+        <span class="footer-logo-sub">
+          a <a href="https://brandcraft.it" target="_blank">Brandcraft srl</a> service
+          &nbsp;·&nbsp; P.IVA IT13291650961 &nbsp;·&nbsp; Milan, Italy
+        </span>
+      </div>
+    </div>
+    <div class="footer-copy">
+      <a href="mailto:giulio.piana@brandcraft.it">giulio.piana@brandcraft.it</a>
+      &nbsp;·&nbsp; remark-vision.com
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
