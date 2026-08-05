@@ -473,7 +473,73 @@ footer { border-top: 1px solid var(--b0); padding: 28px 0; }
           target: "#hs-scan-form",
           redirectUrl: "https://remark-vision.com/en/cra-readiness/thanks/",
           css: "",
-          cssClass: ""
+          cssClass: "",
+          onFormReady: function($form) {
+            // Force dark-theme styles AFTER HubSpot finishes rendering
+            var area = document.querySelector('.scan-form-area');
+            if (!area) return;
+
+            // Remove HubSpot's injected stylesheets
+            document.querySelectorAll('link[href*="hsforms"], style[data-emotion]').forEach(function(el) {
+              el.remove();
+            });
+
+            // Hide the default "We'd love to hear from you" rich text
+            area.querySelectorAll('.hs-richtext').forEach(function(el) {
+              el.style.display = 'none';
+            });
+
+            // Style all inputs
+            area.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"], input[type="number"], textarea, select').forEach(function(el) {
+              el.style.cssText = 'width:100%;padding:10px 14px;background:#080b10;border:1px solid rgba(255,255,255,0.09);border-radius:2px;color:#e8edf5;font-family:"DM Sans",sans-serif;font-size:14px;box-shadow:none;-webkit-appearance:none;';
+            });
+
+            // Style all labels
+            area.querySelectorAll('label').forEach(function(el) {
+              el.style.cssText = 'font-family:"DM Sans",sans-serif;font-size:13px;font-weight:400;color:#a8b3c4;display:block;margin-bottom:6px;';
+            });
+
+            // Style consent checkbox labels (keep inline-flex for alignment)
+            area.querySelectorAll('.hs-form-booleancheckbox-display').forEach(function(el) {
+              el.style.cssText = 'font-family:"DM Sans",sans-serif;font-size:12px;color:#a8b3c4;display:flex;align-items:flex-start;gap:8px;';
+            });
+
+            // Style consent text blocks
+            area.querySelectorAll('.legal-consent-container p, .legal-consent-container span, .legal-consent-container .hs-main-font-element').forEach(function(el) {
+              el.style.cssText = 'font-family:"DM Sans",sans-serif;font-size:12px;color:#7a8799;line-height:1.6;';
+            });
+
+            // Style submit button
+            area.querySelectorAll('input[type="submit"], .hs-button').forEach(function(el) {
+              el.style.cssText = 'display:block;width:100%;padding:14px 28px;background:#22c55e;color:#080b10;font-family:"DM Sans",sans-serif;font-size:15px;font-weight:500;border:none;border-radius:2px;cursor:pointer;text-transform:none;letter-spacing:0;box-shadow:none;';
+            });
+
+            // Fix fieldset widths
+            area.querySelectorAll('fieldset').forEach(function(el) {
+              el.style.cssText = 'max-width:100%;border:none;padding:0;margin:0;';
+            });
+
+            // Fix raw HTML in privacy policy text — HubSpot escapes <a> tags in consent text
+            area.querySelectorAll('.legal-consent-container p, .legal-consent-container span').forEach(function(el) {
+              if (el.textContent.indexOf('<a href=') > -1) {
+                el.innerHTML = el.textContent; // re-parse the escaped HTML
+                el.querySelectorAll('a').forEach(function(a) {
+                  a.style.cssText = 'color:#f59e0b;text-decoration:none;';
+                });
+              }
+            });
+
+            // Style links in consent area
+            area.querySelectorAll('.legal-consent-container a').forEach(function(el) {
+              el.style.cssText = 'color:#f59e0b;text-decoration:none;';
+            });
+
+            // Add focus styling via event listeners
+            area.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"], textarea').forEach(function(el) {
+              el.addEventListener('focus', function() { this.style.borderColor = 'rgba(245,158,11,0.5)'; this.style.outline = 'none'; });
+              el.addEventListener('blur', function() { this.style.borderColor = 'rgba(255,255,255,0.09)'; });
+            });
+          }
         });
       </script>
 
