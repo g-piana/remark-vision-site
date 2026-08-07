@@ -744,6 +744,27 @@ footer {
   .ai-readiness-stats { gap: 20px; flex-wrap: wrap; }
 }
 
+/* CRA block variant — green accent, urgency tone */
+.cra-block::before {
+  background: linear-gradient(to right, transparent, var(--fail), transparent);
+}
+.cra-block .ai-readiness-tag {
+  color: var(--fail);
+}
+.cra-block .ai-readiness-stat-val {
+  color: var(--pass);
+}
+.cra-cta {
+  white-space: nowrap;
+  align-self: flex-start;
+  border-color: rgba(34,197,94,0.3) !important;
+  color: var(--pass) !important;
+}
+.cra-cta:hover {
+  background: rgba(34,197,94,0.08) !important;
+  border-color: rgba(34,197,94,0.6) !important;
+}
+
 /* ── Responsive ───────────────────────────────────────────── */
 @media (max-width: 640px) {
   .service-blocks     { grid-template-columns: 1fr; }
@@ -940,6 +961,44 @@ footer {
       </div>
     </div>
     <a href="/en/opportunity-map/" class="btn-secondary">See the approach →</a>
+  </div>
+</section>
+
+<!-- ── CRA Readiness featured block ───────────────────────── -->
+<section class="section container">
+  <div class="section-label">Regulatory · Connected Product Manufacturers</div>
+  <div class="ai-readiness-block cra-block">
+    <div>
+      <div class="ai-readiness-tag">CRA Article 14 · September 11, 2026</div>
+      <h3>From September 11, any manufacturer shipping a connected product<br>→ must report exploited vulnerabilities to ENISA within 24 hours.</h3>
+      <p>
+        This applies to any product with software inside that connects to a network: industrial controllers,
+        edge gateways, smart meters, PLC systems, IoT sensors, building automation devices.
+        If a known-exploited vulnerability is found in a dependency your product ships —
+        a Python library, a firmware component, an embedded OS package — the 24-hour clock starts
+        the moment you become aware. Missing it carries fines up to €15M or 2.5% of global turnover.
+        Most manufacturers have no process in place.
+        I've automated the entire workflow: daily dependency scanning against live vulnerability databases,
+        CISA KEV cross-reference, and a pre-filled ENISA report ready when the clock starts.
+        For PE/VC portfolios with connected-product companies, this is an unpriced compliance risk
+        sitting in the portfolio today.
+      </p>
+      <div class="ai-readiness-stats">
+        <div>
+          <span class="ai-readiness-stat-val">24 h</span>
+          <span class="ai-readiness-stat-lbl">to notify ENISA once aware of an exploited vulnerability</span>
+        </div>
+        <div>
+          <span class="ai-readiness-stat-val">€15M</span>
+          <span class="ai-readiness-stat-lbl">maximum fine or 2.5% of global turnover, whichever is higher</span>
+        </div>
+        <div>
+          <span class="ai-readiness-stat-val">Free</span>
+          <span class="ai-readiness-stat-lbl">exposure scan — results in 48h, zero effort required</span>
+        </div>
+      </div>
+    </div>
+    <a href="/en/cra-readiness/scan/" class="btn-secondary cra-cta">Get a free scan →</a>
   </div>
 </section>
 
